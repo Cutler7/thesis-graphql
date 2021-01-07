@@ -2,7 +2,7 @@
   "name": "thesis-graphql-frontend",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve --open --port 3600",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "postinstall": "ngcc"

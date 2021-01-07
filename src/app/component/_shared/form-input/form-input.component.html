@@ -1,0 +1,9 @@
+<mat-form-field class="form-field">
+  <mat-label>{{label}}</mat-label>
+  <input matInput
+         type="text"
+         [formControl]="$any(fieldRef)">
+  <mat-error *ngIf="fieldRef.hasError('required') && (fieldRef.dirty || fieldRef.touched)">
+    Pole wymagane
+  </mat-error>
+</mat-form-field>

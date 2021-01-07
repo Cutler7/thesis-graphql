@@ -2,24 +2,29 @@
   <div>
     <h1>Web Shop App</h1>
     <h1>Logowanie</h1>
-    <form class="form">
-      <mat-form-field class="form-field">
-        <mat-label>Nazwa użytkownika</mat-label>
-        <input matInput type="text">
-      </mat-form-field>
+    <form class="form"
+          [formGroup]="form"
+          (ngSubmit)="onLogin()">
+      <app-form-input [fieldRef]="form.get('username')"
+                      label="Nazwa użytkownika"></app-form-input>
+      <app-form-input [fieldRef]="form.get('password')"
+                      label="Hasło"></app-form-input>
 
-      <mat-form-field class="form-field">
-        <mat-label>Hasło</mat-label>
-        <input matInput type="password">
-      </mat-form-field>
       <div class="buttons-container">
-        <button mat-raised-button color="primary">Zaloguj</button>
-        <button mat-raised-button>Wyczyść</button>
+        <button mat-raised-button
+                color="primary"
+                type="submit">Zaloguj
+        </button>
+        <button mat-raised-button
+                type="button"
+                (click)="clearFormValues()">Wyczyść
+        </button>
       </div>
     </form>
     <button mat-button color="primary"
             (click)="goToMainPage()">
-      <mat-icon>home</mat-icon> Powrót na stronę główną
+      <mat-icon>home</mat-icon>
+      Powrót na stronę główną
     </button>
   </div>
 </div>
