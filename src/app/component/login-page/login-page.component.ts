@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RouteName} from "../../shared/enum/route-name.enum";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -8,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  goToMainPage() {
+    this.router.navigate([RouteName.SHOP]);
+  }
 }

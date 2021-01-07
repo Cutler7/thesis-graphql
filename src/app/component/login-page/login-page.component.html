@@ -1,1 +1,25 @@
-<p>login-page works!</p>
+<div class="centering login-page">
+  <div>
+    <h1>Web Shop App</h1>
+    <h1>Logowanie</h1>
+    <form class="form">
+      <mat-form-field class="form-field">
+        <mat-label>Nazwa użytkownika</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password">
+      </mat-form-field>
+      <div class="buttons-container">
+        <button mat-raised-button color="primary">Zaloguj</button>
+        <button mat-raised-button>Wyczyść</button>
+      </div>
+    </form>
+    <button mat-button color="primary"
+            (click)="goToMainPage()">
+      <mat-icon>home</mat-icon> Powrót na stronę główną
+    </button>
+  </div>
+</div>

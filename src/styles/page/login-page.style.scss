@@ -1,0 +1,16 @@
+@import "../variables.style";
+
+.login-page {
+  background-color: $primaryColor;
+  text-align: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  & > div {
+    padding: 4em;
+    background-color: white;
+    border-radius: 20px;
+  }
+}

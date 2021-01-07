@@ -1,0 +1,19 @@
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+
+  .form-field {
+    width: 100%;
+  }
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+
+  button {
+    text-transform: uppercase;
+    margin: 2em;
+  }
+}
