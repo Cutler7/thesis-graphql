@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {RouteName} from '../../shared/enum/route-name.enum';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthorizationService} from '../../shared/service/authorization.service';
+import {ReportService} from '../../shared/service/report.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,6 +16,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authorizationService: AuthorizationService,
+    private reportService: ReportService,
   ) {
   }
 
@@ -23,7 +27,11 @@ export class LoginPageComponent implements OnInit {
 
   onLogin() {
     this.form.markAllAsTouched();
-    console.log(this.form);
+    if (this.form.valid) {
+      this.authorizationService.login(this.form.value)
+        .then(() => this.router.navigate([RouteName.SHOP]))
+        .catch(() => this.reportService.showUserInfo('Nie udało się zalogować'));
+    }
   }
 
   clearFormValues() {

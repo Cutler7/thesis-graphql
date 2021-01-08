@@ -8,6 +8,3 @@ export class User extends BaseModel {
 
   surname: string;
 }
-
-const a = new User();
-const b: InstanceType<typeof User>;

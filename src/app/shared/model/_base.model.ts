@@ -1,7 +1,8 @@
 export class BaseModel {
 
   constructor(source: any = {}) {
-    this.id = 5;
+    Object.keys(source)
+      .forEach(key => this[key as keyof BaseModel] = source[key]);
   }
 
   id: number;

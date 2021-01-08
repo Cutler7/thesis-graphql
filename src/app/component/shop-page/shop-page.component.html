@@ -2,8 +2,15 @@
   <mat-toolbar color="primary">
     <span>Web Shop App</span>
     <span class="toolbar-spacer"></span>
-    <button mat-raised-button color="accent"
+    <button *ngIf="!isUserLogged"
+            mat-raised-button
+            color="accent"
             (click)="goToLoginPage()">Logowanie
+    </button>
+    <button *ngIf="isUserLogged"
+            mat-raised-button
+            color="accent"
+            (click)="logout()">Wyloguj
     </button>
   </mat-toolbar>
 </p>
