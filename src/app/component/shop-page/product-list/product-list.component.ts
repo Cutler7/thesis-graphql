@@ -1,16 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {RouteName} from '../../../shared/enum/route-name.enum';
+import {ProductService} from '../../../shared/service/product.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  columns = ['image', 'name', 'price', 'action'];
 
-  ngOnInit(): void {
+  products: any[] = [];
+
+  constructor(
+    private router: Router,
+    private productService: ProductService,
+  ) {
   }
 
+  ngOnInit(): void {
+    this.productService.getProductList()
+      .then(res => this.products = res);
+  }
+
+  goToDetails(row: any) {
+    console.log(row);
+    this.router.navigate([RouteName.SHOP, RouteName.DETAILS, row.id]);
+  }
 }
