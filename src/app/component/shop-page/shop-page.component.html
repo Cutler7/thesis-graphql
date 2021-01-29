@@ -5,12 +5,16 @@
     <button *ngIf="!isUserLogged"
             mat-raised-button
             color="accent"
-            (click)="goToLoginPage()">Logowanie
+            (click)="goToLoginPage()">
+      <i class="feather-log-in"></i>
+      Logowanie
     </button>
     <button *ngIf="isUserLogged"
             mat-raised-button
             color="accent"
-            (click)="logout()">Wyloguj
+            (click)="logout()">
+      <i class="feather-log-out"></i>
+      Wyloguj
     </button>
   </mat-toolbar>
 </p>

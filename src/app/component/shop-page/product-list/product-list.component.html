@@ -1,7 +1,7 @@
 <table mat-table [dataSource]="products" class="mat-elevation-z8">
 
   <ng-container matColumnDef="image">
-    <th mat-header-cell *matHeaderCellDef></th>
+    <th mat-header-cell *matHeaderCellDef>Sortuj według:</th>
     <td mat-cell *matCellDef="let element">
       <img src="assets/img/example.jpg" alt="placeholder">
     </td>
@@ -14,20 +14,26 @@
 
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Cena</th>
-    <td mat-cell *matCellDef="let element"> {{element.price | currency}} </td>
+    <td mat-cell *matCellDef="let element"
+        class="price"> {{element.price | currency}} </td>
   </ng-container>
 
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-button color="primary">
-        <mat-icon>shopping_basket_outline</mat-icon>
+    <td mat-cell *matCellDef="let element"
+        class="row-action-container">
+      <button mat-raised-button color="accent"
+              (click)="goToDetails(element.id)">
+        <i class="feather-info"></i>
+        Otwórz
+      </button>
+      <button mat-raised-button color="accent">
+        <i class="feather-plus-square"></i>
         Dodaj do koszyka
       </button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns;"
-      (click)="goToDetails(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>

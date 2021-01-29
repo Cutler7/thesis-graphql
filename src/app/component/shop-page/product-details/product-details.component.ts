@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../shared/service/product.service';
+import {RouteName} from '../../../shared/enum/route-name.enum';
+import {Product} from '../../../shared/model/product.model';
 
 @Component({
   selector: 'app-product-details',
@@ -9,10 +11,11 @@ import {ProductService} from '../../../shared/service/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  product: any;
+  product: Product;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService,
   ) {
   }
@@ -21,5 +24,9 @@ export class ProductDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.productService.getProductById(Number(id))
       .then(res => this.product = res);
+  }
+
+  goToProductList() {
+    this.router.navigate([RouteName.SHOP, RouteName.LIST]);
   }
 }
