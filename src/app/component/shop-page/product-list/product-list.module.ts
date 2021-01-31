@@ -6,16 +6,19 @@ import {ProductListComponent} from './product-list.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {SearchPanelComponent} from './search-panel/search-panel.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
-  declarations: [ProductListComponent],
+  declarations: [ProductListComponent, SearchPanelComponent],
   imports: [
     CommonModule,
     MatTableModule,
     ProductListRoutingModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
   ],
 })
 export class ProductListModule { }

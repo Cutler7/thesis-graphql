@@ -54,7 +54,7 @@ export class ShoppingCartService {
   private getFromCache() {
     const savedCart = sessionStorage.getItem(this.key);
     if (savedCart) {
-      this.products.next(new Map(...JSON.parse(savedCart)));
+      this.products.next(new Map(JSON.parse(savedCart)));
     }
   }
 }

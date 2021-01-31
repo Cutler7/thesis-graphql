@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
     this.form.markAllAsTouched();
     if (this.form.valid) {
       this.authorizationService.login(this.form.value)
-        .then(() => this.router.navigate([RouteName.SHOP]))
+        .then(() => this.router.navigate([RouteName.SHOP, RouteName.ADMIN]))
         .catch(() => this.reportService.showUserInfo('Nie udało się zalogować'));
     }
   }

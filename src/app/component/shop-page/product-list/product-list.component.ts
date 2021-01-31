@@ -4,6 +4,7 @@ import {RouteName} from '../../../shared/enum/route-name.enum';
 import {ProductService} from '../../../shared/service/product.service';
 import {Product} from '../../../shared/model/product.model';
 import {ShoppingCartService} from '../../../shared/service/shopping-cart.service';
+import {ReportService} from '../../../shared/service/report.service';
 
 @Component({
   selector: 'app-product-list',
@@ -19,6 +20,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private router: Router,
     private productService: ProductService,
+    private reportService: ReportService,
     private shoppingCartService: ShoppingCartService,
   ) {
   }
@@ -30,6 +32,7 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product: Product) {
     this.shoppingCartService.addProduct(product);
+    this.reportService.showUserInfo('Dodano artykuł do listy zakupów');
   }
 
   goToDetails(id: number) {
