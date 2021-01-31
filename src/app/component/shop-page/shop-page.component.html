@@ -1,7 +1,14 @@
-<p>
+<p class="top-toolbar">
   <mat-toolbar color="primary">
     <span>Web Shop App</span>
     <span class="toolbar-spacer"></span>
+    <button *ngIf="!isUserLogged"
+            mat-raised-button
+            color="accent"
+            (click)="goToLoginPage()">
+      <i class="feather-shopping-cart"></i>
+      Koszyk: {{numberOfProductsInCart}} produktów
+    </button>
     <button *ngIf="!isUserLogged"
             mat-raised-button
             color="accent"
