@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormInputComponent} from './form-input.component';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatSelectModule,
   ],
   exports: [FormInputComponent],
 })

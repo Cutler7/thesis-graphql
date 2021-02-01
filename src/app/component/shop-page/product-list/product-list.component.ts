@@ -38,4 +38,8 @@ export class ProductListComponent implements OnInit {
   goToDetails(id: number) {
     this.router.navigate([RouteName.SHOP, RouteName.DETAILS, id]);
   }
+
+  search(searchParams: any) {
+    console.log(searchParams);
+  }
 }

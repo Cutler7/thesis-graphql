@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthorizationService} from '../../shared/service/authorization.service';
 import {ReportService} from '../../shared/service/report.service';
+import {InputType} from '../../shared/enum/input.type';
 
 @Component({
   selector: 'app-login-page',
@@ -11,6 +12,8 @@ import {ReportService} from '../../shared/service/report.service';
   styles: [],
 })
 export class LoginPageComponent implements OnInit {
+
+  InputType = InputType;
 
   form: FormGroup;
 

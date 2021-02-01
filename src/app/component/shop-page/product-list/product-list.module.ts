@@ -9,6 +9,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {SearchPanelComponent} from './search-panel/search-panel.component';
 import {MatCardModule} from '@angular/material/card';
 import {AddProductButtonModule} from '../../_shared/add-product-button/add-product-button.module';
+import {FormInputModule} from '../../_shared/form-input/form-input.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import {AddProductButtonModule} from '../../_shared/add-product-button/add-produ
     MatIconModule,
     MatCardModule,
     AddProductButtonModule,
+    FormInputModule,
+    ReactiveFormsModule,
   ],
 })
 export class ProductListModule { }

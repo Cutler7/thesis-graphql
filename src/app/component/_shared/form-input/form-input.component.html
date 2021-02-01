@@ -1,8 +1,29 @@
 <mat-form-field class="form-field">
   <mat-label>{{label}}</mat-label>
-  <input matInput
-         type="text"
-         [formControl]="$any(fieldRef)">
+  <ng-container [ngSwitch]="inputType">
+    <input *ngSwitchCase="InputType.TEXT"
+           matInput
+           type="text"
+           [formControl]="$any(fieldRef)">
+    <input *ngSwitchCase="InputType.NUMBER"
+           matInput
+           type="number"
+           [formControl]="$any(fieldRef)">
+    <input *ngSwitchCase="InputType.PASSWORD"
+           matInput
+           type="password"
+           [formControl]="$any(fieldRef)">
+    <mat-select *ngSwitchCase="InputType.DROPDOWN"
+                [formControl]="$any(fieldRef)"
+                multiple>
+      <mat-select-trigger>
+        abcd
+      </mat-select-trigger>
+      <mat-option *ngFor="let option of fieldConfig.options" [value]="option">
+        {{fieldConfig.labelField ? option[fieldConfig.labelField] : option}}
+      </mat-option>
+    </mat-select>
+  </ng-container>
   <mat-error *ngIf="fieldRef.hasError('required') && (fieldRef.dirty || fieldRef.touched)">
     Pole wymagane
   </mat-error>

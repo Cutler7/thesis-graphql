@@ -1,5 +1,25 @@
 <mat-card class="search-panel mat-elevation-z8">
   <mat-card-content>
-    SEARCH PANEL
+    <form [formGroup]="form"
+          (ngSubmit)="searchClick()">
+      <app-form-input [fieldRef]="form.get('name')"
+                      label="Nazwa"></app-form-input>
+      <app-form-input [fieldRef]="form.get('priceFrom')"
+                      [inputType]="InputType.NUMBER"
+                      label="Cena od"></app-form-input>
+      <app-form-input [fieldRef]="form.get('priceTo')"
+                      [inputType]="InputType.NUMBER"
+                      label="Cena do"></app-form-input>
+      <app-form-input [fieldRef]="form.get('category')"
+                      [inputType]="InputType.DROPDOWN"
+                      [fieldConfig]="{ options: categories }"
+                      label="Kategoria"></app-form-input>
+      <div>
+        <button mat-raised-button
+                color="accent"
+                type="submit">Szukaj
+        </button>
+      </div>
+    </form>
   </mat-card-content>
 </mat-card>

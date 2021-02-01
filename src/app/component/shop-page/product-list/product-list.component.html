@@ -1,4 +1,4 @@
-<app-search-panel></app-search-panel>
+<app-search-panel (search)="search($event)"></app-search-panel>
 
 <table mat-table [dataSource]="products" class="mat-elevation-z8">
 
