@@ -9,10 +9,32 @@ table {
       font-weight: bold;
     }
   }
+
+  .mat-footer-row {
+    font-weight: bold;
+  }
 }
 
 .row-action-container > button {
   margin: 10px 0;
-  width: 200px;
+  width: 180px;
   text-align: left;
+}
+
+.add-product-btn {
+  display: flex;
+  width: 180px;
+
+  button.icon-btn {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    min-width: 30px;
+  }
+
+  input {
+    width: 30px;
+    text-align: center;
+    font-size: 18px;
+  }
 }

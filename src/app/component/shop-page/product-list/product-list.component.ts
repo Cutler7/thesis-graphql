@@ -13,9 +13,9 @@ import {ReportService} from '../../../shared/service/report.service';
 })
 export class ProductListComponent implements OnInit {
 
-  columns = ['image', 'name', 'price', 'action'];
-
   products: Product[] = [];
+
+  readonly columns = ['image', 'name', 'price', 'action'];
 
   constructor(
     private router: Router,
@@ -30,8 +30,8 @@ export class ProductListComponent implements OnInit {
       .then(res => this.products = res);
   }
 
-  addToCart(product: Product) {
-    this.shoppingCartService.addProduct(product);
+  addToCart(product: Product, count: number) {
+    this.shoppingCartService.addProduct(product, count);
     this.reportService.showUserInfo('Dodano artykuł do listy zakupów');
   }
 

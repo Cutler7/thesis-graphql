@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {SearchPanelComponent} from './search-panel/search-panel.component';
 import {MatCardModule} from '@angular/material/card';
+import {AddProductButtonModule} from '../../_shared/add-product-button/add-product-button.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    AddProductButtonModule,
   ],
 })
 export class ProductListModule { }

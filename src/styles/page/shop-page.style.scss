@@ -4,6 +4,24 @@
   }
 }
 
+button i {
+  margin-right: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 16px !important;
+
+  [class^="feather-"], [class*=" feather-"] {
+    font-size: 1em;
+    margin-right: 20px;
+  }
+}
+
+.no-products-info {
+  text-align: center;
+  margin-top: 4em;
+}
+
 .search-panel {
   margin-bottom: 30px;
   border-radius: 0 !important;

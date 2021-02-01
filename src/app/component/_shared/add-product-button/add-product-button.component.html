@@ -1,0 +1,23 @@
+<div class="add-product-btn">
+  <button mat-button
+          class="icon-btn"
+          type="button"
+          (click)="decrement()">
+    <i class="feather-arrow-down-circle"></i>
+  </button>
+  <input matInput
+         type="text"
+         [(ngModel)]="count">
+  <button mat-button
+          class="icon-btn"
+          type="button"
+          (click)="increment()">
+    <i class="feather-arrow-up-circle"></i>
+  </button>
+  <button class="add-btn"
+          mat-raised-button
+          color="accent"
+          (click)="addProduct.emit(count)">
+    Dodaj
+  </button>
+</div>

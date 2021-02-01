@@ -1,10 +1,6 @@
-<button mat-button color="accent"
-        (click)="goToProductList()">
-  <i class=" feather-arrow-left"></i>
-  Powrót do listy produktów
-</button>
+<app-go-to-product-list></app-go-to-product-list>
 
-<mat-card>
+<mat-card *ngIf="product">
   <mat-card-header>
     <mat-card-title>{{product.name}}</mat-card-title>
   </mat-card-header>
