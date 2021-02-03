@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {InputType} from '../../../../shared/enum/input.type';
+import {ProductCategory, productCategory} from '../../../../shared/const/product-category';
 
 @Component({
   selector: 'app-search-panel',
@@ -13,7 +14,7 @@ export class SearchPanelComponent implements OnInit {
 
   form: FormGroup;
 
-  readonly categories: string[] = ['A', 'B', 'C', 'D', 'E', 'F'];
+  readonly categories: ProductCategory[] = productCategory;
 
   @Output()
   search = new EventEmitter<any>();
@@ -34,6 +35,7 @@ export class SearchPanelComponent implements OnInit {
   private prepareFormGroup() {
     this.form = new FormGroup({
       name: new FormControl(''),
+      searchInDescription: new FormControl(''),
       priceFrom: new FormControl(''),
       priceTo: new FormControl(''),
       category: new FormControl(''),

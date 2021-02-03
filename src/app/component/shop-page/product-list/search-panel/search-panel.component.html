@@ -4,6 +4,9 @@
           (ngSubmit)="searchClick()">
       <app-form-input [fieldRef]="form.get('name')"
                       label="Nazwa"></app-form-input>
+      <app-form-input [fieldRef]="form.get('searchInDescription')"
+                      label="Szukaj w opisie"
+                      [inputType]="InputType.CHECKBOX"></app-form-input>
       <app-form-input [fieldRef]="form.get('priceFrom')"
                       [inputType]="InputType.NUMBER"
                       label="Cena od"></app-form-input>
@@ -12,7 +15,7 @@
                       label="Cena do"></app-form-input>
       <app-form-input [fieldRef]="form.get('category')"
                       [inputType]="InputType.DROPDOWN"
-                      [fieldConfig]="{ options: categories }"
+                      [fieldConfig]="{ options: categories, labelField: 'name' }"
                       label="Kategoria"></app-form-input>
       <div>
         <button mat-raised-button

@@ -1,4 +1,5 @@
-<mat-form-field class="form-field">
+<mat-form-field *ngIf="formFieldSupported(); else elseBlock"
+                class="form-field">
   <mat-label>{{label}}</mat-label>
   <ng-container [ngSwitch]="inputType">
     <input *ngSwitchCase="InputType.TEXT"
@@ -28,3 +29,9 @@
     Pole wymagane
   </mat-error>
 </mat-form-field>
+
+<!-- components without mat-form-field support -->
+<ng-template #elseBlock>
+  <mat-checkbox *ngIf="inputType === InputType.CHECKBOX"
+                [formControl]="$any(fieldRef)">{{label}}</mat-checkbox>
+</ng-template>

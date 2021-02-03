@@ -23,4 +23,13 @@ export class FormInputComponent {
 
   @Input()
   fieldConfig: Partial<FieldConfig>;
+
+  log() {
+    console.log(this.fieldRef);
+  }
+
+  formFieldSupported(): boolean {
+    const supportedTypes = [InputType.TEXT, InputType.NUMBER, InputType.PASSWORD, InputType.DROPDOWN];
+    return supportedTypes.includes(this.inputType);
+  }
 }

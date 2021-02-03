@@ -3,4 +3,5 @@ export enum InputType {
   NUMBER = 'number',
   PASSWORD = 'password',
   DROPDOWN = 'dropdown',
+  CHECKBOX = 'checkbox',
 }
