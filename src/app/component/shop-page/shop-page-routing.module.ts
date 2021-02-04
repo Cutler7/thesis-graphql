@@ -25,6 +25,11 @@ const routes: Routes = [
           .then(m => m.ShoppingListModule),
       },
       {
+        path: RouteName.PAYMENT,
+        loadChildren: () => import('./delivery-and-payment/delivery-and-payment.module')
+          .then(m => m.DeliveryAndPaymentModule),
+      },
+      {
         path: RouteName.ADMIN,
         canActivate: [AuthGuard],
         loadChildren: () => import('./admin-page/admin-page.module')

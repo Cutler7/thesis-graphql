@@ -5,5 +5,6 @@ export enum RouteName {
   LIST = 'list',
   DETAILS = 'details',
   CART = 'cart',
+  PAYMENT = 'payment',
   ADMIN = 'admin',
 }

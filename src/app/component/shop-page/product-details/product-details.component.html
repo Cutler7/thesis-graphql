@@ -15,14 +15,12 @@
       <div class="details-title-container">
         <h1>{{product.name}}</h1>
         <h3>Cena za szt. <span class="bold">{{product.price | currency:'PLN'}}</span></h3>
+        <app-add-product-button (addProduct)="addToCart(product, $event)"></app-add-product-button>
       </div>
     </div>
     <h2>Opis produktu</h2>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
+    <p *ngIf="product.description">{{product.description}}</p>
+    <p *ngIf="!product.description">Produkt nie posiada opisu.</p>
     <h2>Detale</h2>
 
     <h2>Oceny i komentarze</h2>

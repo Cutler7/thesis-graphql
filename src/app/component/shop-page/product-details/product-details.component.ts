@@ -4,6 +4,8 @@ import {ProductService} from '../../../shared/service/product.service';
 import {Product} from '../../../shared/model/product.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';
+import {ShoppingCartService} from '../../../shared/service/shopping-cart.service';
+import {ReportService} from '../../../shared/service/report.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +19,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private reportService: ReportService,
     private productService: ProductService,
+    private shoppingCartService: ShoppingCartService,
   ) {
   }
 
@@ -28,6 +32,11 @@ export class ProductDetailsComponent implements OnInit {
         this.product = res;
         this.product.img = 'assets/img/example.jpg';
       });
+  }
+
+  addToCart(product: Product, count: number) {
+    this.shoppingCartService.addProduct(product, count);
+    this.reportService.showUserInfo('Dodano artykuł do listy zakupów');
   }
 
   showFullScreenImg() {

@@ -6,9 +6,9 @@ export class ProductService {
 
   private data: Product[] = [
     {id: 1, name: 'Produkt A', description: 'ABCDEF', price: 10},
-    {id: 2, name: 'Produkt B', description: 'ABCDEF', price: 20},
+    {id: 2, name: 'Produkt B', description: null, price: 20},
     {id: 3, name: 'Produkt C', description: 'ABCDEF', price: 30},
-    {id: 4, name: 'Produkt D', description: 'ABCDEF', price: 40},
+    {id: 4, name: 'Produkt D', description: null, price: 40},
     {id: 5, name: 'Produkt E', description: 'ABCDEF', price: 50},
     {id: 6, name: 'Produkt F', description: 'ABCDEF', price: 60},
     {id: 7, name: 'Produkt A', description: 'ABCDEF', price: 10},

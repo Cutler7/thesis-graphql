@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {GoToProductListModule} from '../../_shared/go-to-product-list/go-to-product-list.module';
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {AddProductButtonModule} from '../../_shared/add-product-button/add-product-button.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatDialogModule,
     GoToProductListModule,
+    AddProductButtonModule,
   ],
 })
 export class ProductDetailsModule { }

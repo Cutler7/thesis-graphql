@@ -1,5 +1,15 @@
 <h1><i class="feather-shopping-cart"></i>Podsumowanie zakupów</h1>
-<app-go-to-product-list></app-go-to-product-list>
+
+<div class="details-button-container">
+  <app-go-to-product-list></app-go-to-product-list>
+  <button mat-raised-button
+          color="accent"
+          (click)="goToPaymentPage()">
+    <i class=" feather-shopping-bag"></i>
+    Dostawa i płatność
+  </button>
+</div>
+
 
 <h2 *ngIf="!products.length"
     class="no-products-info">Brak produktów na liście</h2>
