@@ -32,6 +32,10 @@ export class SearchPanelComponent implements OnInit {
     }
   }
 
+  resetForm() {
+    this.form.reset();
+  }
+
   private prepareFormGroup() {
     this.form = new FormGroup({
       name: new FormControl(''),

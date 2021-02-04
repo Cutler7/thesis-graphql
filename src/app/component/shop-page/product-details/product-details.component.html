@@ -1,18 +1,30 @@
 <app-go-to-product-list></app-go-to-product-list>
 
 <mat-card *ngIf="product">
-  <mat-card-header>
-    <mat-card-title>{{product.name}}</mat-card-title>
-  </mat-card-header>
   <mat-card-content>
-    <img src="assets/img/example.jpg" alt="placeholder">
-    <h4>Cena</h4>
-    <span>{{product.price | currency}}</span>
-    <h4>Opis</h4>
+    <div class="details-title-section">
+      <div class="img-container">
+        <img src="assets/img/example.jpg"
+             alt="placeholder">
+        <div class="search-icon"
+             (click)="showFullScreenImg()">
+          <i class="feather-search"></i>
+        </div>
+        <span class="bottom-text">Kliknij aby powiększyć.</span>
+      </div>
+      <div class="details-title-container">
+        <h1>{{product.name}}</h1>
+        <h3>Cena za szt. <span class="bold">{{product.price | currency:'PLN'}}</span></h3>
+      </div>
+    </div>
+    <h2>Opis produktu</h2>
     <p>
       The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
       A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
       bred for hunting.
     </p>
+    <h2>Detale</h2>
+
+    <h2>Oceny i komentarze</h2>
   </mat-card-content>
 </mat-card>

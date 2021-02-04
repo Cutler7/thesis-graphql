@@ -17,10 +17,17 @@
                       [inputType]="InputType.DROPDOWN"
                       [fieldConfig]="{ options: categories, labelField: 'name' }"
                       label="Kategoria"></app-form-input>
-      <div>
+      <div class="search-btn-container">
         <button mat-raised-button
                 color="accent"
                 type="submit">Szukaj
+        </button>
+      </div>
+      <div class="search-btn-container">
+        <button mat-button
+                color="accent"
+                type="button"
+                (click)="resetForm()">Wyczyść
         </button>
       </div>
     </form>

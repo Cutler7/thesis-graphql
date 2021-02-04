@@ -1,4 +1,4 @@
 export interface FieldConfig {
-  options: string[] | object[];
+  options: string[] | Record<string, any>[];
   labelField: string;
 }

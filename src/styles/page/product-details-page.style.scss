@@ -1,0 +1,64 @@
+@import "../variables.style";
+
+.mat-card-content {
+  padding: 2em;
+
+  h2 {
+    margin-top: 3em !important;
+  }
+
+  p {
+    width: 60%;
+  }
+}
+
+.details-title-section {
+  display: flex;
+
+  .img-container {
+    position: relative;
+
+    img {
+      min-height: 300px;
+      max-height: 500px;
+      display: block;
+    }
+
+    .bottom-text {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: $lightGray;
+    }
+  }
+
+  .search-icon {
+    opacity: 0;
+    color: $lightGray;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+  }
+
+  .search-icon:hover {
+    background-color: white;
+    opacity: 0.6;
+  }
+
+  .details-title-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 4em;
+
+    > * {
+      margin: 6px !important;
+    }
+  }
+}

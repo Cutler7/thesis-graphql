@@ -6,15 +6,18 @@ import {ProductDetailsComponent} from './product-details.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {GoToProductListModule} from '../../_shared/go-to-product-list/go-to-product-list.module';
+import {ImageDialogComponent} from './image-dialog/image-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [ProductDetailsComponent],
+  declarations: [ProductDetailsComponent, ImageDialogComponent],
   imports: [
     CommonModule,
     ProductDetailsRoutingModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     GoToProductListModule,
   ],
 })
