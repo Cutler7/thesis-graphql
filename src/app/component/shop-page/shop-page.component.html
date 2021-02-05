@@ -9,6 +9,10 @@
       <i class="feather-shopping-cart"></i>
       Koszyk: {{numberOfProductsInCart}} produktów
     </button>
+    <button *ngIf="isUserLogged"
+            mat-icon-button [matMenuTriggerFor]="menu">
+      <i class="feather-settings"></i>
+    </button>
     <button *ngIf="!isUserLogged"
             mat-raised-button
             color="accent"
@@ -28,3 +32,16 @@
 <div class="page-container">
   <router-outlet></router-outlet>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item
+          (click)="goToUsersPage()">
+    <i class="feather-users"></i>
+    <span>Użytkownicy</span>
+  </button>
+  <button mat-menu-item
+          (click)="goToOrdersPage()">
+    <i class="feather-package"></i>
+    <span>Zamówienia</span>
+  </button>
+</mat-menu>

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ShopPageComponent} from './shop-page.component';
 import {RouteName} from '../../shared/enum/route-name.enum';
-import {AuthGuard} from '../../shared/service/auth.guard';
 
 const routes: Routes = [
   {
@@ -31,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: RouteName.ADMIN,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./admin-page/admin-page.module')
           .then(m => m.AdminPageModule),
       },

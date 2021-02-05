@@ -44,6 +44,14 @@ export class ShopPageComponent implements OnInit, OnDestroy {
     this.router.navigate([RouteName.SHOP, RouteName.CART]);
   }
 
+  goToUsersPage() {
+    this.router.navigate([RouteName.SHOP, RouteName.ADMIN, RouteName.USERS]);
+  }
+
+  goToOrdersPage() {
+    this.router.navigate([RouteName.SHOP, RouteName.ADMIN, RouteName.ORDERS]);
+  }
+
   logout() {
     this.authorizationService.logout();
   }

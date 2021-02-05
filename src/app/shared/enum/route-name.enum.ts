@@ -7,4 +7,6 @@ export enum RouteName {
   CART = 'cart',
   PAYMENT = 'payment',
   ADMIN = 'admin',
+  USERS = 'users',
+  ORDERS = 'orders',
 }
