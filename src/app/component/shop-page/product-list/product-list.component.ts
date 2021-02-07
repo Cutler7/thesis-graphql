@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RouteName} from '../../../shared/enum/route-name.enum';
-import {ProductService} from '../../../shared/service/product.service';
+import {ProductService} from '../../../shared/service/http/product.service';
 import {Product} from '../../../shared/model/product.model';
 import {ShoppingCartService} from '../../../shared/service/shopping-cart.service';
 import {ReportService} from '../../../shared/service/report.service';

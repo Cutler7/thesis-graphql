@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ProductService} from '../../../shared/service/product.service';
+import {ProductService} from '../../../shared/service/http/product.service';
 import {Product} from '../../../shared/model/product.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';

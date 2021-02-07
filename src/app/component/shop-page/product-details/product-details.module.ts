@@ -9,6 +9,7 @@ import {GoToProductListModule} from '../../_shared/go-to-product-list/go-to-prod
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AddProductButtonModule} from '../../_shared/add-product-button/add-product-button.module';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {AddProductButtonModule} from '../../_shared/add-product-button/add-produ
     MatDialogModule,
     GoToProductListModule,
     AddProductButtonModule,
+    MatTableModule,
   ],
 })
 export class ProductDetailsModule { }
