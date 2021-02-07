@@ -10,10 +10,18 @@ import {ImageDialogComponent} from './image-dialog/image-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AddProductButtonModule} from '../../_shared/add-product-button/add-product-button.module';
 import {MatTableModule} from '@angular/material/table';
+import {ProductRatingComponent} from './product-rating/product-rating.component';
+import {BarRatingModule} from 'ngx-bar-rating';
+import { ProductCommentsComponent } from './product-comments/product-comments.component';
 
 
 @NgModule({
-  declarations: [ProductDetailsComponent, ImageDialogComponent],
+  declarations: [
+    ProductDetailsComponent,
+    ImageDialogComponent,
+    ProductRatingComponent,
+    ProductCommentsComponent,
+  ],
   imports: [
     CommonModule,
     ProductDetailsRoutingModule,
@@ -23,6 +31,7 @@ import {MatTableModule} from '@angular/material/table';
     GoToProductListModule,
     AddProductButtonModule,
     MatTableModule,
+    BarRatingModule,
   ],
 })
 export class ProductDetailsModule { }

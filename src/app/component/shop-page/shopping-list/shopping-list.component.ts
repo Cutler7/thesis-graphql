@@ -15,7 +15,7 @@ export class ShoppingListComponent implements OnInit {
 
   total: number;
 
-  readonly columns: string[] = ['product', 'priceForOne', 'count', 'priceForAll', 'action'];
+  readonly columns = ['product', 'priceForOne', 'count', 'priceForAll', 'action'];
 
   constructor(
     private router: Router,

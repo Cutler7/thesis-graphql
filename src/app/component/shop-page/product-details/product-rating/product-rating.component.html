@@ -1,0 +1,20 @@
+<div class="rating-top-panel">
+  <div class="rating-container">
+    <h3>
+      <span class="bold">{{comments.length}}</span> użytkowników oceniło ten produkt.
+      Średnia ocena użytkowników: <span class="bold">{{avgRate | number:'1.0-2'}}</span>
+    </h3>
+    <bar-rating [rate]="avgRate"
+                [max]="5"
+                [readOnly]="true"
+                [theme]="'fontawesome-o'"></bar-rating>
+  </div>
+  <div>
+    <button mat-raised-button
+            color="accent"
+            (click)="addComment()">
+      <i class=" feather-message-square"></i>
+      Dodaj komentarz
+    </button>
+  </div>
+</div>

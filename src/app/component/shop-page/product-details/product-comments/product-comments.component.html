@@ -1,0 +1,40 @@
+<h3 *ngIf="!comments?.length"
+    class="no-products-info">Ten produkt nie posiada jeszcze komentarzy</h3>
+
+<table *ngIf="comments?.length"
+       mat-table [dataSource]="comments"
+       class="comments-table">
+  <ng-container matColumnDef="author">
+    <th mat-header-cell *matHeaderCellDef>Autor</th>
+    <td style="width: 15%" mat-cell *matCellDef="let element">
+      {{element.author}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Dodano dnia</th>
+    <td style="width: 10%" mat-cell *matCellDef="let element">
+      {{element.createdAt | date}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rate">
+    <th mat-header-cell *matHeaderCellDef>Ocena</th>
+    <td style="width: 15%" mat-cell *matCellDef="let element">
+      <bar-rating [rate]="element.rate"
+                  [max]="5"
+                  [readOnly]="true"
+                  [theme]="'fontawesome-o'"></bar-rating>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="content">
+    <th mat-header-cell *matHeaderCellDef>Treść</th>
+    <td style="width: 60%" mat-cell *matCellDef="let element">
+      {{element.content}}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>

@@ -67,6 +67,24 @@
   }
 }
 
+.rating-top-panel {
+  display: flex;
+  justify-content: space-between;
+
+  .rating-container {
+    display: flex;
+
+    .br {
+      margin-left: 12px !important;
+      margin-top: 18px !important;
+    }
+  }
+}
+
+table.comments-table {
+  table-layout: auto;
+}
+
 .details-button-container {
   display: flex;
   justify-content: space-between;
