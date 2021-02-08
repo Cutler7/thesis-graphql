@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import '@angular/common/locales/global/pl';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import '@angular/common/locales/global/pl';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     MatSnackBarModule,
   ],
