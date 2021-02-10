@@ -12,7 +12,10 @@ import {AddProductButtonModule} from '../../_shared/add-product-button/add-produ
 import {MatTableModule} from '@angular/material/table';
 import {ProductRatingComponent} from './product-rating/product-rating.component';
 import {BarRatingModule} from 'ngx-bar-rating';
-import { ProductCommentsComponent } from './product-comments/product-comments.component';
+import {ProductCommentsComponent} from './product-comments/product-comments.component';
+import {AddCommentDialogComponent} from './add-comment-dialog/add-comment-dialog.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormInputModule} from '../../_shared/form-input/form-input.module';
 
 
 @NgModule({
@@ -21,6 +24,7 @@ import { ProductCommentsComponent } from './product-comments/product-comments.co
     ImageDialogComponent,
     ProductRatingComponent,
     ProductCommentsComponent,
+    AddCommentDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +36,8 @@ import { ProductCommentsComponent } from './product-comments/product-comments.co
     AddProductButtonModule,
     MatTableModule,
     BarRatingModule,
+    ReactiveFormsModule,
+    FormInputModule,
   ],
 })
 export class ProductDetailsModule { }

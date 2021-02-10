@@ -7,8 +7,10 @@
     margin-top: 3em !important;
   }
 
-  p {
-    width: 60%;
+  @media only screen and (min-width: 1200px) {
+    p {
+      width: 60%;
+    }
   }
 }
 
@@ -21,10 +23,11 @@
 
   .img-container {
     position: relative;
+    flex: 1;
 
     img {
-      min-height: 300px;
       max-height: 500px;
+      width: 100%;
       display: block;
     }
 
@@ -57,9 +60,11 @@
 
   .details-title-container {
     display: flex;
+    flex: 2;
     justify-content: center;
     flex-direction: column;
-    margin-left: 4em;
+    box-sizing: border-box;
+    margin-left: 6rem;
 
     > * {
       margin: 6px !important;
@@ -89,4 +94,21 @@ table.comments-table {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2em;
+}
+
+.add-comment-dialog {
+  padding: 0 2em 2em 2em;
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .mat-dialog-actions {
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+
+  label {
+    color: rgba(0, 0, 0, 0.54)
+  }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "thesis-graphql-frontend": {
+    "thesis-graphql": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/thesis-graphql-frontend",
+            "outputPath": "dist/thesis-graphql",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "proxyConfig": "proxy.conf.json",
-            "browserTarget": "thesis-graphql-frontend:build"
+            "browserTarget": "thesis-graphql:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "thesis-graphql-frontend:build:production"
+              "browserTarget": "thesis-graphql:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "thesis-graphql-frontend:build"
+            "browserTarget": "thesis-graphql:build"
           }
         },
         "test": {
@@ -119,16 +119,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "thesis-graphql-frontend:serve"
+            "devServerTarget": "thesis-graphql:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "thesis-graphql-frontend:serve:production"
+              "devServerTarget": "thesis-graphql:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "thesis-graphql-frontend"
+  "defaultProject": "thesis-graphql"
 }

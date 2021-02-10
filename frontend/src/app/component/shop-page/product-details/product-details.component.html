@@ -39,7 +39,8 @@
     </table>
 
     <h2>Oceny i Komentarze</h2>
-    <app-product-rating [comments]="product.comments"></app-product-rating>
+    <app-product-rating [comments]="product.comments"
+                        (addComment)="openAddCommentDialog()"></app-product-rating>
     <app-product-comments [comments]="product.comments"></app-product-comments>
   </mat-card-content>
 </mat-card>

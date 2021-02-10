@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.get('/api').toPromise()
+    this.httpClient.post('/graphql', {query: 'query {hello}'}).toPromise()
       .then(res => console.log(res));
   }
 }

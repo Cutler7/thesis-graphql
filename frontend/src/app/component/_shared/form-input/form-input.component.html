@@ -6,6 +6,11 @@
            matInput
            type="text"
            [formControl]="$any(fieldRef)">
+    <textarea *ngSwitchCase="InputType.TEXTAREA"
+              matInput
+              type="text"
+              rows="6"
+              [formControl]="$any(fieldRef)"></textarea>
     <input *ngSwitchCase="InputType.NUMBER"
            matInput
            type="number"

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Comment} from '../../../../shared/model/comment.model';
 
 @Component({
@@ -11,6 +11,9 @@ export class ProductRatingComponent implements OnChanges {
   @Input()
   comments: Comment[] = [];
 
+  @Output()
+  addComment = new EventEmitter<void>();
+
   avgRate: number = 0;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -18,9 +21,5 @@ export class ProductRatingComponent implements OnChanges {
       const sum = this.comments.reduce((prevVal, currVal) => prevVal + currVal.rate, 0);
       this.avgRate = sum / this.comments.length;
     }
-  }
-
-  addComment() {
-
   }
 }

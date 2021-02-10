@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';
 import {ShoppingCartService} from '../../../shared/service/shopping-cart.service';
 import {ReportService} from '../../../shared/service/report.service';
+import {AddCommentDialogComponent} from './add-comment-dialog/add-comment-dialog.component';
 
 @Component({
   selector: 'app-product-details',
@@ -43,5 +44,10 @@ export class ProductDetailsComponent implements OnInit {
     this.dialog.open(ImageDialogComponent, {
       data: this.product.img,
     });
+  }
+
+  openAddCommentDialog() {
+    const dialogRef = this.dialog.open(AddCommentDialogComponent, {width: '400px'});
+    dialogRef.afterClosed().subscribe(val => console.log(val));
   }
 }

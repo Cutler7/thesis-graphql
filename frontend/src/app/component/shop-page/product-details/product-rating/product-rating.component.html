@@ -1,4 +1,5 @@
-<div class="rating-top-panel">
+<div *ngIf="comments?.length"
+     class="rating-top-panel">
   <div class="rating-container">
     <h3>
       <span class="bold">{{comments.length}}</span> użytkowników oceniło ten produkt.
@@ -12,7 +13,7 @@
   <div>
     <button mat-raised-button
             color="accent"
-            (click)="addComment()">
+            (click)="addComment.emit()">
       <i class=" feather-message-square"></i>
       Dodaj komentarz
     </button>
