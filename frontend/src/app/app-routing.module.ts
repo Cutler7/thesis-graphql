@@ -14,6 +14,11 @@ const routes: Routes = [
       .then(m => m.LoginPageModule),
   },
   {
+    path: RouteName.PAYMENT_PROCESS,
+    loadChildren: () => import('./component/payment-page/payment-page.module')
+      .then(m => m.PaymentPageModule),
+  },
+  {
     path: RouteName.PAGE_404,
     loadChildren: () => import('./component/page-not-found-page/page-not-found-page.module')
       .then(m => m.PageNotFoundPageModule),
@@ -21,7 +26,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: RouteName.SHOP,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',

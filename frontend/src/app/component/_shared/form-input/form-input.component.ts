@@ -32,12 +32,13 @@ export class FormInputComponent {
     InputType.TEXTAREA,
   ];
 
-  log() {
-    console.log(this.fieldRef);
-  }
-
   formFieldSupported(): boolean {
     return this.supportedTypes.includes(this.inputType);
+  }
+
+  isFieldRequired(): boolean {
+    const validation = this.fieldRef?.validator?.({} as AbstractControl);
+    return validation?.required;
   }
 
   getTriggerLabel(): string {

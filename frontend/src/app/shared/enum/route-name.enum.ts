@@ -9,4 +9,5 @@ export enum RouteName {
   ADMIN = 'admin',
   USERS = 'users',
   ORDERS = 'orders',
+  PAYMENT_PROCESS = 'payment-process',
 }

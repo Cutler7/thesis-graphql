@@ -23,7 +23,6 @@ export class AddUserDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareFormGroup();
-    console.log(this.form);
   }
 
   addUser() {
