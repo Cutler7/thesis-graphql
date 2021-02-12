@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Comment} from '../../../../shared/model/comment.model';
 import {InputType} from '../../../../shared/enum/input.type';
 import {ReportService} from '../../../../shared/service/report.service';
 
@@ -15,7 +14,6 @@ export class AddCommentDialogComponent implements OnInit {
   InputType = InputType;
 
   form: FormGroup;
-  val: Comment;
 
   constructor(
     private dialogRef: MatDialogRef<AddCommentDialogComponent>,

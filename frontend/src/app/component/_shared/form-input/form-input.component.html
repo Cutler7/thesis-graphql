@@ -23,15 +23,15 @@
                 [formControl]="$any(fieldRef)"
                 multiple>
       <mat-select-trigger>
-        abcd
+        {{getTriggerLabel()}}
       </mat-select-trigger>
       <mat-option *ngFor="let option of fieldConfig.options" [value]="option">
         {{fieldConfig.labelField ? option[fieldConfig.labelField] : option}}
       </mat-option>
     </mat-select>
   </ng-container>
-  <mat-error *ngIf="fieldRef.hasError('required') && (fieldRef.dirty || fieldRef.touched)">
-    Pole wymagane
+  <mat-error *ngIf="fieldRef.invalid && (fieldRef.dirty || fieldRef.touched)">
+    <app-field-errors [fieldRef]="fieldRef"></app-field-errors>
   </mat-error>
 </mat-form-field>
 

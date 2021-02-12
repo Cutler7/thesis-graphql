@@ -5,6 +5,7 @@ import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {FieldErrorsModule} from '../field-errors/field-errors.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatSelectModule,
     MatCheckboxModule,
+    FieldErrorsModule,
   ],
   exports: [FormInputComponent],
 })

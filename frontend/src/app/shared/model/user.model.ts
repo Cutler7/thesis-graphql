@@ -7,4 +7,8 @@ export class User extends BaseModel {
   name: string;
 
   surname: string;
+
+  password: string;
+
+  email: string;
 }

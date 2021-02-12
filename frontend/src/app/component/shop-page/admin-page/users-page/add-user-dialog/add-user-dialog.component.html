@@ -1,0 +1,30 @@
+<form [formGroup]="form"
+      (ngSubmit)="addUser()">
+  <div class="add-comment-dialog">
+    <h2 mat-dialog-title>Utwórz nowego użytkownika</h2>
+
+    <div mat-dialog-content>
+      <app-form-input [fieldRef]="form.get('username')"
+                      label="Nick"></app-form-input>
+      <app-form-input [fieldRef]="form.get('name')"
+                      label="Imię"></app-form-input>
+      <app-form-input [fieldRef]="form.get('surname')"
+                      label="Nazwisko"></app-form-input>
+      <app-form-input [fieldRef]="form.get('password')"
+                      [inputType]="InputType.PASSWORD"
+                      label="Hasło"></app-form-input>
+      <app-form-input [fieldRef]="form.get('email')"
+                      label="Email"></app-form-input>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button
+              style="float: right; position: relative"
+              color="accent"
+              type="submit">
+        <i class=" feather-check"></i>
+        Utwórz
+      </button>
+    </div>
+  </div>
+</form>

@@ -39,4 +39,10 @@ export class FormInputComponent {
   formFieldSupported(): boolean {
     return this.supportedTypes.includes(this.inputType);
   }
+
+  getTriggerLabel(): string {
+    const labelField = this.fieldConfig.labelField;
+    const value = this.fieldRef.value || [];
+    return labelField ? value.map(el => el[labelField]).join() : value.join();
+  }
 }

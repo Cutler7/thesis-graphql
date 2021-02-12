@@ -5,11 +5,32 @@ import {User} from '../../model/user.model';
 export class UserService {
 
   private data: User[] = [
-    {id: 1, username: 'jkowalski', name: 'Jan', surname: 'Kowalski', createdAt: new Date},
-    {id: 1, username: 'mnowak', name: 'Marek', surname: 'Nowak', createdAt: new Date},
-    {id: 1, username: 'kmalinowski', name: 'Krzysztof', surname: 'Malinowski', createdAt: new Date},
-    {id: 1, username: 'jzielinska', name: 'Jadwiga', surname: 'Zielińska', createdAt: new Date},
-    {id: 1, username: 'mwojciechowska', name: 'Marta', surname: 'Wojciechowska', createdAt: new Date},
+    {id: 1, username: 'jkowalski', name: 'Jan', surname: 'Kowalski', email: 'jkowalski@mail.com', createdAt: new Date},
+    {id: 1, username: 'mnowak', name: 'Marek', surname: 'Nowak', email: 'mnowak@mail.com', createdAt: new Date},
+    {
+      id: 1,
+      username: 'kmalinowski',
+      name: 'Krzysztof',
+      surname: 'Malinowski',
+      email: 'kmalinowski@mail.com',
+      createdAt: new Date,
+    },
+    {
+      id: 1,
+      username: 'jzielinska',
+      name: 'Jadwiga',
+      surname: 'Zielińska',
+      email: 'jzielinska@mail.com',
+      createdAt: new Date,
+    },
+    {
+      id: 1,
+      username: 'mwojciechowska',
+      name: 'Marta',
+      surname: 'Wojciechowska',
+      email: 'mwojciechowska@mail.com',
+      createdAt: new Date,
+    },
   ] as User[];
 
   getUserList(): Promise<User[]> {

@@ -1,3 +1,9 @@
-<mat-error *ngIf="fieldRef.hasError('required') && fieldRef.dirty">
+<span *ngIf="fieldRef.hasError('required')">
   Pole wymagane
-</mat-error>
+</span>
+<span *ngIf="fieldRef.hasError('minlength')">
+  Pole musi zawierać minimum {{fieldRef.getError('minlength')?.requiredLength}} znaków.
+</span>
+<span *ngIf="fieldRef.hasError('email')">
+  Niepoprawny adres email
+</span>
