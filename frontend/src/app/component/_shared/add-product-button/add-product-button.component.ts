@@ -10,7 +10,12 @@ export class AddProductButtonComponent {
   count: number = 1;
 
   @Output()
-  addProduct = new EventEmitter<number>();
+  addProductEvent = new EventEmitter<number>();
+
+  addProduct() {
+    this.addProductEvent.emit(this.count);
+    this.count = 1;
+  }
 
   increment() {
     if (this.count < 20) {

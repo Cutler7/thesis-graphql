@@ -19,4 +19,6 @@ export class Product extends BaseModel {
   properties: ProductProperty[] = [];
 
   img?: string;
+
+  quantity: number;
 }

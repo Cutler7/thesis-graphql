@@ -56,3 +56,30 @@ h1, h2, h3, h4, h5, h6 {
 .product-list-image {
   height: 200px;
 }
+
+.delete-user-confirm {
+  padding: 0 2rem 2rem;
+
+  h1 i {
+    margin-right: 0;
+  }
+
+  h3 {
+    text-align: justify;
+  }
+
+  .mat-dialog-content {
+    overflow: initial;
+  }
+
+  .mat-dialog-actions {
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+}
+
+//.add-product-button {
+//  margin-bottom: 2rem;
+//  margin-right: 4rem;
+//  float: right;
+//}

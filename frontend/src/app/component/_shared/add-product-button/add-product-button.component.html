@@ -1,7 +1,14 @@
 <div class="add-product-btn">
+  <button class="add-btn"
+          mat-button
+          color="accent"
+          (click)="addProduct()">
+    Dodaj
+  </button>
   <button mat-button
           class="icon-btn"
           type="button"
+          color="primary"
           (click)="decrement()">
     <i class="feather-arrow-down-circle"></i>
   </button>
@@ -11,13 +18,8 @@
   <button mat-button
           class="icon-btn"
           type="button"
+          color="primary"
           (click)="increment()">
     <i class="feather-arrow-up-circle"></i>
-  </button>
-  <button class="add-btn"
-          mat-raised-button
-          color="accent"
-          (click)="addProduct.emit(count)">
-    Dodaj
   </button>
 </div>

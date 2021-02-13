@@ -4,10 +4,23 @@ import gql from 'graphql-tag';
 export const SCHEMA: DocumentNode = gql`
     type Query {
         productList: [Product]
-        getProduct(id: ID): Product
+        getProduct(id: ID!): Product
+    }
+
+    type Mutation {
+        deleteProduct(id: ID!): Product
+        createOrUpdateProduct(product: ProductInput!): Product
     }
 
     scalar Date
+
+    input ProductInput {
+        id: ID
+        name: String
+        description: String
+        price: Int
+        properties: [ProductPropertyInput]
+    }
 
     type Product {
         id: ID
@@ -16,6 +29,12 @@ export const SCHEMA: DocumentNode = gql`
         price: Int
         properties: [ProductProperty]
         comments: [Comment]
+    }
+
+    input ProductPropertyInput {
+        id: ID
+        name: String
+        value: String
     }
 
     type ProductProperty {

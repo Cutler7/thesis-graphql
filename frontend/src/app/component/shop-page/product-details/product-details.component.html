@@ -16,7 +16,7 @@
       <div class="details-title-container">
         <h1>{{product.name}}</h1>
         <h3>Cena za szt. <span class="bold">{{product.price | currency:'PLN'}}</span></h3>
-        <app-add-product-button (addProduct)="addToCart(product, $event)"></app-add-product-button>
+        <app-add-product-button (addProductEvent)="addToCart(product, $event)"></app-add-product-button>
       </div>
     </div>
     <h2>Opis produktu</h2>
@@ -27,7 +27,7 @@
     <table *ngIf="product.properties.length"
            mat-table [dataSource]="product.properties">
       <ng-container matColumnDef="name">
-        <td class="bold upper" mat-cell *matCellDef="let element">
+        <td class="bold upper primary-color" mat-cell *matCellDef="let element">
           {{element.name}}
         </td>
       </ng-container>

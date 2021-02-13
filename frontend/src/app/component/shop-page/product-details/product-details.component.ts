@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ProductService} from '../../../shared/service/http/product.service';
+import {ProductServiceMock} from '../../../shared/service/http/product-service-mock.service';
 import {Product} from '../../../shared/model/product.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';
@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private reportService: ReportService,
-    private productService: ProductService,
+    private productService: ProductServiceMock,
     private shoppingCartService: ShoppingCartService,
   ) {
   }
