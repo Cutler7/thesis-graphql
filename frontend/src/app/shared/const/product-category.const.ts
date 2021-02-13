@@ -1,6 +1,6 @@
-export type ProductCategory = { name: string, id: number };
+export type ProductCategoryConst = { name: string, id: number };
 
-export const productCategory: ProductCategory[] = [
+export const PRODUCT_CATEGORY: ProductCategoryConst[] = [
   {name: 'kwiaty doniczkowe', id: 1},
   {name: 'sukulenty', id: 2},
   {name: 'palmy', id: 3},

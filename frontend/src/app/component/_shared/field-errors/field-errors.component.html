@@ -7,3 +7,9 @@
 <span *ngIf="fieldRef.hasError('email')">
   Niepoprawny adres email
 </span>
+<span *ngIf="fieldRef.hasError('phone')">
+  Numer telefonu ma niewłaściwy format
+</span>
+<span *ngIf="fieldRef.hasError('postalCode')">
+  Kod pocztowy ma niewłaściwy format
+</span>

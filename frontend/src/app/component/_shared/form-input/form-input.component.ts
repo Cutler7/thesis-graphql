@@ -22,7 +22,7 @@ export class FormInputComponent {
   fieldRef: AbstractControl;
 
   @Input()
-  fieldConfig: Partial<FieldConfig>;
+  fieldConfig: Partial<FieldConfig> = {};
 
   private readonly supportedTypes = [
     InputType.TEXT,
@@ -42,6 +42,9 @@ export class FormInputComponent {
   }
 
   getTriggerLabel(): string {
+    if (!this.fieldConfig.multipleDropdown) {
+      return this.fieldRef.value;
+    }
     const labelField = this.fieldConfig.labelField;
     const value = this.fieldRef.value || [];
     return labelField ? value.map(el => el[labelField]).join() : value.join();

@@ -24,7 +24,7 @@
            [formControl]="$any(fieldRef)">
     <mat-select *ngSwitchCase="InputType.DROPDOWN"
                 [formControl]="$any(fieldRef)"
-                multiple>
+                [multiple]="fieldConfig.multipleDropdown">
       <mat-select-trigger>
         {{getTriggerLabel()}}
       </mat-select-trigger>

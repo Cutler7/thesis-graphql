@@ -1,44 +1,53 @@
-<h1><i class="feather-shopping-bag"></i>Dostawa i płatność</h1>
-<app-go-to-product-list></app-go-to-product-list>
+<div class="delivery-page">
+  <h1><i class="feather-shopping-bag"></i>Dostawa i płatność</h1>
+  <app-go-to-product-list></app-go-to-product-list>
 
-<mat-card>
-  <form [formGroup]="form"
-        (ngSubmit)="submit()">
-    <mat-card-content>
-      <h2>Dane do wysyłki</h2>
-      <app-form-input [fieldRef]="form.get('name')"
-                      label="Imię"></app-form-input>
-      <app-form-input [fieldRef]="form.get('surname')"
-                      label="Nazwisko"></app-form-input>
-      <app-form-input [fieldRef]="form.get('email')"
-                      label="Telefon"></app-form-input>
-      <app-form-input [fieldRef]="form.get('phone')"
-                      label="Email"></app-form-input>
+  <mat-card>
+    <div class="delivery-icon">
+      <i class="feather-truck"></i>
+    </div>
+    <form [formGroup]="form"
+          (ngSubmit)="submit()">
+      <mat-card-content>
+        <div class="delivery-form">
+          <h2>Dane do wysyłki</h2>
+          <app-form-input [fieldRef]="form.get('name')"
+                          label="Imię"></app-form-input>
+          <app-form-input [fieldRef]="form.get('surname')"
+                          label="Nazwisko"></app-form-input>
+          <app-form-input [fieldRef]="form.get('phone')"
+                          label="Telefon"></app-form-input>
+          <app-form-input [fieldRef]="form.get('email')"
+                          label="Email"></app-form-input>
 
-      <h2>Adres</h2>
-      <app-form-input [fieldRef]="form.get('street')"
-                      label="Ulica"></app-form-input>
-      <app-form-input [fieldRef]="form.get('houseNumber')"
-                      label="Nr domu"></app-form-input>
-      <app-form-input [fieldRef]="form.get('apartmentNumber')"
-                      label="Nr lokalu"></app-form-input>
-      <app-form-input [fieldRef]="form.get('city')"
-                      label="Miasto"></app-form-input>
-      <app-form-input [fieldRef]="form.get('postalCode')"
-                      label="Kod pocztowy"></app-form-input>
+          <h2>Adres</h2>
+          <app-form-input [fieldRef]="form.get('street')"
+                          label="Ulica"></app-form-input>
+          <app-form-input [fieldRef]="form.get('houseNumber')"
+                          label="Nr domu"></app-form-input>
+          <app-form-input [fieldRef]="form.get('apartmentNumber')"
+                          label="Nr lokalu"></app-form-input>
+          <app-form-input [fieldRef]="form.get('city')"
+                          label="Miasto"></app-form-input>
+          <app-form-input [fieldRef]="form.get('postalCode')"
+                          label="Kod pocztowy"></app-form-input>
 
+          <h2>Dostawa</h2>
+          <app-form-input [fieldRef]="form.get('delivery')"
+                          [inputType]="InputType.DROPDOWN"
+                          [fieldConfig]="{ options: DELIVERY_METHOD }"
+                          label="Sposób dostawy"></app-form-input>
+        </div>
 
-      <h2>Płatność</h2>
-
-
-      <div class="payment-button">
-        <button mat-raised-button
-                color="accent"
-                type="submit">
-          <i class="feather-credit-card"></i>
-          Potwierdzam i płacę
-        </button>
-      </div>
-    </mat-card-content>
-  </form>
-</mat-card>
+        <div class="payment-button">
+          <button mat-raised-button
+                  color="accent"
+                  type="submit">
+            <i class="feather-credit-card"></i>
+            Potwierdzam i płacę
+          </button>
+        </div>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

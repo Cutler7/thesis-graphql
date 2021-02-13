@@ -4,6 +4,7 @@
   <app-go-to-product-list></app-go-to-product-list>
   <button mat-raised-button
           color="accent"
+          [disabled]="!products.length"
           (click)="goToPaymentPage()">
     <i class=" feather-shopping-bag"></i>
     Dostawa i płatność

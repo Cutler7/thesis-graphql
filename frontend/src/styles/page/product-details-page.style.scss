@@ -96,7 +96,11 @@ table.comments-table {
   margin-bottom: 2em;
 }
 
-.add-comment-dialog {
+.br-fontawesome-o .br-selected:after {
+  color: $primaryColor !important;
+}
+
+.form-dialog-container {
   padding: 0 2em 2em 2em;
 
   .mat-form-field {
