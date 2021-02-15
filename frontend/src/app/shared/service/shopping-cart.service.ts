@@ -9,9 +9,9 @@ export interface CartItem {
 }
 
 @Injectable({providedIn: 'root'})
-export class ShoppingCartService extends BrowserStoredService<[number, CartItem][]> {
+export class ShoppingCartService extends BrowserStoredService<[string, CartItem][]> {
 
-  private products = new BehaviorSubject<Map<number, CartItem>>(new Map());
+  private products = new BehaviorSubject<Map<string, CartItem>>(new Map());
 
   protected browserStorage: Storage = localStorage;
 
@@ -22,7 +22,7 @@ export class ShoppingCartService extends BrowserStoredService<[number, CartItem]
     this.getFromCache();
   }
 
-  getProductListObservable(): Observable<Map<number, CartItem>> {
+  getProductListObservable(): Observable<Map<string, CartItem>> {
     return this.products.asObservable();
   }
 
@@ -37,7 +37,7 @@ export class ShoppingCartService extends BrowserStoredService<[number, CartItem]
     });
   }
 
-  removeProduct(id: number) {
+  removeProduct(id: string) {
     this.withBrowserCache(() => this.getProductList().delete(id));
   }
 
@@ -45,16 +45,16 @@ export class ShoppingCartService extends BrowserStoredService<[number, CartItem]
     this.withBrowserCache(() => this.getProductList().clear());
   }
 
-  protected init(data: [number, CartItem][]): void {
+  protected init(data: [string, CartItem][]): void {
     this.products.next(new Map(data));
   }
 
-  protected store(): [number, CartItem][] {
+  protected store(): [string, CartItem][] {
     this.products.next(this.getProductList());
     return Array.from(this.getProductList());
   }
 
-  private getProductList(): Map<number, CartItem> {
+  private getProductList(): Map<string, CartItem> {
     return this.products.getValue();
   }
 }

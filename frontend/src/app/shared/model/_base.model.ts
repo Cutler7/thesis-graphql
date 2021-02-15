@@ -5,7 +5,7 @@ export class BaseModel {
       .forEach(key => this[key as keyof BaseModel] = source[key]);
   }
 
-  id: number;
+  id: string;
 
   createdAt: Date;
 }

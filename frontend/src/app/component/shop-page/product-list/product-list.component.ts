@@ -45,19 +45,19 @@ export class ProductListComponent implements OnInit {
     this.reportService.showUserInfo('Dodano artykuł do listy zakupów');
   }
 
-  editProduct(id: number) {
-
+  editProduct(id: string) {
+    this.router.navigate([RouteName.SHOP, RouteName.ADMIN, RouteName.EDIT_PRODUCT, id]);
   }
 
   addNewProduct() {
-
+    this.router.navigate([RouteName.SHOP, RouteName.ADMIN, RouteName.ADD_PRODUCT]);
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: string) {
     this.dialog.open(ConfirmDeleteDialogComponent, {width: '400px'});
   }
 
-  goToDetails(id: number) {
+  goToDetails(id: string) {
     this.router.navigate([RouteName.SHOP, RouteName.DETAILS, id]);
   }
 

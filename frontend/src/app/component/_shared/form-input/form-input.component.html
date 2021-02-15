@@ -42,4 +42,14 @@
 <ng-template #elseBlock>
   <mat-checkbox *ngIf="inputType === InputType.CHECKBOX"
                 [formControl]="$any(fieldRef)">{{label}}</mat-checkbox>
+  <ng-container *ngIf="inputType === InputType.FILE">
+    <input #fileInput
+           type="file"
+           [hidden]="true"
+           [formControl]="$any(fieldRef)">
+    <button mat-flat-button
+            color="primary"
+            (click)="fileInput.click()">Choose file
+    </button>
+  </ng-container>
 </ng-template>

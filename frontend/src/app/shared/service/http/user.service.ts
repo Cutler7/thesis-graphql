@@ -5,10 +5,17 @@ import {User} from '../../model/user.model';
 export class UserService {
 
   private data: User[] = [
-    {id: 1, username: 'jkowalski', name: 'Jan', surname: 'Kowalski', email: 'jkowalski@mail.com', createdAt: new Date},
-    {id: 1, username: 'mnowak', name: 'Marek', surname: 'Nowak', email: 'mnowak@mail.com', createdAt: new Date},
     {
-      id: 1,
+      id: '1',
+      username: 'jkowalski',
+      name: 'Jan',
+      surname: 'Kowalski',
+      email: 'jkowalski@mail.com',
+      createdAt: new Date,
+    },
+    {id: '1', username: 'mnowak', name: 'Marek', surname: 'Nowak', email: 'mnowak@mail.com', createdAt: new Date},
+    {
+      id: '1',
       username: 'kmalinowski',
       name: 'Krzysztof',
       surname: 'Malinowski',
@@ -16,7 +23,7 @@ export class UserService {
       createdAt: new Date,
     },
     {
-      id: 1,
+      id: '1',
       username: 'jzielinska',
       name: 'Jadwiga',
       surname: 'Zielińska',
@@ -24,7 +31,7 @@ export class UserService {
       createdAt: new Date,
     },
     {
-      id: 1,
+      id: '1',
       username: 'mwojciechowska',
       name: 'Marta',
       surname: 'Wojciechowska',

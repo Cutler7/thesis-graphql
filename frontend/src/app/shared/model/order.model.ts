@@ -1,6 +1,13 @@
 import {BaseModel} from './_base.model';
 
+export interface OrderItem extends BaseModel {
+  productId: string
+  amount: number;
+}
+
 export class Order extends BaseModel {
+
+  orderNo: string;
 
   name: string;
 
@@ -21,4 +28,6 @@ export class Order extends BaseModel {
   postalCode: string;
 
   delivery: string;
+
+  products: OrderItem[];
 }

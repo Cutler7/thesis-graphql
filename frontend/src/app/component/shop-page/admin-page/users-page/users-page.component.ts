@@ -13,7 +13,7 @@ export class UsersPageComponent implements OnInit {
 
   users: User[] = [];
 
-  columns: string[] = ['nick', 'name', 'email', 'createdAt', 'action'];
+  readonly columns = ['nick', 'name', 'email', 'createdAt', 'action'];
 
   constructor(
     private userService: UserService,

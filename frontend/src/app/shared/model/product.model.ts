@@ -1,7 +1,7 @@
 import {BaseModel} from './_base.model';
 import {Comment} from './comment.model';
 
-export interface ProductProperty {
+export interface ProductProperty extends BaseModel {
   name: string;
   value: string;
 }

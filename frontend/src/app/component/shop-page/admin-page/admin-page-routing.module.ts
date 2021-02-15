@@ -19,6 +19,16 @@ const routes: Routes = [
           .then(m => m.OrderListModule),
       },
       {
+        path: RouteName.ADD_PRODUCT,
+        loadChildren: () => import('./add-product/add-product.module')
+          .then(m => m.AddProductModule),
+      },
+      {
+        path: RouteName.EDIT_PRODUCT,
+        loadChildren: () => import('./edit-product/edit-product.module')
+          .then(m => m.EditProductModule),
+      },
+      {
         path: '',
         redirectTo: '/' + RouteName.SHOP + '/' + RouteName.LIST,
         pathMatch: 'full',

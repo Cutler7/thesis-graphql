@@ -36,7 +36,7 @@ export class ShoppingListComponent implements OnInit {
     this.total = this.products.reduce((prevVal, currVal) => prevVal + currVal.product.price * currVal.count, 0);
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     this.shoppingCartService.removeProduct(id);
     this.reportService.showUserInfo('Usunięto produkt z listy');
   }

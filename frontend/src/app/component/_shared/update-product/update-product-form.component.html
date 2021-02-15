@@ -1,0 +1,31 @@
+<div>
+  <form [formGroup]="form"
+        (ngSubmit)="saveProduct()">
+    <div class="product-form">
+
+      <app-form-input [fieldRef]="form.get('name')"
+                      [inputType]="InputType.TEXT"
+                      label="Nazwa"></app-form-input>
+      <app-form-input [fieldRef]="form.get('description')"
+                      [inputType]="InputType.TEXTAREA"
+                      label="Opis"></app-form-input>
+      <app-form-input [fieldRef]="form.get('img')"
+                      [inputType]="InputType.FILE"
+                      label="Zdjęcie"></app-form-input>
+      <app-form-input [fieldRef]="form.get('price')"
+                      [inputType]="InputType.NUMBER"
+                      label="Cena"></app-form-input>
+      <app-form-input [fieldRef]="form.get('quantity')"
+                      [inputType]="InputType.NUMBER"
+                      label="Ilość"></app-form-input>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button
+              color="accent"
+              type="submit">
+        <i class=" feather-check"></i>
+        Zapisz
+      </button>
+    </div>
+  </form>
+</div>

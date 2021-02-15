@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.productService.getProductById(Number(id))
+    this.productService.getProductById(id)
       .then(res => {
         this.product = res;
         this.product.img = 'assets/img/example.jpg';

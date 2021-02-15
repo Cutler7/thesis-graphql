@@ -1,0 +1,24 @@
+.product-page {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .product-form {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+
+    .mat-form-field-infix {
+      width: 280px;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin: 24px;
+    }
+  }
+}

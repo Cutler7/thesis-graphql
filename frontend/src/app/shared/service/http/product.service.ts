@@ -32,6 +32,9 @@ const GQL_CREATE_OR_UPDATE_PRODUCT = gql`
 const GQL_ADD_COMMENT = gql`
 `;
 
+const GQL_UPDATE_AMOUNT = gql`
+`;
+
 @Injectable({providedIn: 'root'})
 export class ProductService extends GraphqlService {
 
@@ -51,7 +54,11 @@ export class ProductService extends GraphqlService {
     return this.execute<Product>(GQL_CREATE_OR_UPDATE_PRODUCT, 'createOrUpdateProduct', product);
   }
 
-  addComment(comment: Comment): Promise<Comment> {
-    return this.execute<Comment>(GQL_ADD_COMMENT, 'addComment', comment);
+  addComment(id: string, comment: Comment): Promise<Comment> {
+    return this.execute<Comment>(GQL_ADD_COMMENT, 'addComment', id, comment);
+  }
+
+  updateAmount(id: string, amount: number): Promise<Product> {
+    return this.execute<Product>(GQL_UPDATE_AMOUNT, 'updateAmount', id, amount);
   }
 }
