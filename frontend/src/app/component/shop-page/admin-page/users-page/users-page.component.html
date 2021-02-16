@@ -49,7 +49,7 @@
     <td mat-cell *matCellDef="let element">
       <button mat-button
               color="accent"
-              (click)="deleteUser(element.product.id)">
+              (click)="deleteUser(element.id, element.username)">
         <i class="feather-user-x"></i>Usuń
       </button>
     </td>

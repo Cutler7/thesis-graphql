@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ProductServiceMock} from '../../../shared/service/http/product-service-mock.service';
 import {Product} from '../../../shared/model/product.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ImageDialogComponent} from './image-dialog/image-dialog.component';
 import {ShoppingCartService} from '../../../shared/service/shopping-cart.service';
 import {ReportService} from '../../../shared/service/report.service';
 import {AddCommentDialogComponent} from './add-comment-dialog/add-comment-dialog.component';
+import {ProductService} from '../../../shared/service/http/product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private reportService: ReportService,
-    private productService: ProductServiceMock,
+    private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
   ) {
   }
@@ -48,6 +48,11 @@ export class ProductDetailsComponent implements OnInit {
 
   openAddCommentDialog() {
     const dialogRef = this.dialog.open(AddCommentDialogComponent, {width: '400px'});
-    dialogRef.afterClosed().subscribe(val => console.log(val));
+    dialogRef.afterClosed().subscribe(val => this.addComment(val));
+  }
+
+  private addComment(comment: Comment) {
+    this.productService.addComment(this.product.id, comment)
+      .then(() => this.reportService.showUserInfo(`Dodano komentarz dla produktu: ${this.product.name}`));
   }
 }

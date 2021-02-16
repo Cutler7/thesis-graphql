@@ -1,19 +1,18 @@
 import {buildASTSchema, GraphQLFieldResolver} from 'graphql';
 import {graphqlHTTP} from 'express-graphql';
 import express from 'express';
-import {data} from './controller/_data';
+import {data, users} from './_data/_data';
 import {SCHEMA} from './schema';
-import {Product} from './model/product.model';
 
 const root = {
   productList: () => data,
+  userList: () => users,
   getProduct: (args: { id: string }, obj: any, context: any, info: any) => {
     // console.log(args);
     // console.log(obj);
     // console.log(context);
     // console.log(info);
-    const productData = data.find(el => el.id === args.id);
-    return new Product(productData);
+    return data.find(el => el.id === args.id);
   },
 };
 

@@ -1,14 +1,14 @@
-export type ProductCategoryConst = { name: string, id: number };
+import {EnumerableType} from '../interface/enumerable-type.interface';
 
-export const PRODUCT_CATEGORY: ProductCategoryConst[] = [
-  {name: 'kwiaty doniczkowe', id: 1},
-  {name: 'sukulenty', id: 2},
-  {name: 'palmy', id: 3},
-  {name: 'doniczki', id: 4},
-  {name: 'kwiaty do ogrodu', id: 5},
-  {name: 'byliny', id: 6},
-  {name: 'nasiona', id: 7},
-  {name: 'środki ochrony', id: 8},
-  {name: 'nawozy', id: 9},
-  {name: 'podłoża', id: 10},
+export const PRODUCT_CATEGORY: EnumerableType[] = [
+  {label: 'kwiaty doniczkowe', code: '1'},
+  {label: 'sukulenty', code: '2'},
+  {label: 'palmy', code: '3'},
+  {label: 'doniczki', code: '4'},
+  {label: 'kwiaty do ogrodu', code: '5'},
+  {label: 'byliny', code: '6'},
+  {label: 'nasiona', code: '7'},
+  {label: 'środki ochrony', code: '8'},
+  {label: 'nawozy', code: '9'},
+  {label: 'podłoża', code: '10'},
 ];

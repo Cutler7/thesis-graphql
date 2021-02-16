@@ -4,21 +4,33 @@ import {QueryListArgs} from '../../interface/query-list-args.interface';
 import {PageResponse} from '../../interface/page-response.interface';
 import {gql, GraphqlService} from './graphql.service';
 
-const GQL_PRODUCT_BY_ID = gql`
-  query($var1: ID!) {
-    getProduct(id: $var1) {
-      id
-      price
-    }
-  }
-`;
-
 const GQL_PRODUCT_LIST = gql`
   {
     productList {
       id
       name
       price
+    }
+  }
+`;
+
+const GQL_PRODUCT_BY_ID = gql`
+  query($var1: ID!) {
+    getProduct(id: $var1) {
+      id
+      name
+      description
+      price
+      properties {
+        name
+        value
+      }
+      comments {
+        author
+        content
+        createdAt
+        rate
+      }
     }
   }
 `;

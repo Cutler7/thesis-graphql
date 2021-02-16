@@ -45,8 +45,50 @@ export const data: any[] = [
 ];
 
 data.forEach(el => {
-  // el.comments = comments;
+  el.comments = comments;
   el.properties = dataProps;
   el.description = description;
 });
 
+export const users = [
+  {
+    id: '1',
+    username: 'jkowalski',
+    name: 'Jan',
+    surname: 'Kowalski',
+    email: 'jkowalski@mail.com',
+    createdAt: new Date,
+  },
+  {
+    id: '1',
+    username: 'mnowak',
+    name: 'Marek',
+    surname: 'Nowak',
+    email: 'mnowak@mail.com',
+    createdAt: new Date,
+  },
+  {
+    id: '1',
+    username: 'kmalinowski',
+    name: 'Krzysztof',
+    surname: 'Malinowski',
+    email: 'kmalinowski@mail.com',
+    createdAt: new Date,
+  },
+  {
+    id: '1',
+    username: 'jzielinska',
+    name: 'Jadwiga',
+    surname: 'Zielińska',
+    email: 'jzielinska@mail.com',
+    createdAt: new Date,
+  },
+  {
+    id: '1',
+    username: 'mwojciechowska',
+    name: 'Marta',
+    surname: 'Wojciechowska',
+    email: 'mwojciechowska@mail.com',
+    createdAt: new Date,
+  },
+];

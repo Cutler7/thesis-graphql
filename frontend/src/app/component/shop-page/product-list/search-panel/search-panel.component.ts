@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {InputType} from '../../../../shared/enum/input.type';
-import {PRODUCT_CATEGORY, ProductCategoryConst} from '../../../../shared/const/product-category.const';
+import {PRODUCT_CATEGORY} from '../../../../shared/const/product-category.const';
+import {EnumerableType} from '../../../../shared/interface/enumerable-type.interface';
 
 @Component({
   selector: 'app-search-panel',
@@ -14,7 +15,7 @@ export class SearchPanelComponent implements OnInit {
 
   form: FormGroup;
 
-  readonly categories: ProductCategoryConst[] = PRODUCT_CATEGORY;
+  readonly categories: EnumerableType[] = PRODUCT_CATEGORY;
 
   @Output()
   search = new EventEmitter<any>();

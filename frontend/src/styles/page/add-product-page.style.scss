@@ -13,6 +13,24 @@
     }
   }
 
+  td.mat-cell {
+    border-bottom-width: 0;
+
+    .mat-form-field-infix {
+      padding: 0;
+      border-top: 0;
+    }
+  }
+
+  tbody > tr:first-child .mat-form-field-infix {
+    padding-top: 1.5rem;
+  }
+
+  .add-item-btn {
+    display: flex;
+    justify-content: center;
+  }
+
   .button-container {
     display: flex;
     justify-content: flex-end;

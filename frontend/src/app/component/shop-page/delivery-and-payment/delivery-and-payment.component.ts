@@ -25,7 +25,6 @@ export class DeliveryAndPaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareFormGroup();
-    console.log(this.form);
   }
 
   submit() {

@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 export const SCHEMA: DocumentNode = gql`
     type Query {
         productList: [Product]
+        userList: [User]
         getProduct(id: ID!): Product
     }
 
@@ -13,6 +14,21 @@ export const SCHEMA: DocumentNode = gql`
     }
 
     scalar Date
+
+    type BaseModel {
+        id: ID,
+        createdAt: Date,
+    }
+
+    type User {
+        id: ID,
+        createdAt: Date,
+        username: String,
+        name: String,
+        surname: String,
+        password: String,
+        email: String,
+    }
 
     input ProductInput {
         id: ID
@@ -48,6 +64,6 @@ export const SCHEMA: DocumentNode = gql`
         rate: Int,
         createdAt: Date,
         author: String,
-        comment: String
+        content: String
     }
 `;

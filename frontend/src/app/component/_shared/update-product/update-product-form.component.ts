@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {InputType} from 'src/app/shared/enum/input.type';
 import {Product} from '../../../shared/model/product.model';
 import {ProductService} from '../../../shared/service/http/product.service';
@@ -10,9 +10,8 @@ import {RouteName} from '../../../shared/enum/route-name.enum';
 @Component({
   selector: 'app-update-product-form',
   templateUrl: './update-product-form.component.html',
-  styles: [],
 })
-export class UpdateProductFormComponent implements OnInit, OnChanges {
+export class UpdateProductFormComponent implements OnChanges {
 
   InputType = InputType;
 
@@ -21,6 +20,12 @@ export class UpdateProductFormComponent implements OnInit, OnChanges {
 
   form: FormGroup;
 
+  refresh: boolean = true;
+
+  get propertiesIdxList(): number[] {
+    return Array.from((this.form.get('properties') as FormArray).controls.keys());
+  }
+
   constructor(
     private productService: ProductService,
     private reportService: ReportService,
@@ -28,12 +33,10 @@ export class UpdateProductFormComponent implements OnInit, OnChanges {
   ) {
   }
 
-  ngOnInit(): void {
-    this.prepareFormGroup();
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value && this.value) {
+      this.prepareFormGroup();
+      this.adjustListLength(this.value?.properties?.length || 1);
       this.form.patchValue(this.value);
     }
   }
@@ -54,6 +57,12 @@ export class UpdateProductFormComponent implements OnInit, OnChanges {
       name: new FormControl(''),
       value: new FormControl(''),
     }));
+  }
+
+  private adjustListLength(newLen: number) {
+    const list = this.form.get('properties') as FormArray;
+    list.clear();
+    new Array(newLen).fill(1).forEach(() => this.addProperty());
   }
 
   private prepareFormGroup() {

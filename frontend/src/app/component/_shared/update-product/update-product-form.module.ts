@@ -4,6 +4,7 @@ import {UpdateProductFormComponent} from './update-product-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormInputModule} from '../form-input/form-input.module';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     FormInputModule,
     MatButtonModule,
+    MatTableModule,
   ],
   exports: [UpdateProductFormComponent],
 })

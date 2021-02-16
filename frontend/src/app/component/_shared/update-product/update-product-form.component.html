@@ -18,6 +18,34 @@
       <app-form-input [fieldRef]="form.get('quantity')"
                       [inputType]="InputType.NUMBER"
                       label="Ilość"></app-form-input>
+      <h2>Właściwości produktu</h2>
+      <table *ngIf="refresh"
+             mat-table
+             [dataSource]="propertiesIdxList">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <app-form-input [fieldRef]="form.get(['properties', i, 'name'])"></app-form-input>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef>Wartość</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <app-form-input [fieldRef]="form.get(['properties', i, 'value'])"></app-form-input>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['name', 'value']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['name', 'value'];"></tr>
+      </table>
+      <div class="add-item-btn">
+        <button mat-raised-button
+                color="primary"
+                type="button"
+                (click)="addProperty()">
+          <i class="feather-plus-square"></i>
+          Dodaj właściwość
+        </button>
+      </div>
     </div>
     <div class="button-container">
       <button mat-raised-button

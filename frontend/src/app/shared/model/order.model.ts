@@ -29,5 +29,9 @@ export class Order extends BaseModel {
 
   delivery: string;
 
+  status: string;
+
+  paid: boolean;
+
   products: OrderItem[];
 }
