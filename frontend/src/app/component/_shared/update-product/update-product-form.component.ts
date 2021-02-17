@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {InputType} from 'src/app/shared/enum/input.type';
 import {Product} from '../../../shared/model/product.model';
 import {ProductService} from '../../../shared/service/http/product.service';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReportService} from '../../../shared/service/report.service';
 import {Router} from '@angular/router';
 import {RouteName} from '../../../shared/enum/route-name.enum';
@@ -43,6 +43,7 @@ export class UpdateProductFormComponent implements OnChanges {
 
   saveProduct() {
     if (this.form.valid) {
+      console.log(this.form.value);
       this.productService.createOrUpdateProduct(this.form.value)
         .then(() => this.reportService.showUserInfo('Zmiany zostały zapisane'))
         .then(() => this.router.navigate([RouteName.SHOP]));
@@ -68,11 +69,11 @@ export class UpdateProductFormComponent implements OnChanges {
   private prepareFormGroup() {
     this.form = new FormGroup({
       id: new FormControl(''),
-      name: new FormControl(''),
-      description: new FormControl(''),
-      img: new FormControl(''),
-      price: new FormControl(''),
-      quantity: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      img: new FormControl(null, [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.min(0.01)]),
+      quantity: new FormControl('', [Validators.required, Validators.min(1)]),
       properties: new FormArray([]),
     });
   }

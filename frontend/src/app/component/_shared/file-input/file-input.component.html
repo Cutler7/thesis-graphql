@@ -1,0 +1,16 @@
+<div class="file-input">
+  <input #fileInput
+         [hidden]="true"
+         (change)="handleFileChange($event)"
+         type="file">
+  <button mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="disabled"
+          (click)="fileInput.click()">Choose file
+  </button>
+  <div *ngIf="value"
+       class="file-name">
+    {{value.name}}
+  </div>
+</div>

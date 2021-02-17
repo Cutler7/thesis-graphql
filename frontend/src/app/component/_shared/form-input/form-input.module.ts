@@ -7,6 +7,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FieldErrorsModule} from '../field-errors/field-errors.module';
 import {MatButtonModule} from '@angular/material/button';
+import {FileInputModule} from '../file-input/file-input.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatCheckboxModule,
     FieldErrorsModule,
     MatButtonModule,
+    FileInputModule,
   ],
   exports: [FormInputComponent],
 })

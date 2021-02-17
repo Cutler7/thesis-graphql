@@ -4,6 +4,9 @@
 <span *ngIf="fieldRef.hasError('minlength')">
   Pole musi zawierać minimum {{fieldRef.getError('minlength')?.requiredLength}} znaków.
 </span>
+<span *ngIf="fieldRef.hasError('min')">
+  Minimalna wartość dla tego pola to {{fieldRef.getError('min')?.min}}
+</span>
 <span *ngIf="fieldRef.hasError('email')">
   Niepoprawny adres email
 </span>
