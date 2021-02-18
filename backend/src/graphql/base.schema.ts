@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import {makeExecutableSchema} from '@graphql-tools/schema';
 
 export const baseTypes = gql`
 
@@ -27,7 +26,3 @@ export const baseTypes = gql`
 
     scalar Date
 `;
-
-export const baseSchema = makeExecutableSchema({
-    typeDefs: baseTypes,
-});

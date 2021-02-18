@@ -1,39 +1,30 @@
 import express from 'express';
-import {mergeTypeDefs} from '@graphql-tools/merge';
+import {mergeResolvers, mergeTypeDefs} from '@graphql-tools/merge';
+import {makeExecutableSchema} from '@graphql-tools/schema';
+import {graphqlHTTP} from 'express-graphql';
 import {baseTypes} from './src/graphql/base.schema';
-import {orderTypes} from './src/graphql/order.schema';
-import {productTypes} from './src/graphql/product.schema';
-import {userTypes} from './src/graphql/user.schema';
+import {orderResolvers, orderTypes} from './src/graphql/order.schema';
+import {productResolvers, productTypes} from './src/graphql/product.schema';
+import {userResolvers, userTypes} from './src/graphql/user.schema';
 
-
-const app = express();
-
-// const t = mergeSchemas({
-//   schemas: [
-//     baseSchema,
-//     userSchema,
-//     productSchema,
-//     orderSchema,
-//   ],
-// });
-
-const tt = mergeTypeDefs([
+const typeDefs = mergeTypeDefs([
   baseTypes,
   orderTypes,
   productTypes,
   userTypes,
 ]);
 
-// app.use('/graphql', graphqlHTTP({
-//   schema: mergeSchemas({
-//     typeDefs: baseSchema,
-//     schemas: [
-//       userSchema,
-//       productSchema,
-//       orderSchema,
-//     ],
-//   }),
-//   graphiql: true,
-// }));
+const resolvers = mergeResolvers([
+  orderResolvers,
+  productResolvers,
+  userResolvers,
+]);
+
+const app = express();
+
+app.use('/graphql', graphqlHTTP({
+  schema: makeExecutableSchema({typeDefs, resolvers}),
+  graphiql: true,
+}));
 
 app.listen(3000, () => console.log('Server is listening at port 3000'));

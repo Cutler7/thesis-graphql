@@ -1,4 +1,3 @@
-import {makeExecutableSchema} from '@graphql-tools/schema';
 import gql from 'graphql-tag';
 
 export const orderTypes = gql`
@@ -65,7 +64,7 @@ export const orderTypes = gql`
     }
 `;
 
-const orderResolvers = {
+export const orderResolvers = {
     Query: {
         orderList(obj, args, context, info) {
             return [];
@@ -83,8 +82,3 @@ const orderResolvers = {
         },
     },
 };
-
-export const orderSchema = makeExecutableSchema({
-    typeDefs: orderTypes,
-    resolvers: orderResolvers,
-});

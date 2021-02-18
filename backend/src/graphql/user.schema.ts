@@ -1,4 +1,3 @@
-import {makeExecutableSchema} from '@graphql-tools/schema';
 import gql from 'graphql-tag';
 
 export const userTypes = gql`
@@ -47,7 +46,7 @@ export const userTypes = gql`
     }
 `;
 
-const userResolvers = {
+export const userResolvers = {
     Query: {
         userList(obj, args, context, info) {
             return [];
@@ -65,8 +64,3 @@ const userResolvers = {
         },
     },
 };
-
-export const userSchema = makeExecutableSchema({
-    typeDefs: userTypes,
-    resolvers: userResolvers,
-});

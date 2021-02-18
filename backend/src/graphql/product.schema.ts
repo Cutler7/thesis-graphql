@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import {makeExecutableSchema} from '@graphql-tools/schema';
 
 export const productTypes = gql`
     schema {
@@ -75,7 +74,7 @@ export const productTypes = gql`
     }
 `;
 
-const productResolvers = {
+export const productResolvers = {
   Query: {
     productList(obj, args, context, info) {
       return [];
@@ -99,8 +98,3 @@ const productResolvers = {
     },
   },
 };
-
-export const productSchema = makeExecutableSchema({
-  typeDefs: productTypes,
-  resolvers: productResolvers,
-});
