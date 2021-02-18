@@ -7,13 +7,17 @@ import {User} from '../../model/user.model';
 const GQL_USER_LIST = gql`
   {
     userList {
-      id
-      createdAt
-      username
-      name
-      surname
-      password
-      email
+      page
+      pageSize
+      totalRecords
+      content {
+        id
+        createdAt
+        username
+        name
+        surname
+        email
+      }
     }
   }
 `;

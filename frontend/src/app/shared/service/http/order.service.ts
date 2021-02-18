@@ -31,7 +31,7 @@ export class OrderService extends GraphqlService {
     return this.execute(GQL_CREATE_ORDER, 'createOrder', order);
   }
 
-  changeOrderStatus(order: Order): Promise<Order> {
-    return this.execute(GQL_CHANGE_ORDER_STATUS, 'changeOrderStatus', order);
+  changeOrderStatus(id: string, status: string): Promise<Order> {
+    return this.execute(GQL_CHANGE_ORDER_STATUS, 'changeOrderStatus', id, status);
   }
 }

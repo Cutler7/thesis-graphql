@@ -55,8 +55,8 @@ export class UpdateProductFormComponent implements OnChanges {
   addProperty() {
     const list = this.form.get('properties') as FormArray;
     list.push(new FormGroup({
-      name: new FormControl(''),
-      value: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      value: new FormControl('', [Validators.required]),
     }));
   }
 

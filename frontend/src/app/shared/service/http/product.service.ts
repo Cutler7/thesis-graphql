@@ -3,6 +3,7 @@ import {Product} from '../../model/product.model';
 import {QueryListArgs} from '../../interface/query-list-args.interface';
 import {PageResponse} from '../../interface/page-response.interface';
 import {gql, GraphqlService} from './graphql.service';
+import {Comment} from '../../model/comment.model';
 
 const GQL_PRODUCT_LIST = gql`
   {

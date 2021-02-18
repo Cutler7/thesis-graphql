@@ -9,7 +9,7 @@ const GQL_LOGIN = gql`
 @Injectable({providedIn: 'root'})
 export class AuthorizationHttpService extends GraphqlService {
 
-  getOrderById(credentials: Credentials): Promise<Order> {
+  login(credentials: Credentials): Promise<Order> {
     return this.execute(GQL_LOGIN, 'login', credentials);
   }
 }
