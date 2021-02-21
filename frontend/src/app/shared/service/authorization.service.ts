@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from '../model/user.model';
 import {Credentials} from '../interface/credentials.interface';
 import {BrowserStoredService} from './browser-stored.service';
+import {AuthorizationHttpService} from './http/authorization-http.service';
 
 export interface UserSession {
   user: User;
@@ -17,7 +18,9 @@ export class AuthorizationService extends BrowserStoredService<UserSession> {
 
   protected readonly key = 'userSession';
 
-  constructor() {
+  constructor(
+    private authorizationHttpService: AuthorizationHttpService,
+  ) {
     super();
     this.getFromCache();
   }
@@ -27,14 +30,11 @@ export class AuthorizationService extends BrowserStoredService<UserSession> {
   }
 
   login(credentials: Credentials): Promise<void> {
-    return this.withBrowserCache(() => {
-      if (credentials.username === 'admin') {
-        this.createUser(credentials.username);
-        this.token = 'XYZ';
-        return Promise.resolve();
-      }
-      return Promise.reject();
-    });
+    return this.authorizationHttpService.login(credentials)
+      .then(res => this.withBrowserCache(() => {
+        this.activeUser = new User(res.user);
+        this.token = res.token;
+      }));
   }
 
   logout() {
@@ -42,14 +42,6 @@ export class AuthorizationService extends BrowserStoredService<UserSession> {
       this.activeUser = null;
       this.token = null;
     });
-  }
-
-  private createUser(username: string) {
-    this.activeUser = new User({
-      username,
-      name: 'George',
-      surname: 'George',
-    } as User);
   }
 
   protected init(data: UserSession): void {

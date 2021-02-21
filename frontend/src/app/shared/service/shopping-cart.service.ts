@@ -28,11 +28,11 @@ export class ShoppingCartService extends BrowserStoredService<[string, CartItem]
 
   addProduct(product: Product, count: number = 1) {
     this.withBrowserCache(() => {
-      const foundItem = this.getProductList().get(product.id);
+      const foundItem = this.getProductList().get(product._id);
       if (foundItem) {
         foundItem.count += count;
       } else {
-        this.getProductList().set(product.id, {product, count});
+        this.getProductList().set(product._id, {product, count});
       }
     });
   }

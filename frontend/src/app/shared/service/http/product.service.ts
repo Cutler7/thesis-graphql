@@ -8,9 +8,14 @@ import {Comment} from '../../model/comment.model';
 const GQL_PRODUCT_LIST = gql`
   {
     productList {
-      id
-      name
-      price
+      page
+      pageSize
+      totalRecords
+      content {
+        _id
+        name
+        price
+      }
     }
   }
 `;
@@ -18,7 +23,7 @@ const GQL_PRODUCT_LIST = gql`
 const GQL_PRODUCT_BY_ID = gql`
   query($var1: ID!) {
     getProduct(id: $var1) {
-      id
+      _id
       name
       description
       price

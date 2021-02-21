@@ -19,7 +19,7 @@ export const orderTypes = gql`
     }
 
     type Order implements BaseModel {
-        id: ID
+        _id: ID
         createdAt: Date
         orderNo: String
         name: String
@@ -52,7 +52,7 @@ export const orderTypes = gql`
     }
 
     type OrderItem implements BaseModel {
-        id: ID
+        _id: ID
         createdAt: Date
         productId: String
         amount: String

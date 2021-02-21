@@ -26,7 +26,7 @@ export const productTypes = gql`
     }
 
     type Product implements BaseModel {
-        id: ID
+        _id: ID
         createdAt: Date
         name: String
         description: String
@@ -38,7 +38,7 @@ export const productTypes = gql`
     }
 
     input ProductInput {
-        id: ID
+        _id: ID
         name: String
         description: String
         price: Int
@@ -48,7 +48,7 @@ export const productTypes = gql`
     }
 
     type ProductProperty implements BaseModel {
-        id: ID
+        _id: ID
         createdAt: Date
         name: String
         value: String
@@ -60,7 +60,7 @@ export const productTypes = gql`
     }
 
     type Comment implements BaseModel {
-        id: ID
+        _id: ID
         createdAt: Date
         author: String
         rate: Int
@@ -77,6 +77,7 @@ export const productTypes = gql`
 export const productResolvers = {
   Query: {
     productList(obj, args, context, info) {
+      const db = context.dbConnectionController.getDb();
       return [];
     },
     getProduct(obj, args, context, info) {

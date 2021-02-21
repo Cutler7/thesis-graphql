@@ -7,11 +7,8 @@ import {User} from '../../model/user.model';
 const GQL_USER_LIST = gql`
   {
     userList {
-      page
-      pageSize
-      totalRecords
       content {
-        id
+        _id
         createdAt
         username
         name
@@ -23,9 +20,19 @@ const GQL_USER_LIST = gql`
 `;
 
 const GQL_CREATE_USER = gql`
+  mutation($var1: UserInput!) {
+    createUser(user: $var1) {
+      _id
+    }
+  }
 `;
 
 const GQL_DELETE_USER = gql`
+  mutation($var1: ID!) {
+    deleteUser(id: $var1) {
+      _id
+    }
+  }
 `;
 
 @Injectable({providedIn: 'root'})

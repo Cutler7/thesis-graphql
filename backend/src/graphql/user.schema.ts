@@ -24,7 +24,7 @@ export const userTypes = gql`
     }
 
     type User implements BaseModel {
-        id: ID
+        _id: ID
         createdAt: Date
         username: String
         name: String
@@ -45,22 +45,3 @@ export const userTypes = gql`
         password: String!
     }
 `;
-
-export const userResolvers = {
-    Query: {
-        userList(obj, args, context, info) {
-            return [];
-        },
-        login(obj, args, context, info) {
-            return [];
-        },
-    },
-    Mutation: {
-        createUser(obj, args, context, info) {
-            return [];
-        },
-        deleteUser(obj, args, context, info) {
-            return [];
-        },
-    },
-};

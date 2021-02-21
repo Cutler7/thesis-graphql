@@ -1,9 +1,13 @@
 import gql from 'graphql-tag';
+import {mergeTypeDefs} from '@graphql-tools/merge';
+import {orderTypes} from './order.schema';
+import {productTypes} from './product.schema';
+import {userTypes} from './user.schema';
 
 export const baseTypes = gql`
 
     interface BaseModel {
-        id: ID,
+        _id: ID,
         createdAt: Date,
     }
 
@@ -22,7 +26,22 @@ export const baseTypes = gql`
     input FilterArg {
         key: String!
         value: String!
+        op: FilterOperator
     }
 
     scalar Date
+
+    enum FilterOperator {
+        eg
+        neq
+        gt
+        lt
+    }
 `;
+
+export const typeDefs = mergeTypeDefs([
+    baseTypes,
+    orderTypes,
+    productTypes,
+    userTypes,
+]);

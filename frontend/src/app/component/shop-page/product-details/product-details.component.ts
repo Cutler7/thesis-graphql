@@ -7,6 +7,7 @@ import {ShoppingCartService} from '../../../shared/service/shopping-cart.service
 import {ReportService} from '../../../shared/service/report.service';
 import {AddCommentDialogComponent} from './add-comment-dialog/add-comment-dialog.component';
 import {ProductService} from '../../../shared/service/http/product.service';
+import {Comment} from '../../../shared/model/comment.model';
 
 @Component({
   selector: 'app-product-details',
@@ -52,7 +53,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private addComment(comment: Comment) {
-    this.productService.addComment(this.product.id, comment)
+    this.productService.addComment(this.product._id, comment)
       .then(() => this.reportService.showUserInfo(`Dodano komentarz dla produktu: ${this.product.name}`));
   }
 }

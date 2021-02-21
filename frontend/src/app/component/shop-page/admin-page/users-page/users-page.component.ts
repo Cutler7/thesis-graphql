@@ -24,9 +24,7 @@ export class UsersPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserList()
-      .then(res => this.users = res as any)
-      .catch(err => console.error(err));
+    this.fetchUserList();
   }
 
   openAddUserDialog() {
@@ -36,11 +34,19 @@ export class UsersPageComponent implements OnInit {
 
   deleteUser(id: string, username: string) {
     this.userService.deleteUser(id)
+      .then(() => this.fetchUserList())
       .then(() => this.reportService.showUserInfo(`Usunięto użytkownika: ${username}`));
   }
 
   private createUser(user: User) {
     this.userService.createUser(user)
+      .then(() => this.fetchUserList())
       .then(() => this.reportService.showUserInfo('Dodano nowego użytkownika'));
+  }
+
+  private fetchUserList(): Promise<any> {
+    return this.userService.getUserList()
+      .then(res => this.users = res.content)
+      .catch(err => console.error(err));
   }
 }

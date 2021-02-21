@@ -21,34 +21,34 @@ export const comments = [
 
 export const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim dui, pharetra ac posuere ut, egestas ut tortor. Nam malesuada sapien et mollis aliquam. Nam placerat urna vitae justo scelerisque dictum. In vitae metus quis arcu pellentesque ultrices. Maecenas venenatis metus arcu, non pretium lorem convallis a. Nulla mattis ipsum in mi faucibus fermentum a quis ligula. Pellentesque faucibus vulputate tempus. Mauris est arcu, vulputate vitae pretium blandit, rutrum at orci. Nulla eleifend nulla eget erat placerat, non mollis est mattis. Nunc sed consectetur ligula, id aliquam arcu. Sed purus sem, ultrices at orci non, tempus rutrum elit. Vivamus molestie blandit suscipit.';
 
-export const data: any[] = [
-  {id: '1', name: 'Produkt A', description: 'ABCDEF', price: 10},
-  {id: '2', name: 'Produkt B', description: null, price: 20},
-  {id: '3', name: 'Produkt C', description: 'ABCDEF', price: 30},
-  {id: '4', name: 'Produkt D', description: null, price: 40},
-  {id: '5', name: 'Produkt E', description: 'ABCDEF', price: 50},
-  {id: '6', name: 'Produkt F', description: 'ABCDEF', price: 60},
-  {id: '7', name: 'Produkt A', description: 'ABCDEF', price: 10},
-  {id: '8', name: 'Produkt B', description: 'ABCDEF', price: 20},
-  {id: '9', name: 'Produkt C', description: 'ABCDEF', price: 30},
-  {id: '10', name: 'Produkt D', description: 'ABCDEF', price: 40},
-  {id: '11', name: 'Produkt E', description: 'ABCDEF', price: 50},
-  {id: '12', name: 'Produkt F', description: 'ABCDEF', price: 60},
-  {id: '13', name: 'Produkt A', description: 'ABCDEF', price: 10},
-  {id: '14', name: 'Produkt B', description: 'ABCDEF', price: 20},
-  {id: '15', name: 'Produkt C', description: 'ABCDEF', price: 30},
-  {id: '16', name: 'Produkt D', description: 'ABCDEF', price: 40},
-  {id: '17', name: 'Produkt E', description: 'ABCDEF', price: 50},
-  {id: '18', name: 'Produkt F', description: 'ABCDEF', price: 60},
-  {id: '19', name: 'Produkt A', description: 'ABCDEF', price: 10},
-  {id: '20', name: 'Produkt B', description: 'ABCDEF', price: 20},
+export const products: any[] = [
+  {name: 'Produkt A', price: 10, quantity: 100},
+  {name: 'Produkt B', price: 20, quantity: 150},
+  {name: 'Produkt C', price: 30, quantity: 0},
+  {name: 'Produkt D', price: 40, quantity: 0},
+  {name: 'Produkt E', price: 50, quantity: 100},
+  {name: 'Produkt F', price: 60, quantity: 100},
+  {name: 'Produkt A', price: 10, quantity: 150},
+  {name: 'Produkt B', price: 20, quantity: 200},
+  {name: 'Produkt C', price: 30, quantity: 300},
+  {name: 'Produkt D', price: 40, quantity: 100},
+  {name: 'Produkt E', price: 50, quantity: 900},
+  {name: 'Produkt F', price: 60, quantity: 1},
+  {name: 'Produkt A', price: 10, quantity: 8},
+  {name: 'Produkt B', price: 20, quantity: 100},
+  {name: 'Produkt C', price: 30, quantity: 100},
+  {name: 'Produkt D', price: 40, quantity: 100},
+  {name: 'Produkt E', price: 50, quantity: 100},
+  {name: 'Produkt F', price: 60, quantity: 100},
+  {name: 'Produkt A', price: 10, quantity: 100},
+  {name: 'Produkt B', price: 20, quantity: 100},
 ];
 
-data.forEach(el => {
-  el.comments = comments;
-  el.properties = dataProps;
-  el.description = description;
-});
+// data.forEach(el => {
+//   el.comments = comments;
+//   el.properties = dataProps;
+//   el.description = description;
+// });
 
 export const users = [
   {
@@ -60,7 +60,7 @@ export const users = [
     createdAt: new Date,
   },
   {
-    id: '1',
+    id: '2',
     username: 'mnowak',
     name: 'Marek',
     surname: 'Nowak',
@@ -68,7 +68,7 @@ export const users = [
     createdAt: new Date,
   },
   {
-    id: '1',
+    id: '3',
     username: 'kmalinowski',
     name: 'Krzysztof',
     surname: 'Malinowski',
@@ -76,7 +76,7 @@ export const users = [
     createdAt: new Date,
   },
   {
-    id: '1',
+    id: '4',
     username: 'jzielinska',
     name: 'Jadwiga',
     surname: 'Zielińska',
@@ -84,7 +84,7 @@ export const users = [
     createdAt: new Date,
   },
   {
-    id: '1',
+    id: '5',
     username: 'mwojciechowska',
     name: 'Marta',
     surname: 'Wojciechowska',
