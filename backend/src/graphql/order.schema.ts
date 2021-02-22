@@ -63,22 +63,3 @@ export const orderTypes = gql`
         amount: String
     }
 `;
-
-export const orderResolvers = {
-    Query: {
-        orderList(obj, args, context, info) {
-            return [];
-        },
-        getOrder(obj, args, context, info) {
-            return [];
-        },
-    },
-    Mutation: {
-        createOrder(obj, args, context, info) {
-            return [];
-        },
-        changeOrderStatus(obj, args, context, info) {
-            return [];
-        },
-    },
-};

@@ -73,29 +73,3 @@ export const productTypes = gql`
         content: String
     }
 `;
-
-export const productResolvers = {
-  Query: {
-    productList(obj, args, context, info) {
-      const db = context.dbConnectionController.getDb();
-      return [];
-    },
-    getProduct(obj, args, context, info) {
-      return [];
-    },
-  },
-  Mutation: {
-    deleteProduct(obj, args, context, info) {
-      return [];
-    },
-    createOrUpdateProduct(obj, args, context, info) {
-      return [];
-    },
-    addComment(obj, args, context, info) {
-      return [];
-    },
-    updateAmount(obj, args, context, info) {
-      return [];
-    },
-  },
-};

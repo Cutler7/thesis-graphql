@@ -36,7 +36,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProductList()
-      .then(res => this.products = res as any)
+      .then(res => this.products = res.content)
       .catch(err => console.error(err));
   }
 

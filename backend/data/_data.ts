@@ -7,16 +7,15 @@ export const dataProps = [
 
 export const comments = [
   {
-    id: '1',
     rate: 1,
     createdAt: new Date,
     author: 'Janusz',
     content: 'bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo',
   },
-  {id: '2', rate: 2, createdAt: new Date, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
-  {id: '3', rate: 3, createdAt: new Date, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
-  {id: '4', rate: 4, createdAt: new Date, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
-  {id: '5', rate: 5, createdAt: new Date, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 2, createdAt: new Date, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 3, createdAt: new Date, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 4, createdAt: new Date, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 5, createdAt: new Date, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
 ];
 
 export const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim dui, pharetra ac posuere ut, egestas ut tortor. Nam malesuada sapien et mollis aliquam. Nam placerat urna vitae justo scelerisque dictum. In vitae metus quis arcu pellentesque ultrices. Maecenas venenatis metus arcu, non pretium lorem convallis a. Nulla mattis ipsum in mi faucibus fermentum a quis ligula. Pellentesque faucibus vulputate tempus. Mauris est arcu, vulputate vitae pretium blandit, rutrum at orci. Nulla eleifend nulla eget erat placerat, non mollis est mattis. Nunc sed consectetur ligula, id aliquam arcu. Sed purus sem, ultrices at orci non, tempus rutrum elit. Vivamus molestie blandit suscipit.';
@@ -44,11 +43,11 @@ export const products: any[] = [
   {name: 'Produkt B', price: 20, quantity: 100},
 ];
 
-// data.forEach(el => {
-//   el.comments = comments;
-//   el.properties = dataProps;
-//   el.description = description;
-// });
+products.forEach(el => {
+  // el.comments = comments;
+  // el.properties = dataProps;
+  el.description = description;
+});
 
 export const users = [
   {

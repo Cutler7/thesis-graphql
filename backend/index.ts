@@ -1,20 +1,18 @@
 import express, {Express} from 'express';
 import {mergeResolvers} from '@graphql-tools/merge';
 import {typeDefs} from './src/graphql/base.schema';
-import {orderResolvers} from './src/graphql/order.schema';
-import {productResolvers} from './src/graphql/product.schema';
 import {DbConnectionController} from './src/controller/db-connection.controller';
 import {graphqlHTTP} from 'express-graphql';
 import {makeExecutableSchema} from 'graphql-tools';
 import {DbInitController} from './src/controller/db-init.controller';
-import {userResolvers} from './src/resolver/user.resolver';
 import {ResolverContext} from './src/interface/resolver-context.interface';
+import {userResolvers} from './src/resolver/user.resolver';
+import {orderResolvers} from './src/resolver/order.resolver';
+import {productResolvers} from './src/resolver/product.resolver';
 
 const app: Express = express();
 const dbConnectionController = new DbConnectionController();
 const dbInitController = new DbInitController(dbConnectionController);
-
-// dbConnectionController.whenReady(() => dbInitController.initUsers());
 
 const resolvers = mergeResolvers([
   orderResolvers,
@@ -24,7 +22,7 @@ const resolvers = mergeResolvers([
 
 app.get('/init', (req, res) => {
   dbInitController.initDatabase()
-    .then(() => res.send('Ok'));
+    .then(() => res.send({result: 'OK'}));
 });
 
 app.use('/graphql', graphqlHTTP({

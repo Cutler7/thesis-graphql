@@ -37,24 +37,24 @@
         class="row-action-container">
       <ng-container *ngIf="isUserLoggedIn">
         <button mat-button color="accent"
-                (click)="editProduct(element.id)">
+                (click)="editProduct(element._id)">
           <i class="feather-edit"></i>
           Edytuj
         </button>
         <button mat-button color="accent"
-                (click)="editProduct(element.id)">
+                (click)="editProduct(element._id)">
           <i class="feather-chevrons-up"></i>
           Aktualizuj ilość
         </button>
         <button mat-button color="warn"
-                (click)="deleteProduct(element.id)">
+                (click)="deleteProduct(element._id)">
           <i class="feather-x-square"></i>
           Usuń
         </button>
       </ng-container>
       <ng-container *ngIf="!isUserLoggedIn">
         <button mat-raised-button color="accent"
-                (click)="goToDetails(element.id)">
+                (click)="goToDetails(element._id)">
           <i class="feather-arrow-up-right"></i>
           Otwórz
         </button>

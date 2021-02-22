@@ -21,14 +21,14 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {
     const order = {
-      id: '1',
+      _id: '1',
       orderNo: '12345',
       createdAt: new Date(),
       products: [],
       paid: true,
       status: 'PENDING',
-    };
-    new Array(20).fill(0).forEach(e => this.orders.push(order as Order));
+    } as Order;
+    new Array(20).fill(0).forEach(e => this.orders.push(order));
   }
 
   openOrderDetails(id: string) {
