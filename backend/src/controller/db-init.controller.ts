@@ -1,6 +1,6 @@
 import {DbConnectionController} from './db-connection.controller';
 import {Db, InsertOneWriteOpResult} from 'mongodb';
-import {comments, dataProps, products, users} from '../../data/_data';
+import {comments, dataProps, orders, products, users} from '../../data/_data';
 import {cloneDeep} from 'lodash';
 import {Collection} from '../enum/collection.enum';
 
@@ -18,10 +18,9 @@ export class DbInitController {
   }
 
   private initWithData(db: Db) {
-    return Promise.all([
-      db.collection(Collection.USER).insertMany(users),
-      this.initProducts(db),
-    ]);
+    return db.collection(Collection.USER).insertMany(users)
+      .then(() => this.initProducts(db))
+      .then(() => this.initOrders(db));
   }
 
   private initProducts(db: Db): Promise<any> {
@@ -44,5 +43,9 @@ export class DbInitController {
     const dataCpy = cloneDeep(dataSet);
     dataCpy.forEach(el => el.productId = inserted.insertedId);
     list.push(...dataCpy);
+  }
+
+  private initOrders(db: Db): Promise<any> {
+    return db.collection(Collection.ORDER).insertMany(orders);
   }
 }

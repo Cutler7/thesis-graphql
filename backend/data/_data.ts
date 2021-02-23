@@ -1,3 +1,6 @@
+const addCreatedAtField = (...collection: any[][]) => collection
+  .forEach(col => col.forEach(el => el.createdAt = new Date()));
+
 export const dataProps = [
   {name: 'wysokość', value: 'do 40cm'},
   {name: 'stanowisko', value: 'słoneczne'},
@@ -8,14 +11,13 @@ export const dataProps = [
 export const comments = [
   {
     rate: 1,
-    createdAt: new Date,
     author: 'Janusz',
     content: 'bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo bardzo ładne kwiaty mają państwo',
   },
-  {rate: 2, createdAt: new Date, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
-  {rate: 3, createdAt: new Date, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
-  {rate: 4, createdAt: new Date, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
-  {rate: 5, createdAt: new Date, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 2, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 3, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 4, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
+  {rate: 5, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
 ];
 
 export const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim dui, pharetra ac posuere ut, egestas ut tortor. Nam malesuada sapien et mollis aliquam. Nam placerat urna vitae justo scelerisque dictum. In vitae metus quis arcu pellentesque ultrices. Maecenas venenatis metus arcu, non pretium lorem convallis a. Nulla mattis ipsum in mi faucibus fermentum a quis ligula. Pellentesque faucibus vulputate tempus. Mauris est arcu, vulputate vitae pretium blandit, rutrum at orci. Nulla eleifend nulla eget erat placerat, non mollis est mattis. Nunc sed consectetur ligula, id aliquam arcu. Sed purus sem, ultrices at orci non, tempus rutrum elit. Vivamus molestie blandit suscipit.';
@@ -44,50 +46,62 @@ export const products: any[] = [
 ];
 
 products.forEach(el => {
-  // el.comments = comments;
-  // el.properties = dataProps;
   el.description = description;
 });
 
 export const users = [
   {
-    id: '1',
     username: 'jkowalski',
     name: 'Jan',
     surname: 'Kowalski',
     email: 'jkowalski@mail.com',
-    createdAt: new Date,
   },
   {
-    id: '2',
     username: 'mnowak',
     name: 'Marek',
     surname: 'Nowak',
     email: 'mnowak@mail.com',
-    createdAt: new Date,
   },
   {
-    id: '3',
     username: 'kmalinowski',
     name: 'Krzysztof',
     surname: 'Malinowski',
     email: 'kmalinowski@mail.com',
-    createdAt: new Date,
   },
   {
-    id: '4',
     username: 'jzielinska',
     name: 'Jadwiga',
     surname: 'Zielińska',
     email: 'jzielinska@mail.com',
-    createdAt: new Date,
   },
   {
-    id: '5',
     username: 'mwojciechowska',
     name: 'Marta',
     surname: 'Wojciechowska',
     email: 'mwojciechowska@mail.com',
-    createdAt: new Date,
   },
 ];
+
+const addressData = {
+  name: 'Jan',
+  surname: 'Kowalski',
+  email: 'test@mail.com',
+  phone: '111-111-111',
+  street: 'Wąska',
+  houseNumber: '2',
+  apartmentNumber: '6',
+  city: 'Szczecin',
+  postalCode: '70-222',
+  delivery: 'PACZKA',
+  status: 'PENDING',
+  paid: false,
+};
+
+export const orders = [];
+
+new Array(100).fill(1).forEach((el, i) => {
+  const result: any = {...addressData};
+  result.orderNo = `#${i.toString().padStart(5, '0')}`;
+  orders.push(result);
+});
+addCreatedAtField(dataProps, comments, products, users, orders);

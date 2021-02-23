@@ -4,6 +4,7 @@ import {ResolverMap} from '../interface/resolver-map.interface';
 import {Collection} from '../enum/collection.enum';
 import {getPageOfData} from '../util/get-page-of-data.util';
 import {getCollection} from '../util/get-collection.util';
+import {insertDocument} from '../util/insert-document.util';
 
 const getUserById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.USER)
   .findOne({_id: new ObjectId(id)});
@@ -25,10 +26,7 @@ export const userResolvers: ResolverMap = {
   },
   Mutation: {
     async createUser(obj, args, context) {
-      args.user.createdAt = new Date;
-      const inserted = await getCollection(context, Collection.USER)
-        .insertOne(args.user);
-      return await getUserById(context, inserted.insertedId);
+      return await insertDocument(args.user, Collection.USER, context);
     },
     async deleteUser(obj, args, context) {
       const user = await getUserById(context, args.id);

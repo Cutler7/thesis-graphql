@@ -3,4 +3,6 @@ export enum Collection {
   PRODUCT = 'Product',
   COMMENT = 'Comment',
   PRODUCT_PROPERTY = 'ProductProperty',
+  ORDER = 'Order',
+  ORDER_ITEM = 'OrderItem',
 }
