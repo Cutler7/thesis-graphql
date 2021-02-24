@@ -18,8 +18,9 @@ export const userResolvers: ResolverMap = {
       return getPageOfData(users);
     },
     async login(obj, args, context) {
+      const user = getCollection(context, Collection.USER).find({username: args.credentials.username});
       return {
-        user: {username: 'admin'},
+        user: user || {username: 'admin'},
         token: 'test',
       };
     },

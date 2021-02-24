@@ -9,6 +9,7 @@ export const orderTypes = gql`
     extend type Mutation {
         createOrder(order: OrderInput!): Order
         changeOrderStatus(id: ID!, status: String): Order
+        payForOrder(id: ID!): Order
     }
 
     type OrderPage implements DataPage {
@@ -54,12 +55,12 @@ export const orderTypes = gql`
     type OrderItem implements BaseModel {
         _id: ID
         createdAt: Date
-        productId: String
-        amount: String
+        product: Product
+        amount: Int
     }
 
     input OrderItemInput {
         productId: String
-        amount: String
+        amount: Int
     }
 `;

@@ -6,6 +6,7 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReportService} from '../../../shared/service/report.service';
 import {Router} from '@angular/router';
 import {RouteName} from '../../../shared/enum/route-name.enum';
+import {range} from 'lodash';
 
 @Component({
   selector: 'app-update-product-form',
@@ -63,7 +64,7 @@ export class UpdateProductFormComponent implements OnChanges {
   private adjustListLength(newLen: number) {
     const list = this.form.get('properties') as FormArray;
     list.clear();
-    new Array(newLen).fill(1).forEach(() => this.addProperty());
+    range(newLen).forEach(() => this.addProperty());
   }
 
   private prepareFormGroup() {

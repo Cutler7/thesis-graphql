@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Order} from '../../../../shared/model/order.model';
 import {MatDialog} from '@angular/material/dialog';
 import {OrderDetailsDialogComponent} from './order-details-dialog/order-details-dialog.component';
+import {range} from 'lodash';
 
 @Component({
   selector: 'app-order-list',
@@ -28,7 +29,7 @@ export class OrderListComponent implements OnInit {
       paid: true,
       status: 'PENDING',
     } as Order;
-    new Array(20).fill(0).forEach(e => this.orders.push(order));
+    range(20).forEach(e => this.orders.push(order));
   }
 
   openOrderDetails(id: string) {

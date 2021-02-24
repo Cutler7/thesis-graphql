@@ -1,7 +1,7 @@
 import {DbConnectionController} from './db-connection.controller';
 import {Db, InsertOneWriteOpResult} from 'mongodb';
 import {comments, dataProps, orders, products, users} from '../../data/_data';
-import {cloneDeep} from 'lodash';
+import {cloneDeep, random, range} from 'lodash';
 import {Collection} from '../enum/collection.enum';
 
 export class DbInitController {
@@ -45,7 +45,22 @@ export class DbInitController {
     list.push(...dataCpy);
   }
 
-  private initOrders(db: Db): Promise<any> {
-    return db.collection(Collection.ORDER).insertMany(orders);
+  private async initOrders(db: Db): Promise<any> {
+    const insertOrderPromise = [];
+    const orderItemList = [];
+    const products = await db.collection(Collection.PRODUCT).find({}).toArray();
+    orders.forEach(order => insertOrderPromise.push(
+      db.collection(Collection.ORDER).insertOne(order)
+        .then(inserted => {
+          range(random(1, 10)).forEach(() => orderItemList.push({
+            createdAt: new Date(),
+            productId: products[random(0, products.length - 1)]._id,
+            amount: random(1, 40),
+            orderId: inserted.insertedId,
+          }));
+        }),
+    ));
+    return Promise.all(insertOrderPromise)
+      .then(() => db.collection(Collection.ORDER_ITEM).insertMany(orderItemList));
   }
 }

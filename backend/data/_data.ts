@@ -1,3 +1,5 @@
+import {range} from 'lodash';
+
 const addCreatedAtField = (...collection: any[][]) => collection
   .forEach(col => col.forEach(el => el.createdAt = new Date()));
 
@@ -99,7 +101,7 @@ const addressData = {
 
 export const orders = [];
 
-new Array(100).fill(1).forEach((el, i) => {
+range(100).forEach((el, i) => {
   const result: any = {...addressData};
   result.orderNo = `#${i.toString().padStart(5, '0')}`;
   orders.push(result);
