@@ -18,8 +18,13 @@
 
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Cena</th>
-    <td mat-cell *matCellDef="let element"
-        class="price"> {{element.price | currency:'PLN'}} </td>
+    <td class="price-column"
+        mat-cell *matCellDef="let element">
+      <div class="price">{{element.price | currency:'PLN'}}</div>
+      <div class="quantity">
+        (Ilość dostępnych sztuk: <span [ngClass]="{'bold': true, 'zero': !element.quantity}">{{element.quantity}}</span>)
+      </div>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="action">
@@ -42,12 +47,12 @@
           Edytuj
         </button>
         <button mat-button color="accent"
-                (click)="editProduct(element._id)">
+                (click)="updateAmountDialog(element._id, element.quantity)">
           <i class="feather-chevrons-up"></i>
           Aktualizuj ilość
         </button>
         <button mat-button color="warn"
-                (click)="deleteProduct(element._id)">
+                (click)="deleteProduct(element._id, element.name)">
           <i class="feather-x-square"></i>
           Usuń
         </button>
@@ -58,7 +63,8 @@
           <i class="feather-arrow-up-right"></i>
           Otwórz
         </button>
-        <app-add-product-button (addProductEvent)="addToCart(element, $event)"></app-add-product-button>
+        <app-add-product-button [amountAvailable]="element.quantity"
+                                (addProductEvent)="addToCart(element, $event)"></app-add-product-button>
       </ng-container>
     </td>
   </ng-container>

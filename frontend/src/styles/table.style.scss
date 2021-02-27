@@ -1,10 +1,24 @@
+@import "variables.style";
+
 table {
   width: 100%;
 
   tr td {
     font-size: 16px !important;
 
-    &.price {
+    &.price-column {
+      text-align: center;
+    }
+
+    .quantity {
+      font-size: 14px;
+
+      .zero {
+        color: $errorColor;
+      }
+    }
+
+    .price {
       font-size: 18px !important;
       font-weight: bold;
     }

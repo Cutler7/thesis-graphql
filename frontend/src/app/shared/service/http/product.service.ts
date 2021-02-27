@@ -14,7 +14,9 @@ const GQL_PRODUCT_LIST = gql`
       content {
         _id
         name
+        img
         price
+        quantity
       }
     }
   }
@@ -27,6 +29,7 @@ const GQL_PRODUCT_BY_ID = gql`
       name
       description
       price
+      quantity
       properties {
         name
         value
@@ -42,15 +45,41 @@ const GQL_PRODUCT_BY_ID = gql`
 `;
 
 const GQL_DELETE_PRODUCT = gql`
+  mutation($var1: ID!) {
+    deleteProduct(id: $var1) {
+      _id
+    }
+  }
 `;
 
 const GQL_CREATE_OR_UPDATE_PRODUCT = gql`
+  mutation ($var1: ProductInput!) {
+    createOrUpdateProduct(product: $var1) {
+      _id
+    }
+  }
 `;
 
 const GQL_ADD_COMMENT = gql`
+  mutation($var1: ID!, $var2: CommentInput!) {
+    addComment(id: $var1, comment: $var2) {
+      _id
+      createdAt
+      author
+      rate
+      content
+    }
+  }
 `;
 
 const GQL_UPDATE_AMOUNT = gql`
+  mutation($var1: ID!, $var2: Int!) {
+    updateAmount(id: $var1, amount: $var2) {
+      _id
+      name
+      quantity
+    }
+  }
 `;
 
 @Injectable({providedIn: 'root'})

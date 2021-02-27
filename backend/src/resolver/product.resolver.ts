@@ -10,6 +10,10 @@ import {insertManyDocuments} from '../util/insert-many-documents.util';
 const getProductById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.PRODUCT)
   .findOne({_id: new ObjectId(id)});
 
+const isProductExist = async (ctx: ResolverContext, id: string): Promise<boolean> =>
+  !id ? false : !!(await getProductById(ctx, id));
+
+
 const updateProduct = async (product: any, ctx: ResolverContext) => {
   const id = product._id;
   delete product._id;
@@ -54,8 +58,8 @@ export const productResolvers: ResolverMap = {
       let result;
       const properties = args.product.properties;
       delete args.product.properties;
-      const product = await getProductById(context, args.product._id);
-      if (!product) {
+      const productExists = await isProductExist(context, args.product._id);
+      if (!productExists) {
         result = await insertDocument(args.product, Collection.PRODUCT, context);
       } else {
         await getCollection(context, Collection.PRODUCT_PROPERTY)

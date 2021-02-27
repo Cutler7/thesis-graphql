@@ -11,12 +11,17 @@ import {MatCardModule} from '@angular/material/card';
 import {AddProductButtonModule} from '../../_shared/add-product-button/add-product-button.module';
 import {FormInputModule} from '../../_shared/form-input/form-input.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {ConfirmDeleteDialogComponent} from './confirm-delete-dialog/confirm-delete-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-dialog.component';
+import {ConfirmDeleteDialogModule} from '../../_shared/confirm-delete-dialog/confirm-delete-dialog.module';
 
 
 @NgModule({
-  declarations: [ProductListComponent, SearchPanelComponent, ConfirmDeleteDialogComponent],
+  declarations: [
+    ProductListComponent,
+    SearchPanelComponent,
+    UpdateAmountDialogComponent,
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -28,6 +33,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormInputModule,
     ReactiveFormsModule,
     MatDialogModule,
+    ConfirmDeleteDialogModule,
   ],
 })
 export class ProductListModule { }

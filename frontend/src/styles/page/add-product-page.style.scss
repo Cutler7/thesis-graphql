@@ -8,6 +8,15 @@
     flex-direction: column;
     margin: 2rem;
 
+    .basic-fields {
+      display: flex;
+      flex-direction: column;
+
+      .form-field {
+        margin-top: 1.25rem;
+      }
+    }
+
     .mat-form-field-infix {
       width: 280px;
     }
@@ -15,6 +24,10 @@
 
   td.mat-cell {
     border-bottom-width: 0;
+
+    .mat-form-field-label {
+      display: none;
+    }
 
     .mat-form-field-infix {
       padding: 0;

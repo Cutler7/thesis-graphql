@@ -44,8 +44,7 @@ export class UpdateProductFormComponent implements OnChanges {
 
   saveProduct() {
     if (this.form.valid) {
-      console.log(this.form.value);
-      this.productService.createOrUpdateProduct(this.form.value)
+      this.productService.createOrUpdateProduct(this.mapValue(this.form.value))
         .then(() => this.reportService.showUserInfo('Zmiany zostały zapisane'))
         .then(() => this.router.navigate([RouteName.SHOP]));
     } else {
@@ -69,7 +68,7 @@ export class UpdateProductFormComponent implements OnChanges {
 
   private prepareFormGroup() {
     this.form = new FormGroup({
-      id: new FormControl(''),
+      _id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       img: new FormControl(null, [Validators.required]),
@@ -77,5 +76,11 @@ export class UpdateProductFormComponent implements OnChanges {
       quantity: new FormControl('', [Validators.required, Validators.min(1)]),
       properties: new FormArray([]),
     });
+  }
+
+  private mapValue(product: Product): Product {
+    product.img = '';
+    product._id = product._id === '' ? null : product._id;
+    return product;
   }
 }

@@ -2,6 +2,7 @@
   <button class="add-btn"
           mat-button
           color="accent"
+          [disabled]="!amountAvailable"
           (click)="addProduct()">
     Dodaj
   </button>
@@ -9,6 +10,7 @@
           class="icon-btn"
           type="button"
           color="primary"
+          [disabled]="!(this.count > 1)"
           (click)="decrement()">
     <i class="feather-arrow-down-circle"></i>
   </button>
@@ -19,6 +21,7 @@
           class="icon-btn"
           type="button"
           color="primary"
+          [disabled]="!(this.count < this.amountAvailable)"
           (click)="increment()">
     <i class="feather-arrow-up-circle"></i>
   </button>

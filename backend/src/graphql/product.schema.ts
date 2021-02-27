@@ -30,7 +30,7 @@ export const productTypes = gql`
         createdAt: Date
         name: String
         description: String
-        price: Int
+        price: Float
         comments: [Comment]
         properties: [ProductProperty]
         img: String
@@ -41,7 +41,7 @@ export const productTypes = gql`
         _id: ID
         name: String
         description: String
-        price: Int
+        price: Float
         properties: [ProductPropertyInput]
         img: String
         quantity: Int

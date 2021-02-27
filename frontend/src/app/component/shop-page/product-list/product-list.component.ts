@@ -6,8 +6,9 @@ import {ShoppingCartService} from '../../../shared/service/shopping-cart.service
 import {ReportService} from '../../../shared/service/report.service';
 import {AuthorizationService} from '../../../shared/service/authorization.service';
 import {MatDialog} from '@angular/material/dialog';
-import {ConfirmDeleteDialogComponent} from './confirm-delete-dialog/confirm-delete-dialog.component';
 import {ProductService} from '../../../shared/service/http/product.service';
+import {ConfirmDeleteDialogComponent} from '../../_shared/confirm-delete-dialog/confirm-delete-dialog.component';
+import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-dialog.component';
 
 @Component({
   selector: 'app-product-list',
@@ -53,8 +54,27 @@ export class ProductListComponent implements OnInit {
     this.router.navigate([RouteName.SHOP, RouteName.ADMIN, RouteName.ADD_PRODUCT]);
   }
 
-  deleteProduct(id: string) {
-    this.dialog.open(ConfirmDeleteDialogComponent, {width: '400px'});
+  deleteProduct(id: string, name: string) {
+    const content = `Czy jesteś pewien, że chcesz usunąć produkt o nazwie <b>${name}</b>? Tej akcji nie można cofnąć.`;
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {width: '400px', data: content});
+    dialogRef.afterClosed().subscribe(val => {
+      if (val) {
+        this.productService.deleteProduct(id)
+          .then(() => this.reportService.showUserInfo(`Usunięto artykuł: ${name}`))
+          .then(() => this.fetchData());
+      }
+    });
+  }
+
+  updateAmountDialog(id: string, amount: number) {
+    const dialogRef = this.dialog.open(UpdateAmountDialogComponent, {width: '400px', data: amount});
+    dialogRef.afterClosed().subscribe(value => {
+      if (Number.isInteger(value)) {
+        this.productService.updateAmount(id, value)
+          .then(() => this.reportService.showUserInfo(`Zaktualizowano ilość: ${value} sztuk`))
+          .then(() => this.fetchData());
+      }
+    });
   }
 
   goToDetails(id: string) {
@@ -63,5 +83,11 @@ export class ProductListComponent implements OnInit {
 
   search(searchParams: any) {
     console.log(searchParams);
+  }
+
+  private fetchData() {
+    this.productService.getProductList()
+      .then(res => this.products = res.content)
+      .catch(err => console.error(err));
   }
 }

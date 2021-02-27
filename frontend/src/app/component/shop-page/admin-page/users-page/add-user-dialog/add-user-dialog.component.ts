@@ -28,7 +28,6 @@ export class AddUserDialogComponent implements OnInit {
   addUser() {
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
-      this.reportService.showUserInfo('Utworzono nowego użytkownika');
     } else {
       this.reportService.showUserInfo('Popraw błędne dane');
     }

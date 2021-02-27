@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-add-product-button',
@@ -9,6 +9,9 @@ export class AddProductButtonComponent {
 
   count: number = 1;
 
+  @Input()
+  amountAvailable: number;
+
   @Output()
   addProductEvent = new EventEmitter<number>();
 
@@ -18,7 +21,7 @@ export class AddProductButtonComponent {
   }
 
   increment() {
-    if (this.count < 20) {
+    if (this.count < this.amountAvailable) {
       this.count++;
     }
   }

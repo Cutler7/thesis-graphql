@@ -4,6 +4,7 @@ import {UserService} from '../../../../shared/service/http/user.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AddUserDialogComponent} from './add-user-dialog/add-user-dialog.component';
 import {ReportService} from '../../../../shared/service/report.service';
+import {ConfirmDeleteDialogComponent} from '../../../_shared/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-users-page',
@@ -32,10 +33,10 @@ export class UsersPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(val => this.createUser(val));
   }
 
-  deleteUser(id: string, username: string) {
-    this.userService.deleteUser(id)
-      .then(() => this.fetchUserList())
-      .then(() => this.reportService.showUserInfo(`Usunięto użytkownika: ${username}`));
+  confirmDeleteUser(id: string, username: string) {
+    const content = `Czy jesteś pewien, że chcesz usunąć użytkownika o nazwie <b>${username}</b>? Tej akcji nie można cofnąć.`;
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {width: '400px', data: content});
+    dialogRef.afterClosed().subscribe(val => val ? this.deleteUser(id, username) : null);
   }
 
   private createUser(user: User) {
@@ -48,5 +49,11 @@ export class UsersPageComponent implements OnInit {
     return this.userService.getUserList()
       .then(res => this.users = res.content)
       .catch(err => console.error(err));
+  }
+
+  private deleteUser(id: string, username: string) {
+    this.userService.deleteUser(id)
+      .then(() => this.fetchUserList())
+      .then(() => this.reportService.showUserInfo(`Usunięto użytkownika: ${username}`));
   }
 }

@@ -1,0 +1,20 @@
+<form [formGroup]="form"
+      (ngSubmit)="updateAmount()">
+  <div class="delete-user-confirm">
+    <h1 mat-dialog-title><i class="feather-layers"></i> Zmień dostępną ilość</h1>
+
+    <div mat-dialog-content>
+      <app-form-input [fieldRef]="form.get('amount')"
+                      [inputType]="InputType.NUMBER"
+                      label="Ilość"></app-form-input>
+      <div mat-dialog-actions>
+        <button mat-raised-button
+                color="accent"
+                type="submit">
+          <i class=" feather-check"></i>
+          Potwierdź
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

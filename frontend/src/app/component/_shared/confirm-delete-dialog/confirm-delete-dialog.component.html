@@ -2,15 +2,12 @@
   <h1 mat-dialog-title><i class="feather-alert-octagon"></i> Uwaga!</h1>
 
   <div mat-dialog-content>
-    <h3>
-      Czy jesteś pewien, że chcesz usunąć produkt o nazwie {{productName}}?
-      Tej akcji nie można cofnąć.
-    </h3>
-
+    <h3 [innerHTML]="content"></h3>
     <div mat-dialog-actions>
       <button mat-raised-button
               color="accent"
-              type="submit">
+              type="button"
+              (click)="dialogRef.close(true)">
         <i class=" feather-check"></i>
         Potwierdź
       </button>
