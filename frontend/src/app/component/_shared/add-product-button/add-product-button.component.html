@@ -2,7 +2,7 @@
   <button class="add-btn"
           mat-button
           color="accent"
-          [disabled]="!amountAvailable"
+          [disabled]="addButtonDisabled()"
           (click)="addProduct()">
     Dodaj
   </button>

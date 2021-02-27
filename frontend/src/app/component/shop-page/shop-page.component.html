@@ -12,6 +12,9 @@
       <i class="feather-shopping-cart"></i>
       Koszyk: {{numberOfProductsInCart}} produktów
     </button>
+    <span *ngIf="isUserLogged"
+          [ngStyle]="{'font-size': '1rem', 'margin-right': '1rem'}">
+      Zalogowano: {{username}}</span>
     <button *ngIf="isUserLogged"
             mat-icon-button [matMenuTriggerFor]="menu">
       <i class="feather-settings"></i>

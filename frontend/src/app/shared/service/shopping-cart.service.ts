@@ -26,6 +26,10 @@ export class ShoppingCartService extends BrowserStoredService<[string, CartItem]
     return this.products.asObservable();
   }
 
+  getProductList(): Map<string, CartItem> {
+    return this.products.getValue();
+  }
+
   addProduct(product: Product, count: number = 1) {
     this.withBrowserCache(() => {
       const foundItem = this.getProductList().get(product._id);
@@ -52,9 +56,5 @@ export class ShoppingCartService extends BrowserStoredService<[string, CartItem]
   protected store(): [string, CartItem][] {
     this.products.next(this.getProductList());
     return Array.from(this.getProductList());
-  }
-
-  private getProductList(): Map<string, CartItem> {
-    return this.products.getValue();
   }
 }

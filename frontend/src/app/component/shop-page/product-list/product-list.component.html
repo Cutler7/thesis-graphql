@@ -21,9 +21,7 @@
     <td class="price-column"
         mat-cell *matCellDef="let element">
       <div class="price">{{element.price | currency:'PLN'}}</div>
-      <div class="quantity">
-        (Ilość dostępnych sztuk: <span [ngClass]="{'bold': true, 'zero': !element.quantity}">{{element.quantity}}</span>)
-      </div>
+      <app-product-quantity [quantity]="element.quantity"></app-product-quantity>
     </td>
   </ng-container>
 

@@ -31,4 +31,8 @@ export class AddProductButtonComponent {
       this.count--;
     }
   }
+
+  addButtonDisabled(): boolean {
+    return this.count < 1 || this.count > this.amountAvailable;
+  }
 }

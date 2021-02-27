@@ -14,6 +14,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-dialog.component';
 import {ConfirmDeleteDialogModule} from '../../_shared/confirm-delete-dialog/confirm-delete-dialog.module';
+import {ProductQuantityModule} from '../../_shared/product-quantity/product-quantity.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {ConfirmDeleteDialogModule} from '../../_shared/confirm-delete-dialog/con
     ReactiveFormsModule,
     MatDialogModule,
     ConfirmDeleteDialogModule,
+    ProductQuantityModule,
   ],
 })
 export class ProductListModule { }

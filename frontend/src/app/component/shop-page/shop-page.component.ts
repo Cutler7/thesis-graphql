@@ -16,6 +16,10 @@ export class ShopPageComponent implements OnInit, OnDestroy {
     return this.authorizationService.isUserLoggedIn();
   }
 
+  get username(): string {
+    return this.authorizationService.getActiveUser()?.username;
+  }
+
   numberOfProductsInCart: number;
 
   private subscription: Subscription;

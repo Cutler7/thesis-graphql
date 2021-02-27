@@ -26,7 +26,15 @@ export class AuthorizationService extends BrowserStoredService<UserSession> {
   }
 
   isUserLoggedIn(): boolean {
-    return !!this.activeUser;
+    return !!this.activeUser?.username;
+  }
+
+  getActiveUser(): User {
+    return this.activeUser;
+  }
+
+  getUserToken(): string {
+    return this.token;
   }
 
   login(credentials: Credentials): Promise<void> {
@@ -45,7 +53,7 @@ export class AuthorizationService extends BrowserStoredService<UserSession> {
   }
 
   protected init(data: UserSession): void {
-    this.activeUser = new User(data);
+    this.activeUser = new User(data.user);
     this.token = data.token;
   }
 

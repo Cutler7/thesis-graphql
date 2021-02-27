@@ -36,13 +36,12 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.getProductList()
-      .then(res => this.products = res.content)
-      .catch(err => console.error(err));
+    this.fetchData();
   }
 
   addToCart(product: Product, count: number) {
     this.shoppingCartService.addProduct(product, count);
+    product.quantity -= count;
     this.reportService.showUserInfo('Dodano artykuł do listy zakupów');
   }
 
@@ -88,6 +87,15 @@ export class ProductListComponent implements OnInit {
   private fetchData() {
     this.productService.getProductList()
       .then(res => this.products = res.content)
+      .then(() => this.updateProductAmount())
       .catch(err => console.error(err));
+  }
+
+  private updateProductAmount() {
+    const cart = this.shoppingCartService.getProductList();
+    this.products.forEach(product => {
+      const amount = cart.get(product._id)?.count || 0;
+      product.quantity -= amount;
+    });
   }
 }

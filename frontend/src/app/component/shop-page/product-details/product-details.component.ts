@@ -33,11 +33,13 @@ export class ProductDetailsComponent implements OnInit {
       .then(res => {
         this.product = res;
         this.product.img = 'assets/img/example.jpg';
+        this.updateProductAmount();
       });
   }
 
   addToCart(product: Product, count: number) {
     this.shoppingCartService.addProduct(product, count);
+    this.product.quantity -= count;
     this.reportService.showUserInfo('Dodano artykuł do listy zakupów');
   }
 
@@ -55,5 +57,10 @@ export class ProductDetailsComponent implements OnInit {
   private addComment(comment: Comment) {
     this.productService.addComment(this.product._id, comment)
       .then(() => this.reportService.showUserInfo(`Dodano komentarz dla produktu: ${this.product.name}`));
+  }
+
+  private updateProductAmount() {
+    const amount = this.shoppingCartService.getProductList().get(this.product._id)?.count || 0;
+    this.product.quantity -= amount;
   }
 }

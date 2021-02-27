@@ -16,6 +16,7 @@ import {ProductCommentsComponent} from './product-comments/product-comments.comp
 import {AddCommentDialogComponent} from './add-comment-dialog/add-comment-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormInputModule} from '../../_shared/form-input/form-input.module';
+import {ProductQuantityModule} from '../../_shared/product-quantity/product-quantity.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {FormInputModule} from '../../_shared/form-input/form-input.module';
     BarRatingModule,
     ReactiveFormsModule,
     FormInputModule,
+    ProductQuantityModule,
   ],
 })
 export class ProductDetailsModule { }
