@@ -5,6 +5,26 @@ import {PageResponse} from '../../interface/page-response.interface';
 import {Order} from '../../model/order.model';
 
 const GQL_ORDER_LIST = gql`
+  query {
+    orderList {
+      pageSize
+      page
+      totalRecords
+      content {
+        _id
+        createdAt
+        orderNo
+        status
+        paid
+        products {
+          amount
+          product {
+            price
+          }
+        }
+      }
+    }
+  }
 `;
 
 const GQL_ORDER_BY_ID = gql`

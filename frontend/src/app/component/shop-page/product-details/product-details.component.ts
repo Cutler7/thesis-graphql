@@ -29,12 +29,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.productService.getProductById(id)
-      .then(res => {
-        this.product = res;
-        this.product.img = 'assets/img/example.jpg';
-        this.updateProductAmount();
-      });
+    this.fetchData(id);
   }
 
   addToCart(product: Product, count: number) {
@@ -56,7 +51,17 @@ export class ProductDetailsComponent implements OnInit {
 
   private addComment(comment: Comment) {
     this.productService.addComment(this.product._id, comment)
+      .then(() => this.fetchData(this.product._id))
       .then(() => this.reportService.showUserInfo(`Dodano komentarz dla produktu: ${this.product.name}`));
+  }
+
+  private fetchData(id: string) {
+    this.productService.getProductById(id)
+      .then(res => {
+        this.product = res;
+        this.product.img = 'assets/img/example.jpg';
+        this.updateProductAmount();
+      });
   }
 
   private updateProductAmount() {

@@ -28,7 +28,6 @@ export class AddCommentDialogComponent implements OnInit {
   addComment() {
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
-      this.reportService.showUserInfo('Dodano komentarz');
     } else {
       this.reportService.showUserInfo('Popraw błędne dane');
     }

@@ -53,7 +53,7 @@ export class AuthorizationService extends BrowserStoredService<UserSession> {
   }
 
   protected init(data: UserSession): void {
-    this.activeUser = new User(data.user);
+    this.activeUser = new User(data.user || {});
     this.token = data.token;
   }
 

@@ -103,7 +103,7 @@ export const orders = [];
 
 range(100).forEach((el, i) => {
   const result: any = {...addressData};
-  result.orderNo = `#${i.toString().padStart(5, '0')}`;
+  result.orderNo = i.toString().padStart(5, '0');
   orders.push(result);
 });
 addCreatedAtField(dataProps, comments, products, users, orders);
