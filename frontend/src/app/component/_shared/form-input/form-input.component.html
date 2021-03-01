@@ -2,7 +2,7 @@
                 class="form-field">
   <mat-label>
     {{label}}
-    <span *ngIf="isFieldRequired()">*</span>
+    <span *ngIf="isFieldRequired() && label">*</span>
   </mat-label>
   <ng-container [ngSwitch]="inputType">
     <input *ngSwitchCase="InputType.TEXT"
@@ -28,8 +28,9 @@
       <mat-select-trigger>
         {{getTriggerLabel()}}
       </mat-select-trigger>
-      <mat-option *ngFor="let option of fieldConfig.options" [value]="option">
-        {{fieldConfig.labelField ? option[fieldConfig.labelField] : option}}
+      <mat-option *ngFor="let option of fieldConfig.options"
+                  [value]="option.value">
+        {{option.label}}
       </mat-option>
     </mat-select>
   </ng-container>

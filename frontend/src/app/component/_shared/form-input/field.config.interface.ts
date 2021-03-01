@@ -1,5 +1,4 @@
 export interface FieldConfig {
-  options: string[] | Record<string, any>[];
-  labelField: string;
+  options: { label: string, value: string }[];
   multipleDropdown: boolean;
 }

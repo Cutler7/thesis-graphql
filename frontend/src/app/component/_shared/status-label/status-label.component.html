@@ -1,0 +1,11 @@
+<div [ngClass]="['status-label', labelField.value.toLowerCase()]"
+     *ngIf="!active"
+     (click)="!disabled && activate()">
+  {{getStatus(labelField.value)}}
+</div>
+<div *ngIf="active">
+  <app-form-input [fieldRef]="labelField"
+                  [inputType]="InputType.DROPDOWN"
+                  (blur)="active=false"
+                  [fieldConfig]="{ options: ORDER_STATUS }"></app-form-input>
+</div>

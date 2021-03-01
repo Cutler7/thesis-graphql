@@ -1,4 +1,4 @@
-import {range} from 'lodash';
+import {random, range} from 'lodash';
 
 const addCreatedAtField = (...collection: any[][]) => collection
   .forEach(col => col.forEach(el => el.createdAt = new Date()));
@@ -88,22 +88,24 @@ const addressData = {
   name: 'Jan',
   surname: 'Kowalski',
   email: 'test@mail.com',
-  phone: '111-111-111',
+  phone: '123456789',
   street: 'Wąska',
   houseNumber: '2',
   apartmentNumber: '6',
   city: 'Szczecin',
   postalCode: '70-222',
-  delivery: 'PACZKA',
-  status: 'PENDING',
-  paid: false,
 };
 
 export const orders = [];
 
 range(100).forEach((el, i) => {
+  const delivery = ['PACKAGE', 'PARCEL_LOCKER', 'POST'];
+  const status = ['PENDING', 'WORKING', 'DONE', 'REJECTED', 'COMPLAINT'];
   const result: any = {...addressData};
   result.orderNo = i.toString().padStart(5, '0');
+  result.delivery = delivery[random(2)];
+  result.status = status[random(4)];
+  result.paid = !(result.status === 'PENDING');
   orders.push(result);
 });
 addCreatedAtField(dataProps, comments, products, users, orders);

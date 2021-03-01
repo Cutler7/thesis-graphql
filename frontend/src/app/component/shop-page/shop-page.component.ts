@@ -62,5 +62,6 @@ export class ShopPageComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authorizationService.logout();
+    this.goToProductList();
   }
 }

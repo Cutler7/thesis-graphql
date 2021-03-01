@@ -1,8 +1,9 @@
-import {EnumerableType} from '../interface/enumerable-type.interface';
+import {SelectItem} from '../interface/select-item.interface';
 
-export const ORDER_STATUS: EnumerableType[] = [
-  {label: 'przyjęte', code: 'PENDING'},
-  {label: 'w trakcie realizacji', code: 'WORKING'},
-  {label: 'zrealizowane', code: 'DONE'},
-  {label: 'odrzucone', code: 'REJECTED'},
+export const ORDER_STATUS: SelectItem[] = [
+  {label: 'przyjęte', value: 'PENDING'},
+  {label: 'w trakcie realizacji', value: 'WORKING'},
+  {label: 'zrealizowane', value: 'DONE'},
+  {label: 'odrzucone', value: 'REJECTED'},
+  {label: 'reklamacja', value: 'COMPLAINT'},
 ];

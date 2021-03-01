@@ -1,3 +1,62 @@
-<h2 mat-dialog-title>Detale zamówienia nr: {{orderId}}</h2>
+<h2 mat-dialog-title>Detale zamówienia nr: #{{order?.orderNo}}</h2>
 
-<div mat-dialog-content></div>
+<div *ngIf="order" mat-dialog-content>
+  <div class="details-container">
+    <div class="details-item">
+      <div class="label">Data złożenia zamówienia</div>
+      <div class="value">{{order.createdAt | date}}</div>
+    </div>
+    <div class="details-item">
+      <div class="label">Imię i nazwisko klienta</div>
+      <div class="value">{{order.name + ' ' + order.surname}}</div>
+    </div>
+    <div class="details-item">
+      <div class="label">Telefon</div>
+      <div class="value">{{order.phone | phone}}</div>
+    </div>
+    <div class="details-item">
+      <div class="label">Email</div>
+      <div class="value">{{order.email}}</div>
+    </div>
+    <div class="details-item">
+      <div class="label">Adres klienta</div>
+      <div class="value">
+        ul. {{order.street}} {{order.houseNumber}}
+        <ng-container *ngIf="order.apartmentNumber"> / {{order.apartmentNumber}}</ng-container>
+      </div>
+    </div>
+    <div class="details-item">
+      <div class="label"></div>
+      <div class="value">{{order.postalCode}}, {{order.city}}</div>
+    </div>
+    <div class="details-item">
+      <div class="label">Sposób dostawy</div>
+      <div class="value">{{getDelivery(order.delivery)}}</div>
+    </div>
+    <div class="details-item">
+      <div class="label">Status zamówienia</div>
+      <div class="value">
+        <app-status-label [status]="order.status"
+                          [id]="order._id"
+                          [disabled]="true"></app-status-label>
+      </div>
+    </div>
+    <div class="details-item">
+      <div class="label">Zamówienie opłacone</div>
+      <div *ngIf="order.paid"
+           class="value success-color">TAK
+      </div>
+      <div *ngIf="!order.paid"
+           class="value danger-color">NIE
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions
+     class="order-details-button">
+  <button mat-button
+          color="primary"
+          (click)="close()">Zamknij
+  </button>
+</div>

@@ -42,11 +42,11 @@ export class FormInputComponent {
   }
 
   getTriggerLabel(): string {
-    if (!this.fieldConfig.multipleDropdown) {
-      return this.fieldRef.value;
-    }
-    const labelField = this.fieldConfig.labelField;
-    const value = this.fieldRef.value || [];
-    return labelField ? value.map(el => el[labelField]).join() : value.join();
+    const val = this.fieldRef.value || '';
+    const values = Array.isArray(val) ? val : [val];
+    return this.fieldConfig.options
+      .filter(el => values.includes(el.value))
+      .map(el => el.label)
+      .join(', ');
   }
 }
