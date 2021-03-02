@@ -1,6 +1,7 @@
 export enum FilterOperator {
-  EQ = 'eg',
+  EQ = 'eq',
   NEQ = 'neq',
   GT = 'gt',
   LT = 'lt',
+  IN = 'in',
 }

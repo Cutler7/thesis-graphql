@@ -10,6 +10,9 @@ import {ProductService} from '../../../shared/service/http/product.service';
 import {ConfirmDeleteDialogComponent} from '../../_shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-dialog.component';
 import {QueryListArgsService} from '../../../shared/service/query-list-args.service';
+import {FilterArg} from '../../../shared/interface/query-list-args.interface';
+import {PageResponse} from '../../../shared/interface/page-response.interface';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-product-list',
@@ -18,11 +21,11 @@ import {QueryListArgsService} from '../../../shared/service/query-list-args.serv
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[] = [];
+  products: PageResponse<Product> = null;
 
-  totalRecords: number;
+  filterArgs: FilterArg[] = [];
 
-  pageIndex: number;
+  sortArg: string;
 
   readonly columns = ['image', 'name', 'price', 'action'];
 
@@ -86,31 +89,29 @@ export class ProductListComponent implements OnInit {
     this.router.navigate([RouteName.SHOP, RouteName.DETAILS, id]);
   }
 
-  search(searchParams: any) {
-    this.pageIndex = 0;
-    const args = this.queryListArgsService.mapToQueryArgs(0, 10, searchParams);
-    console.log(searchParams);
+  search(searchParams: FilterArg[]) {
+    this.filterArgs = searchParams;
+    this.fetchData();
   }
 
-  private fetchData() {
-    this.productService.getProductList()
-      .then(res => {
-        this.products = res.content;
-        this.totalRecords = res.totalRecords;
-      })
+  sortData(sort: Sort) {
+    this.sortArg = `${sort.active}_${sort.direction}`;
+    this.fetchData();
+  }
+
+  fetchData(page: number = 0, pageSize: number = 10) {
+    console.log({page, pageSize, filterArgs: this.filterArgs, orderBy: this.sortArg});
+    this.productService.getProductList({page, pageSize, filterArgs: this.filterArgs, orderBy: this.sortArg})
+      .then(res => this.products = res)
       .then(() => this.updateProductAmount())
       .catch(err => console.error(err));
   }
 
   private updateProductAmount() {
     const cart = this.shoppingCartService.getProductList();
-    this.products.forEach(product => {
+    this.products.content.forEach(product => {
       const amount = cart.get(product._id)?.count || 0;
       product.quantity -= amount;
     });
-  }
-
-  log(e) {
-    console.log(e);
   }
 }

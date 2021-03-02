@@ -16,6 +16,7 @@ import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-
 import {ConfirmDeleteDialogModule} from '../../_shared/confirm-delete-dialog/confirm-delete-dialog.module';
 import {ProductQuantityModule} from '../../_shared/product-quantity/product-quantity.module';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ConfirmDeleteDialogModule,
     ProductQuantityModule,
     MatPaginatorModule,
+    MatSortModule,
   ],
 })
 export class ProductListModule { }

@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {OrderDetailsDialogComponent, PhonePipe} from './order-details-dialog/order-details-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {StatusLabelModule} from '../../../_shared/status-label/status-label.module';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {StatusLabelModule} from '../../../_shared/status-label/status-label.modu
     MatButtonModule,
     MatDialogModule,
     StatusLabelModule,
+    MatSortModule,
   ],
 })
 export class OrderListModule { }

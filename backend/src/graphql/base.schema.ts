@@ -33,10 +33,11 @@ export const baseTypes = gql`
     scalar Date
 
     enum FilterOperator {
-        eg
+        eq
         neq
         gt
         lt
+        in
     }
 `;
 

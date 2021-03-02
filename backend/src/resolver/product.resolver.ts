@@ -37,6 +37,7 @@ const deleteProductDependentDocuments = async (productId: string, ctx: ResolverC
 export const productResolvers: ResolverMap = {
   Query: {
     async productList(obj, args, context) {
+      console.log(args.queryArgs);
       const products = await getCollection(context, Collection.PRODUCT)
         .find({})
         .toArray();

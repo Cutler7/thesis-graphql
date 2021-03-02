@@ -6,8 +6,8 @@ import {gql, GraphqlService} from './graphql.service';
 import {Comment} from '../../model/comment.model';
 
 const GQL_PRODUCT_LIST = gql`
-  {
-    productList {
+  query($var1: QueryListArgs) {
+    productList(queryArgs: $var1) {
       page
       pageSize
       totalRecords

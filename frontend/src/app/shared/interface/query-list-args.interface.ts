@@ -1,6 +1,6 @@
 import {FilterOperator} from '../enum/filter-operator.enum';
 
-interface FilterArg {
+export interface FilterArg {
   key: string;
   value: string;
   op: FilterOperator;

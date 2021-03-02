@@ -28,6 +28,7 @@ const initializeOrderFields = (order, lastId: number): any[] => {
 export const orderResolvers: ResolverMap = {
   Query: {
     async orderList(obj, args, context) {
+      console.log(args);
       const product = await getCollection(context, Collection.ORDER)
         .find({})
         .toArray();
