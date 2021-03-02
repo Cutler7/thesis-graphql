@@ -1,5 +1,14 @@
+import {FilterOperator} from '../enum/filter-operator.enum';
+
+interface FilterArg {
+  key: string;
+  value: string;
+  op: FilterOperator;
+}
+
 export interface QueryListArgs {
-  page?: string,
+  page?: number,
+  pageSize?: number;
   orderBy?: string;
-  filterArgs?: Record<string, string>
+  filterArgs?: FilterArg[];
 }

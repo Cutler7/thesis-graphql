@@ -10,11 +10,18 @@ import {insertManyDocuments} from '../util/insert-many-documents.util';
 const getOrderById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.ORDER)
   .findOne({_id: new ObjectId(id)});
 
-const initializeOrderFields = (order): any[] => {
+const getLastId = async (ctx: ResolverContext) => await getCollection(ctx, Collection.ORDER)
+  .find()
+  .sort({orderNo: -1})
+  .limit(1)
+  .toArray();
+
+const initializeOrderFields = (order, lastId: number): any[] => {
   const items = order.products;
   delete order.products;
   order.paid = false;
   order.status = 'PENDING';
+  order.orderNo = (lastId + 1).toString().padStart(5, '0');
   return items;
 };
 
@@ -32,7 +39,8 @@ export const orderResolvers: ResolverMap = {
   },
   Mutation: {
     async createOrder(obj, args, context) {
-      const items = initializeOrderFields(args.order);
+      const lastId = await getLastId(context);
+      const items = initializeOrderFields(args.order, Number(lastId[0].orderNo));
       const result = await insertDocument(args.order, Collection.ORDER, context);
       items.forEach(el => el.orderId = result._id);
       items.forEach(el => el.productId = new ObjectId(el.productId));

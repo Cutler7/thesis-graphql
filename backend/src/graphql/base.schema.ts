@@ -18,7 +18,8 @@ export const baseTypes = gql`
     }
 
     input QueryListArgs {
-        page: String,
+        page: Int,
+        pageSize: Int
         orderBy: String,
         filterArgs: [FilterArg]
     }

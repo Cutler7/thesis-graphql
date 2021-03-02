@@ -4,7 +4,7 @@ import {PaymentPageComponent} from './payment-page.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: PaymentPageComponent,
   },
 ];

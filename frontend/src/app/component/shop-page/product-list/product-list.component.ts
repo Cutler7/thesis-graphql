@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ProductService} from '../../../shared/service/http/product.service';
 import {ConfirmDeleteDialogComponent} from '../../_shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-dialog.component';
+import {QueryListArgsService} from '../../../shared/service/query-list-args.service';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +19,10 @@ import {UpdateAmountDialogComponent} from './update-amount-dialog/update-amount-
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
+
+  totalRecords: number;
+
+  pageIndex: number;
 
   readonly columns = ['image', 'name', 'price', 'action'];
 
@@ -30,6 +35,7 @@ export class ProductListComponent implements OnInit {
     private dialog: MatDialog,
     private productService: ProductService,
     private reportService: ReportService,
+    private queryListArgsService: QueryListArgsService,
     private shoppingCartService: ShoppingCartService,
     private authorizationService: AuthorizationService,
   ) {
@@ -81,12 +87,17 @@ export class ProductListComponent implements OnInit {
   }
 
   search(searchParams: any) {
+    this.pageIndex = 0;
+    const args = this.queryListArgsService.mapToQueryArgs(0, 10, searchParams);
     console.log(searchParams);
   }
 
   private fetchData() {
     this.productService.getProductList()
-      .then(res => this.products = res.content)
+      .then(res => {
+        this.products = res.content;
+        this.totalRecords = res.totalRecords;
+      })
       .then(() => this.updateProductAmount())
       .catch(err => console.error(err));
   }
@@ -97,5 +108,9 @@ export class ProductListComponent implements OnInit {
       const amount = cart.get(product._id)?.count || 0;
       product.quantity -= amount;
     });
+  }
+
+  log(e) {
+    console.log(e);
   }
 }

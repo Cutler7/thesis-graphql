@@ -80,6 +80,7 @@ const GQL_PAY_FOR_ORDER = gql`
     payForOrder(id: $var1) {
       _id
       paid
+      orderNo
     }
   }
 `;

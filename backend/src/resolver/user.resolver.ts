@@ -15,7 +15,7 @@ export const userResolvers: ResolverMap = {
       const users = await getCollection(context, Collection.USER)
         .find({})
         .toArray();
-      return getPageOfData(users);
+      return getPageOfData(users, 0, 10000);
     },
     async login(obj, args, context) {
       const user = await getCollection(context, Collection.USER)
