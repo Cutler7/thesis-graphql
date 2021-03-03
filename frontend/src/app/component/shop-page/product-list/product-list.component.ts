@@ -95,7 +95,11 @@ export class ProductListComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
-    this.sortArg = `${sort.active}_${sort.direction}`;
+    if (!sort.direction) {
+      this.sortArg = null;
+    } else {
+      this.sortArg = `${sort.active}_${sort.direction}`;
+    }
     this.fetchData();
   }
 

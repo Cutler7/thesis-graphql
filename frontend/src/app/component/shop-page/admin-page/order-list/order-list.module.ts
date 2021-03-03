@@ -10,6 +10,11 @@ import {OrderDetailsDialogComponent, PhonePipe} from './order-details-dialog/ord
 import {MatDialogModule} from '@angular/material/dialog';
 import {StatusLabelModule} from '../../../_shared/status-label/status-label.module';
 import {MatSortModule} from '@angular/material/sort';
+import {SearchPanelComponent} from './search-panel/search-panel.component';
+import {MatCardModule} from '@angular/material/card';
+import {FormInputModule} from '../../../_shared/form-input/form-input.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -17,6 +22,7 @@ import {MatSortModule} from '@angular/material/sort';
     PhonePipe,
     OrderListComponent,
     OrderDetailsDialogComponent,
+    SearchPanelComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +33,10 @@ import {MatSortModule} from '@angular/material/sort';
     MatDialogModule,
     StatusLabelModule,
     MatSortModule,
+    MatCardModule,
+    FormInputModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
   ],
 })
 export class OrderListModule { }

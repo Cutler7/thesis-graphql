@@ -46,6 +46,18 @@
   <ng-container *ngIf="inputType === InputType.FILE">
     <app-file-input [formControl]="$any(fieldRef)"></app-file-input>
   </ng-container>
+  <mat-form-field *ngIf="inputType === InputType.DATE"
+                  appearance="fill">
+    <mat-label>
+      {{label}}
+      <span *ngIf="isFieldRequired() && label">*</span>
+    </mat-label>
+    <input matInput
+           [formControl]="$any(fieldRef)"
+           [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
   <mat-error *ngIf="fieldRef.invalid && (fieldRef.dirty || fieldRef.touched)">
     <app-field-errors [fieldRef]="fieldRef"></app-field-errors>
   </mat-error>

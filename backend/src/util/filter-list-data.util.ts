@@ -12,18 +12,34 @@ const compare = (value, filterArg, valueType) => {
     case 'neq':
       return !checkEquality(value, filterArg.value, valueType);
     case 'gt':
-      return value >= Number(filterArg.value);
+      return checkIsGreater(value, filterArg.value, valueType, 'greater');
     case 'lt':
-      return value <= Number(filterArg.value);
+      return checkIsGreater(value, filterArg.value, valueType, 'less');
     case 'in':
-      return filterArg.value.split().includes(value);
+      return filterArg.value.split(',').includes(value);
   }
 };
 
-const checkEquality = (value: string, arg: string, valueType: 'string' | 'number'): boolean => {
+const checkEquality = (value: any, arg: string, valueType: 'string' | 'number'): boolean => {
   if (valueType === 'string') {
     return value.toLowerCase().includes(arg.toLowerCase());
   } else {
     return Number(value) === Number(arg);
+  }
+};
+
+const checkGreaterLess = (val1, val2, greaterLess: 'greater' | 'less') =>
+  greaterLess === 'greater' ? val1 >= val2 : val1 <= val2;
+
+const checkIsGreater = (
+  value: any,
+  arg: string,
+  valueType: 'object' | 'number',
+  greaterLess: 'greater' | 'less',
+): boolean => {
+  if (valueType === 'number') {
+    return checkGreaterLess(Number(value), Number(arg), greaterLess);
+  } else {
+    return checkGreaterLess(value.getTime(), (new Date(arg)).getTime(), greaterLess);
   }
 };

@@ -4,57 +4,77 @@
   <app-go-to-product-list></app-go-to-product-list>
 </div>
 
-<h2 *ngIf="!orders.length"
+<h2 *ngIf="!orders?.content?.length"
     class="no-products-info">Brak zamówień w systemie</h2>
 
-<table *ngIf="orders.length"
-       mat-table
-       matSort
-       [dataSource]="orders"
-       class="mat-elevation-z8">
-  <ng-container matColumnDef="orderNo">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef>Numer zamówienia</th>
-    <td mat-cell *matCellDef="let element">
-      <span class="bold">#{{element.orderNo}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="createdAt">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef>Złożono dnia</th>
-    <td mat-cell *matCellDef="let element">
-      {{element.createdAt | date}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="orderSum">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef>Wartość zamówienia</th>
-    <td mat-cell *matCellDef="let element">
-      {{element.orderValue | currency: 'PLN'}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>Status</th>
-    <td mat-cell *matCellDef="let element">
-      <app-status-label [status]="element.status"
-                        [id]="element._id"></app-status-label>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="paid">
-    <th mat-header-cell *matHeaderCellDef>Opłacone</th>
-    <td mat-cell *matCellDef="let element">
-      {{element.paid ? 'TAK' : 'NIE'}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button
-              color="accent"
-              (click)="openOrderDetails(element._id)">
-        <i class="feather-arrow-up-right"></i>
-        Detale zamówienia
-      </button>
-    </td>
-  </ng-container>
+<app-search-panel (search)="search($event)"></app-search-panel>
 
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-</table>
+<div *ngIf="orders?.content?.length"
+     class="mat-elevation-z8">
+  <table mat-table
+         matSort
+         (matSortChange)="sortData($event)"
+         [dataSource]="orders.content">
+    <ng-container matColumnDef="orderNo">
+      <th mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef>Numer zamówienia
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="bold">#{{element.orderNo}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef>Złożono dnia
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.createdAt | date}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="orderSum">
+      <th mat-header-cell
+          *matHeaderCellDef>Wartość zamówienia
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.orderValue | currency: 'PLN'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell
+          mat-sort-header
+          *matHeaderCellDef>Status
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <app-status-label [status]="element.status"
+                          [id]="element._id"></app-status-label>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="paid">
+      <th mat-header-cell *matHeaderCellDef>Opłacone</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.paid ? 'TAK' : 'NIE'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button
+                color="accent"
+                (click)="openOrderDetails(element._id)">
+          <i class="feather-arrow-up-right"></i>
+          Detale zamówienia
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+  <mat-paginator [length]="orders.totalRecords"
+                 [pageSize]="orders.pageSize"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [pageIndex]="orders.page"
+                 (page)="fetchData($event.pageIndex, $event.pageSize)"></mat-paginator>
+</div>

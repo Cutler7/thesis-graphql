@@ -1,0 +1,33 @@
+<mat-card class="search-panel mat-elevation-z8">
+  <mat-card-content>
+    <form [formGroup]="form"
+          (ngSubmit)="searchClick()">
+      <app-form-input [fieldRef]="form.get('number')"
+                      [inputType]="InputType.NUMBER"
+                      label="Numer zamówienia"></app-form-input>
+      <app-form-input [fieldRef]="form.get('dateFrom')"
+                      [inputType]="InputType.DATE"
+                      label="Od dnia"></app-form-input>
+      <app-form-input [fieldRef]="form.get('dateTo')"
+                      [inputType]="InputType.DATE"
+                      label="Do dnia"></app-form-input>
+      <app-form-input [fieldRef]="form.get('status')"
+                      [inputType]="InputType.DROPDOWN"
+                      [fieldConfig]="{ options: PRODUCT_CATEGORY, multipleDropdown: true }"
+                      label="Status"></app-form-input>
+      <div class="search-btn-container">
+        <button mat-raised-button
+                color="accent"
+                type="submit">Szukaj
+        </button>
+      </div>
+      <div class="search-btn-container">
+        <button mat-button
+                color="accent"
+                type="button"
+                (click)="resetForm()">Wyczyść
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

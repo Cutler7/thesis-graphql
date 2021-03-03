@@ -4,6 +4,7 @@ export enum InputType {
   TEXTAREA = 'textarea',
   PASSWORD = 'password',
   FILE = 'file',
+  DATE = 'date',
   DROPDOWN = 'dropdown',
   CHECKBOX = 'checkbox',
 }

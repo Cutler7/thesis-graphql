@@ -8,10 +8,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FieldErrorsModule} from '../field-errors/field-errors.module';
 import {MatButtonModule} from '@angular/material/button';
 import {FileInputModule} from '../file-input/file-input.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
-  declarations: [FormInputComponent],
+  declarations: [
+    FormInputComponent,
+  ],
   imports: [
     CommonModule,
     MatInputModule,
@@ -21,8 +25,15 @@ import {FileInputModule} from '../file-input/file-input.module';
     FieldErrorsModule,
     MatButtonModule,
     FileInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  exports: [FormInputComponent],
+  providers: [
+    MatDatepickerModule,
+  ],
+  exports: [
+    FormInputComponent,
+  ],
 })
 export class FormInputModule {
 }

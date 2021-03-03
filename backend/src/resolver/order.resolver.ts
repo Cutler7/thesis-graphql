@@ -6,6 +6,8 @@ import {ResolverContext} from '../interface/resolver-context.interface';
 import {ObjectId} from 'mongodb';
 import {insertDocument} from '../util/insert-document.util';
 import {insertManyDocuments} from '../util/insert-many-documents.util';
+import {filterListData} from '../util/filter-list-data.util';
+import {sortListData} from '../util/sort-list-data.util';
 
 const getOrderById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.ORDER)
   .findOne({_id: new ObjectId(id)});
@@ -28,11 +30,12 @@ const initializeOrderFields = (order, lastId: number): any[] => {
 export const orderResolvers: ResolverMap = {
   Query: {
     async orderList(obj, args, context) {
-      console.log(args);
-      const product = await getCollection(context, Collection.ORDER)
+      let orders = await getCollection(context, Collection.ORDER)
         .find({})
         .toArray();
-      return getPageOfData(product);
+      orders = filterListData(orders, args.queryArgs.filterArgs);
+      orders = sortListData(orders, args.queryArgs.orderBy);
+      return getPageOfData(orders, args.queryArgs.page, args.queryArgs.pageSize);
     },
     async getOrder(obj, args, context) {
       return await getOrderById(context, args.id);
