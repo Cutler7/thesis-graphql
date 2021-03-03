@@ -14,6 +14,8 @@ export class Product extends BaseModel {
 
   price: number;
 
+  category: string;
+
   comments: Comment[] = [];
 
   properties: ProductProperty[] = [];

@@ -29,6 +29,7 @@ const GQL_PRODUCT_BY_ID = gql`
       name
       description
       price
+      category
       quantity
       properties {
         name

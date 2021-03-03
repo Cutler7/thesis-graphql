@@ -4,9 +4,6 @@
           (ngSubmit)="searchClick()">
       <app-form-input [fieldRef]="form.get('name')"
                       label="Nazwa"></app-form-input>
-      <app-form-input [fieldRef]="form.get('searchInDescription')"
-                      label="Szukaj w opisie"
-                      [inputType]="InputType.CHECKBOX"></app-form-input>
       <app-form-input [fieldRef]="form.get('priceFrom')"
                       [inputType]="InputType.NUMBER"
                       label="Cena od"></app-form-input>

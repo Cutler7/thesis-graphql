@@ -49,6 +49,7 @@ export const products: any[] = [
 
 products.forEach(el => {
   el.description = description;
+  el.category = '1';
 });
 
 export const users = [

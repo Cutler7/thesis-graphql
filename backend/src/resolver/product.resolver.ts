@@ -6,6 +6,8 @@ import {ObjectId} from 'mongodb';
 import {ResolverContext} from '../interface/resolver-context.interface';
 import {insertDocument} from '../util/insert-document.util';
 import {insertManyDocuments} from '../util/insert-many-documents.util';
+import {filterListData} from '../util/filter-list-data.util';
+import {sortListData} from '../util/sort-list-data.util';
 
 const getProductById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.PRODUCT)
   .findOne({_id: new ObjectId(id)});
@@ -37,11 +39,12 @@ const deleteProductDependentDocuments = async (productId: string, ctx: ResolverC
 export const productResolvers: ResolverMap = {
   Query: {
     async productList(obj, args, context) {
-      console.log(args.queryArgs);
-      const products = await getCollection(context, Collection.PRODUCT)
+      let products = await getCollection(context, Collection.PRODUCT)
         .find({})
         .toArray();
-      return getPageOfData(products);
+      products = filterListData(products, args.queryArgs.filterArgs);
+      products = sortListData(products, args.queryArgs.orderBy);
+      return getPageOfData(products, args.queryArgs.page, args.queryArgs.pageSize);
     },
     async getProduct(obj, args, context) {
       return await getProductById(context, args.id);

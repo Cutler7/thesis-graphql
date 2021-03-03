@@ -12,6 +12,10 @@
         <app-form-input [fieldRef]="form.get('img')"
                         [inputType]="InputType.FILE"
                         label="Zdjęcie"></app-form-input>
+        <app-form-input [fieldRef]="form.get('category')"
+                        [inputType]="InputType.DROPDOWN"
+                        [fieldConfig]="{ options: PRODUCT_CATEGORY }"
+                        label="Kategoria"></app-form-input>
         <app-form-input [fieldRef]="form.get('price')"
                         [inputType]="InputType.NUMBER"
                         label="Cena"></app-form-input>

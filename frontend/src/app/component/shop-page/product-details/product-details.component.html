@@ -15,6 +15,7 @@
       </div>
       <div class="details-title-container">
         <h1>{{product.name}}</h1>
+        <h3>Kategoria: <span class="bold">{{getItemLabel(product.category)}}</span></h3>
         <h3>Cena za szt. <span class="bold">{{product.price | currency:'PLN'}}</span></h3>
         <app-product-quantity [quantity]="product.quantity"></app-product-quantity>
         <app-add-product-button (addProductEvent)="addToCart(product, $event)"></app-add-product-button>

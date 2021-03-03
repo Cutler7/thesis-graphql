@@ -8,6 +8,8 @@ import {ReportService} from '../../../shared/service/report.service';
 import {AddCommentDialogComponent} from './add-comment-dialog/add-comment-dialog.component';
 import {ProductService} from '../../../shared/service/http/product.service';
 import {Comment} from '../../../shared/model/comment.model';
+import {getItemLabel} from 'src/app/shared/util/get-item-label.function';
+import {PRODUCT_CATEGORY} from '../../../shared/const/product-category.const';
 
 @Component({
   selector: 'app-product-details',
@@ -47,6 +49,10 @@ export class ProductDetailsComponent implements OnInit {
   openAddCommentDialog() {
     const dialogRef = this.dialog.open(AddCommentDialogComponent, {width: '400px'});
     dialogRef.afterClosed().subscribe(val => this.addComment(val));
+  }
+
+  getItemLabel(category: string): string {
+    return getItemLabel(PRODUCT_CATEGORY, category);
   }
 
   private addComment(comment: Comment) {

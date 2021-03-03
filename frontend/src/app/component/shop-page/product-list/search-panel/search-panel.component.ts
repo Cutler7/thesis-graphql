@@ -43,7 +43,6 @@ export class SearchPanelComponent implements OnInit {
   private prepareFormGroup() {
     this.form = new FormGroup({
       name: new FormControl(''),
-      searchInDescription: new FormControl(''),
       priceFrom: new FormControl(''),
       priceTo: new FormControl(''),
       category: new FormControl(''),
@@ -54,10 +53,9 @@ export class SearchPanelComponent implements OnInit {
     const value = this.form.value;
     const result: FilterArg[] = [];
     result.push({key: 'name', value: value.name, op: FilterOperator.EQ});
-    result.push({key: 'description', value: value.searchInDescription ? value.name : null, op: FilterOperator.EQ});
-    result.push({key: 'price', value: value.priceFrom.toString(), op: FilterOperator.GT});
-    result.push({key: 'price', value: value.priceTo.toString(), op: FilterOperator.LT});
-    result.push({key: 'category', value: value.category.join(), op: FilterOperator.IN});
+    result.push({key: 'price', value: (value.priceFrom || '').toString(), op: FilterOperator.GT});
+    result.push({key: 'price', value: (value.priceTo || '').toString(), op: FilterOperator.LT});
+    result.push({key: 'category', value: (value.category || []).join(), op: FilterOperator.IN});
     return result.filter(el => el.value);
   }
 }

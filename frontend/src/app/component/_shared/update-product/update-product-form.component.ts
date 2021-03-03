@@ -7,6 +7,7 @@ import {ReportService} from '../../../shared/service/report.service';
 import {Router} from '@angular/router';
 import {RouteName} from '../../../shared/enum/route-name.enum';
 import {range} from 'lodash';
+import {PRODUCT_CATEGORY} from '../../../shared/const/product-category.const';
 
 @Component({
   selector: 'app-update-product-form',
@@ -15,6 +16,7 @@ import {range} from 'lodash';
 export class UpdateProductFormComponent implements OnChanges {
 
   InputType = InputType;
+  PRODUCT_CATEGORY = PRODUCT_CATEGORY;
 
   @Input()
   value: Product;
@@ -73,6 +75,7 @@ export class UpdateProductFormComponent implements OnChanges {
       description: new FormControl('', [Validators.required]),
       img: new FormControl(null, [Validators.required]),
       price: new FormControl('', [Validators.required, Validators.min(0.01)]),
+      category: new FormControl('', [Validators.required]),
       quantity: new FormControl('', [Validators.required, Validators.min(1)]),
       properties: new FormArray([]),
     });

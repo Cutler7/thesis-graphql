@@ -100,7 +100,6 @@ export class ProductListComponent implements OnInit {
   }
 
   fetchData(page: number = 0, pageSize: number = 10) {
-    console.log({page, pageSize, filterArgs: this.filterArgs, orderBy: this.sortArg});
     this.productService.getProductList({page, pageSize, filterArgs: this.filterArgs, orderBy: this.sortArg})
       .then(res => this.products = res)
       .then(() => this.updateProductAmount())
