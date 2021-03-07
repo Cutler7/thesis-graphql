@@ -2,12 +2,13 @@ import {ResolverMap} from '../interface/resolver-map.interface';
 import {Collection} from '../enum/collection.enum';
 import {getPageOfData} from '../util/get-page-of-data.util';
 import {getCollection} from '../util/get-collection.util';
-import {ObjectId} from 'mongodb';
+import {Binary, ObjectId} from 'mongodb';
 import {ResolverContext} from '../interface/resolver-context.interface';
 import {insertDocument} from '../util/insert-document.util';
 import {insertManyDocuments} from '../util/insert-many-documents.util';
 import {filterListData} from '../util/filter-list-data.util';
 import {sortListData} from '../util/sort-list-data.util';
+import {GraphQLUpload} from 'graphql-upload';
 
 const getProductById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.PRODUCT)
   .findOne({_id: new ObjectId(id)});
@@ -36,6 +37,16 @@ const deleteProductDependentDocuments = async (productId: string, ctx: ResolverC
   ]);
 };
 
+const readStream = (stream) => {
+  return new Promise((resolve, reject) => {
+    const buff = [];
+    stream.on('data', chunk => buff.push(chunk));
+    stream.on('end', () => resolve(Buffer.concat(buff)));
+    stream.on('error', error => reject(error));
+    stream.read();
+  });
+};
+
 export const productResolvers: ResolverMap = {
   Query: {
     async productList(obj, args, context) {
@@ -60,6 +71,10 @@ export const productResolvers: ResolverMap = {
     },
     async createOrUpdateProduct(obj, args, context) {
       let result;
+      const file = await args.file.then();
+      const buff: any = await readStream(file.createReadStream());
+      args.product.img = new Binary(buff);
+
       const properties = args.product.properties;
       delete args.product.properties;
       const productExists = await isProductExist(context, args.product._id);
@@ -87,6 +102,7 @@ export const productResolvers: ResolverMap = {
       return result.value;
     },
   },
+  Upload: GraphQLUpload,
   Product: {
     async comments(obj, args, context) {
       return await getCollection(context, Collection.COMMENT)

@@ -82,7 +82,6 @@ export class UpdateProductFormComponent implements OnChanges {
   }
 
   private mapValue(product: Product): Product {
-    product.img = '';
     product._id = product._id === '' ? null : product._id;
     return product;
   }

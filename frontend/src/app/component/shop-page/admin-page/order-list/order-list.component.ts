@@ -34,7 +34,7 @@ export class OrderListComponent implements OnInit {
 
   openOrderDetails(id: string) {
     this.dialog.open(OrderDetailsDialogComponent, {
-      width: '400px',
+      width: '600px',
       data: id,
     });
   }
@@ -53,7 +53,7 @@ export class OrderListComponent implements OnInit {
     this.fetchData();
   }
 
-  private fetchData(page: number = 0, pageSize: number = 10) {
+  fetchData(page: number = 0, pageSize: number = 10) {
     this.orderService.getOrderList({page, pageSize, filterArgs: this.filterArgs, orderBy: this.sortArg})
       .then(res => this.orders = res)
       .then(() => this.countOrderPrice())

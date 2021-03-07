@@ -9,6 +9,7 @@ import {ResolverContext} from './src/interface/resolver-context.interface';
 import {userResolvers} from './src/resolver/user.resolver';
 import {orderResolvers} from './src/resolver/order.resolver';
 import {productResolvers} from './src/resolver/product.resolver';
+import {graphqlUploadExpress} from 'graphql-upload';
 
 const app: Express = express();
 const dbConnectionController = new DbConnectionController();
@@ -25,10 +26,13 @@ app.get('/init', (req, res) => {
     .then(() => res.send({result: 'OK'}));
 });
 
-app.use('/graphql', graphqlHTTP({
-  schema: makeExecutableSchema({typeDefs, resolvers}),
-  context: {dbConnectionController} as ResolverContext,
-  graphiql: true,
-}));
+app.use(
+  '/graphql',
+  graphqlUploadExpress({maxFileSize: 10000000, maxFiles: 10}),
+  graphqlHTTP({
+    schema: makeExecutableSchema({typeDefs, resolvers}),
+    context: {dbConnectionController} as ResolverContext,
+    graphiql: true,
+  }));
 
 app.listen(3000, () => console.log('Server is listening at port 3000'));

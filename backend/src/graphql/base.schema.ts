@@ -32,6 +32,8 @@ export const baseTypes = gql`
 
     scalar Date
 
+    scalar Upload
+
     enum FilterOperator {
         eq
         neq

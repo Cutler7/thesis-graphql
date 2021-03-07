@@ -20,7 +20,7 @@ export class Product extends BaseModel {
 
   properties: ProductProperty[] = [];
 
-  img?: string;
+  img?: File | string;
 
   quantity: number;
 }

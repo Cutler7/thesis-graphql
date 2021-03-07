@@ -31,6 +31,7 @@ const GQL_PRODUCT_BY_ID = gql`
       price
       category
       quantity
+      img
       properties {
         name
         value
@@ -54,8 +55,8 @@ const GQL_DELETE_PRODUCT = gql`
 `;
 
 const GQL_CREATE_OR_UPDATE_PRODUCT = gql`
-  mutation ($var1: ProductInput!) {
-    createOrUpdateProduct(product: $var1) {
+  mutation ($var1: ProductInput!, $var2: Upload!) {
+    createOrUpdateProduct(product: $var1, file: $var2) {
       _id
     }
   }
@@ -99,7 +100,9 @@ export class ProductService extends GraphqlService {
   }
 
   createOrUpdateProduct(product: Product): Promise<Product> {
-    return this.execute<Product>(GQL_CREATE_OR_UPDATE_PRODUCT, 'createOrUpdateProduct', product);
+    return this.httpClient.post('/graphql', this.prepareProductMultipart(product))
+      .toPromise()
+      .then(res => (res as any).data.createOrUpdateProduct);
   }
 
   addComment(id: string, comment: Comment): Promise<Comment> {
@@ -108,5 +111,19 @@ export class ProductService extends GraphqlService {
 
   updateAmount(id: string, amount: number): Promise<Product> {
     return this.execute<Product>(GQL_UPDATE_AMOUNT, 'updateAmount', id, amount);
+  }
+
+  private prepareProductMultipart(product: Product): FormData {
+    const fd = new FormData();
+    const file = product.img;
+    product.img = null;
+    const body = {
+      query: this.removeWhiteSpaces(GQL_CREATE_OR_UPDATE_PRODUCT),
+      variables: this.mapArgsToParamMap([product, null]),
+    };
+    fd.append('operations', JSON.stringify(body));
+    fd.append('map', '{ "0": ["variables.$var2"] }');
+    fd.append('0', file);
+    return fd;
   }
 }

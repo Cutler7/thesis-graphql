@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export const gql = (literal: TemplateStringsArray) => {
   return literal[0];
@@ -9,20 +9,28 @@ export const gql = (literal: TemplateStringsArray) => {
 export class GraphqlService {
 
   constructor(
-    private httpClient: HttpClient,
+    protected httpClient: HttpClient,
   ) {
   }
 
   execute<T>(query: string, method: string, ...variables: any[]): Promise<T> {
+    return this.callGraphqlMethod(query, method, undefined, ...variables);
+  }
+
+  executeWithCustomHeaders<T>(query: string, method: string, headers: HttpHeaders, ...variables: any[]): Promise<T> {
+    return this.callGraphqlMethod(query, method, headers, ...variables);
+  }
+
+  private callGraphqlMethod<T>(query: string, method: string, headers: HttpHeaders, ...variables: any[]): Promise<T> {
     return this.httpClient.post('/graphql', {
       query: this.removeWhiteSpaces(query),
       variables: this.mapArgsToParamMap(variables),
-    })
+    }, {headers})
       .toPromise()
       .then(res => (res as any).data[method]);
   }
 
-  private mapArgsToParamMap(variables: any[]): Record<string, any> {
+  protected mapArgsToParamMap(variables: any[]): Record<string, any> {
     const result: any = {};
     let counter: number = 1;
     variables.forEach(arg => {
@@ -32,7 +40,7 @@ export class GraphqlService {
     return result;
   }
 
-  private removeWhiteSpaces(query: string): string {
+  protected removeWhiteSpaces(query: string): string {
     return query.replace(/\s+/g, ' ');
   }
 }

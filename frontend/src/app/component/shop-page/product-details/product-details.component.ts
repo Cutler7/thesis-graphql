@@ -65,6 +65,13 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getProductById(id)
       .then(res => {
         this.product = res;
+
+        // TODO: remove this test fragment
+        const img = document.createElement('img');
+        img.src = 'data:image/jpeg;base64,' + (this.product.img as string);
+        document.body.appendChild(img);
+
+
         this.product.img = 'assets/img/example.jpg';
         this.updateProductAmount();
       });

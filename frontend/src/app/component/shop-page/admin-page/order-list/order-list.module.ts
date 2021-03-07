@@ -15,6 +15,7 @@ import {MatCardModule} from '@angular/material/card';
 import {FormInputModule} from '../../../_shared/form-input/form-input.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ProductsInOrderComponent } from './products-in-order/products-in-order.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     OrderListComponent,
     OrderDetailsDialogComponent,
     SearchPanelComponent,
+    ProductsInOrderComponent,
   ],
   imports: [
     CommonModule,
