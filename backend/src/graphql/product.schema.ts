@@ -34,8 +34,9 @@ export const productTypes = gql`
         category: String
         comments: [Comment]
         properties: [ProductProperty]
-        img: String
         quantity: Int
+        fullImg: String
+        minImg: String
     }
 
     input ProductInput {

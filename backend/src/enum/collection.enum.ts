@@ -5,4 +5,5 @@ export enum Collection {
   PRODUCT_PROPERTY = 'ProductProperty',
   ORDER = 'Order',
   ORDER_ITEM = 'OrderItem',
+  ASSET = 'Asset',
 }

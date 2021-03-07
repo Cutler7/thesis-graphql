@@ -4,8 +4,7 @@
   "description": "GraphQL server for a prototype application of the online store",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts",
-    "init-db": "node ./data/init-db.js"
+    "start": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
@@ -28,8 +27,10 @@
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.4",
     "graphql-upload": "^11.0.0",
+    "jimp": "^0.16.1",
     "lodash": "^4.17.21",
     "mongodb": "^3.6.4",
+    "resize-img": "^2.0.0",
     "rxjs": "^6.6.3"
   },
   "devDependencies": {

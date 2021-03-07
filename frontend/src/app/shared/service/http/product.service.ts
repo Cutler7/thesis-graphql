@@ -14,7 +14,7 @@ const GQL_PRODUCT_LIST = gql`
       content {
         _id
         name
-        img
+        minImg
         price
         quantity
       }
@@ -31,7 +31,7 @@ const GQL_PRODUCT_BY_ID = gql`
       price
       category
       quantity
-      img
+      fullImg
       properties {
         name
         value
@@ -116,13 +116,13 @@ export class ProductService extends GraphqlService {
   private prepareProductMultipart(product: Product): FormData {
     const fd = new FormData();
     const file = product.img;
-    product.img = null;
+    delete product.img;
     const body = {
       query: this.removeWhiteSpaces(GQL_CREATE_OR_UPDATE_PRODUCT),
       variables: this.mapArgsToParamMap([product, null]),
     };
     fd.append('operations', JSON.stringify(body));
-    fd.append('map', '{ "0": ["variables.$var2"] }');
+    fd.append('map', '{ "0": ["variables.var2"] }');
     fd.append('0', file);
     return fd;
   }

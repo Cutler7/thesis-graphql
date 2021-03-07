@@ -1,4 +1,4 @@
-export const filterListData = (products: any[], filterArgs: any[]): any[] => {
+export const filterListData = (products: any[], filterArgs: any[] = []): any[] => {
   let result = products;
   filterArgs.forEach(filter => result = result
     .filter(el => compare(el[filter.key], filter, typeof products[0][filter.key])));

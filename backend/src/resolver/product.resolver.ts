@@ -2,13 +2,15 @@ import {ResolverMap} from '../interface/resolver-map.interface';
 import {Collection} from '../enum/collection.enum';
 import {getPageOfData} from '../util/get-page-of-data.util';
 import {getCollection} from '../util/get-collection.util';
-import {Binary, ObjectId} from 'mongodb';
+import {ObjectId} from 'mongodb';
 import {ResolverContext} from '../interface/resolver-context.interface';
 import {insertDocument} from '../util/insert-document.util';
 import {insertManyDocuments} from '../util/insert-many-documents.util';
 import {filterListData} from '../util/filter-list-data.util';
 import {sortListData} from '../util/sort-list-data.util';
 import {GraphQLUpload} from 'graphql-upload';
+import {ResizeImageController} from '../controller/resize-image.controller';
+import {insertImage} from '../util/insert-image.util';
 
 const getProductById = (ctx: ResolverContext, id: string) => getCollection(ctx, Collection.PRODUCT)
   .findOne({_id: new ObjectId(id)});
@@ -35,6 +37,17 @@ const deleteProductDependentDocuments = async (productId: string, ctx: ResolverC
     getCollection(ctx, Collection.PRODUCT_PROPERTY)
       .deleteMany({productId: new ObjectId(productId)}),
   ]);
+};
+
+const saveProductImage = async (args, ctx: ResolverContext) => {
+  const imgResize = new ResizeImageController(200);
+  const file = await args.file.then();
+  const buffFull: any = await readStream(file.createReadStream());
+  const buffMin = await imgResize.transformImageToMiniature(buffFull);
+  const fullImg = await insertImage(ctx.dbConnectionController.getDb(), buffFull);
+  const minImg = await insertImage(ctx.dbConnectionController.getDb(), buffMin);
+  args.product.fullImgId = fullImg.insertedId;
+  args.product.minImgId = minImg.insertedId;
 };
 
 const readStream = (stream) => {
@@ -71,10 +84,7 @@ export const productResolvers: ResolverMap = {
     },
     async createOrUpdateProduct(obj, args, context) {
       let result;
-      const file = await args.file.then();
-      const buff: any = await readStream(file.createReadStream());
-      args.product.img = new Binary(buff);
-
+      await saveProductImage(args, context);
       const properties = args.product.properties;
       delete args.product.properties;
       const productExists = await isProductExist(context, args.product._id);
@@ -113,6 +123,16 @@ export const productResolvers: ResolverMap = {
       return await getCollection(context, Collection.PRODUCT_PROPERTY)
         .find({productId: obj._id})
         .toArray();
+    },
+    async fullImg(obj, args, context) {
+      const img = await getCollection(context, Collection.ASSET)
+        .findOne({_id: obj.fullImgId});
+      return img.file;
+    },
+    async minImg(obj, args, context) {
+      const img = await getCollection(context, Collection.ASSET)
+        .findOne({_id: obj.minImgId});
+      return img.file;
     },
   },
 };

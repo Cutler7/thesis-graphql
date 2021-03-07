@@ -10,6 +10,8 @@ import {userResolvers} from './src/resolver/user.resolver';
 import {orderResolvers} from './src/resolver/order.resolver';
 import {productResolvers} from './src/resolver/product.resolver';
 import {graphqlUploadExpress} from 'graphql-upload';
+import {ResizeImageController} from './src/controller/resize-image.controller';
+import fs from 'fs';
 
 const app: Express = express();
 const dbConnectionController = new DbConnectionController();
@@ -23,6 +25,13 @@ const resolvers = mergeResolvers([
 
 app.get('/init', (req, res) => {
   dbInitController.initDatabase()
+    .then(() => res.send({result: 'OK'}));
+});
+
+app.get('/test', (req, res) => {
+  const file = fs.readFileSync('./data/img/example.jpg');
+  const c = new ResizeImageController(200);
+  c.transformImageToMiniature(file)
     .then(() => res.send({result: 'OK'}));
 });
 
