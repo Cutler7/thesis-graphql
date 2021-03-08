@@ -1,5 +1,6 @@
 import {random, range} from 'lodash';
 import {PRODUCT_DATA} from './product.data';
+import bcrypt from 'bcrypt';
 
 const addCreatedAtField = (...collection: any[][]) => collection
   .forEach(col => col.forEach(el => el.createdAt = new Date()));
@@ -17,6 +18,10 @@ export const comments = [
 ];
 
 export const users = [
+  {
+    username: 'admin',
+    password: bcrypt.hashSync('admin', 10),
+  },
   {
     username: 'jkowalski',
     name: 'Jan',

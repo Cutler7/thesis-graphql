@@ -10,6 +10,8 @@ import {userResolvers} from './src/resolver/user.resolver';
 import {orderResolvers} from './src/resolver/order.resolver';
 import {productResolvers} from './src/resolver/product.resolver';
 import {graphqlUploadExpress} from 'graphql-upload';
+import {IncomingHttpHeaders} from 'http';
+import jwt from 'jsonwebtoken';
 
 const app: Express = express();
 const dbConnectionController = new DbConnectionController();
@@ -21,22 +23,36 @@ const resolvers = mergeResolvers([
   userResolvers,
 ]);
 
+const getResolverContext = (headers: IncomingHttpHeaders): ResolverContext => {
+  console.log(headers);
+  return {
+    dbConnectionController,
+    isAuthorized: true,
+  };
+};
+
 app.get('/init', (req, res) => {
   dbInitController.initDatabase()
     .then(() => res.send({result: 'OK'}));
 });
 
+app.get('/test', (req, res) => {
+  const token = jwt.sign(
+    {role: 'admin'},
+    'secret',
+    {expiresIn: 60 * 20},
+  );
+  res.send({result: token});
+});
+
 app.use(
   '/graphql',
   graphqlUploadExpress({maxFileSize: 10000000, maxFiles: 10}),
-  graphqlHTTP((req) => {
-    console.log(req);
-    return {
-      schema: makeExecutableSchema({typeDefs, resolvers}),
-      context: {dbConnectionController} as ResolverContext,
-      graphiql: true,
-    };
-  }),
+  graphqlHTTP((req) => ({
+    schema: makeExecutableSchema({typeDefs, resolvers}),
+    context: getResolverContext(req.headers),
+    graphiql: true,
+  })),
 );
 
 app.listen(3000, () => console.log('Server is listening at port 3000'));
