@@ -25,6 +25,8 @@ export class UpdateProductFormComponent implements OnChanges {
 
   refresh: boolean = true;
 
+  private imgPlaceholder = new File([], 'current image');
+
   get propertiesIdxList(): number[] {
     return Array.from((this.form.get('properties') as FormArray).controls.keys());
   }
@@ -40,7 +42,7 @@ export class UpdateProductFormComponent implements OnChanges {
     if (changes.value && this.value) {
       this.prepareFormGroup();
       this.adjustListLength(this.value?.properties?.length || 1);
-      this.form.patchValue(this.value);
+      this.updateFormValue();
     }
   }
 
@@ -82,7 +84,13 @@ export class UpdateProductFormComponent implements OnChanges {
   }
 
   private mapValue(product: Product): Product {
+    product.img = product.img === this.imgPlaceholder ? null : product.img;
     product._id = product._id === '' ? null : product._id;
     return product;
+  }
+
+  private updateFormValue() {
+    this.value.img = this.value._id ? this.imgPlaceholder : null;
+    this.form.patchValue(this.value);
   }
 }

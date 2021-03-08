@@ -7,7 +7,7 @@ export class DbConnectionController {
   private mongoClient: MongoClient;
   private dbConnectionReadySubject = new Subject<void>();
   private subscriptions: Subscription[] = [];
-  private readonly url = 'mongodb://172.26.139.212:27017';
+  private readonly url = 'mongodb://127.0.0.1:27017';
   private readonly dbName = 'ACME_DB';
 
   constructor() {

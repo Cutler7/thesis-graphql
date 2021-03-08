@@ -18,6 +18,9 @@ const getProductById = (ctx: ResolverContext, id: string) => getCollection(ctx, 
 const isProductExist = async (ctx: ResolverContext, id: string): Promise<boolean> =>
   !id ? false : !!(await getProductById(ctx, id));
 
+const withAuthentication = () => {
+  
+};
 
 const updateProduct = async (product: any, ctx: ResolverContext) => {
   const id = product._id;
@@ -40,8 +43,11 @@ const deleteProductDependentDocuments = async (productId: string, ctx: ResolverC
 };
 
 const saveProductImage = async (args, ctx: ResolverContext) => {
-  const imgResize = new ResizeImageController(200);
-  const file = await args.file.then();
+  const imgResize = new ResizeImageController(160);
+  const file = await args.file.then().catch(() => null);
+  if (!file) {
+    return;
+  }
   const buffFull: any = await readStream(file.createReadStream());
   const buffMin = await imgResize.transformImageToMiniature(buffFull);
   const fullImg = await insertImage(ctx.dbConnectionController.getDb(), buffFull);

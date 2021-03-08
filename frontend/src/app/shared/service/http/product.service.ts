@@ -55,7 +55,7 @@ const GQL_DELETE_PRODUCT = gql`
 `;
 
 const GQL_CREATE_OR_UPDATE_PRODUCT = gql`
-  mutation ($var1: ProductInput!, $var2: Upload!) {
+  mutation ($var1: ProductInput!, $var2: Upload) {
     createOrUpdateProduct(product: $var1, file: $var2) {
       _id
     }

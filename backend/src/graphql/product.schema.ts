@@ -13,7 +13,7 @@ export const productTypes = gql`
 
     type Mutation {
         deleteProduct(id: ID!): Product
-        createOrUpdateProduct(product: ProductInput!, file: Upload!): Product
+        createOrUpdateProduct(product: ProductInput!, file: Upload): Product
         addComment(id: ID!, comment: CommentInput!): Comment
         updateAmount(id: ID!, amount: Int!): Product
     }

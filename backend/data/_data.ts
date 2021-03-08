@@ -1,14 +1,8 @@
 import {random, range} from 'lodash';
+import {PRODUCT_DATA} from './product.data';
 
 const addCreatedAtField = (...collection: any[][]) => collection
   .forEach(col => col.forEach(el => el.createdAt = new Date()));
-
-export const dataProps = [
-  {name: 'wysokość', value: 'do 40cm'},
-  {name: 'stanowisko', value: 'słoneczne'},
-  {name: 'podlewanie', value: '2 razy w tygodniu'},
-  {name: 'podłoże', value: 'torfowe'},
-];
 
 export const comments = [
   {
@@ -21,36 +15,6 @@ export const comments = [
   {rate: 4, author: 'Grażynka', content: 'bardzo ładne kwiaty mają państwo'},
   {rate: 5, author: 'Janusz', content: 'bardzo ładne kwiaty mają państwo'},
 ];
-
-export const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim dui, pharetra ac posuere ut, egestas ut tortor. Nam malesuada sapien et mollis aliquam. Nam placerat urna vitae justo scelerisque dictum. In vitae metus quis arcu pellentesque ultrices. Maecenas venenatis metus arcu, non pretium lorem convallis a. Nulla mattis ipsum in mi faucibus fermentum a quis ligula. Pellentesque faucibus vulputate tempus. Mauris est arcu, vulputate vitae pretium blandit, rutrum at orci. Nulla eleifend nulla eget erat placerat, non mollis est mattis. Nunc sed consectetur ligula, id aliquam arcu. Sed purus sem, ultrices at orci non, tempus rutrum elit. Vivamus molestie blandit suscipit.';
-
-export const products: any[] = [
-  {name: 'Produkt A', price: 10, quantity: 100},
-  {name: 'Produkt B', price: 20, quantity: 150},
-  {name: 'Produkt C', price: 30, quantity: 0},
-  {name: 'Produkt D', price: 40, quantity: 0},
-  {name: 'Produkt E', price: 50, quantity: 100},
-  {name: 'Produkt F', price: 60, quantity: 100},
-  {name: 'Produkt A', price: 10, quantity: 150},
-  {name: 'Produkt B', price: 20, quantity: 200},
-  {name: 'Produkt C', price: 30, quantity: 300},
-  {name: 'Produkt D', price: 40, quantity: 100},
-  {name: 'Produkt E', price: 50, quantity: 900},
-  {name: 'Produkt F', price: 60, quantity: 1},
-  {name: 'Produkt A', price: 10, quantity: 8},
-  {name: 'Produkt B', price: 20, quantity: 100},
-  {name: 'Produkt C', price: 30, quantity: 100},
-  {name: 'Produkt D', price: 40, quantity: 100},
-  {name: 'Produkt E', price: 50, quantity: 100},
-  {name: 'Produkt F', price: 60, quantity: 100},
-  {name: 'Produkt A', price: 10, quantity: 100},
-  {name: 'Produkt B', price: 20, quantity: 100},
-];
-
-products.forEach(el => {
-  el.description = description;
-  el.category = '1';
-});
 
 export const users = [
   {
@@ -98,6 +62,8 @@ const addressData = {
 };
 
 export const orders = [];
+export const properties = [];
+PRODUCT_DATA.forEach(product => properties.push(...product.properties));
 
 range(100).forEach((el, i) => {
   const delivery = ['PACKAGE', 'PARCEL_LOCKER', 'POST'];
@@ -109,4 +75,4 @@ range(100).forEach((el, i) => {
   result.paid = !(result.status === 'PENDING');
   orders.push(result);
 });
-addCreatedAtField(dataProps, comments, products, users, orders);
+addCreatedAtField(PRODUCT_DATA, properties, comments, users, orders);

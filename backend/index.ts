@@ -10,8 +10,6 @@ import {userResolvers} from './src/resolver/user.resolver';
 import {orderResolvers} from './src/resolver/order.resolver';
 import {productResolvers} from './src/resolver/product.resolver';
 import {graphqlUploadExpress} from 'graphql-upload';
-import {ResizeImageController} from './src/controller/resize-image.controller';
-import fs from 'fs';
 
 const app: Express = express();
 const dbConnectionController = new DbConnectionController();
@@ -28,20 +26,17 @@ app.get('/init', (req, res) => {
     .then(() => res.send({result: 'OK'}));
 });
 
-app.get('/test', (req, res) => {
-  const file = fs.readFileSync('./data/img/example.jpg');
-  const c = new ResizeImageController(200);
-  c.transformImageToMiniature(file)
-    .then(() => res.send({result: 'OK'}));
-});
-
 app.use(
   '/graphql',
   graphqlUploadExpress({maxFileSize: 10000000, maxFiles: 10}),
-  graphqlHTTP({
-    schema: makeExecutableSchema({typeDefs, resolvers}),
-    context: {dbConnectionController} as ResolverContext,
-    graphiql: true,
-  }));
+  graphqlHTTP((req) => {
+    console.log(req);
+    return {
+      schema: makeExecutableSchema({typeDefs, resolvers}),
+      context: {dbConnectionController} as ResolverContext,
+      graphiql: true,
+    };
+  }),
+);
 
 app.listen(3000, () => console.log('Server is listening at port 3000'));

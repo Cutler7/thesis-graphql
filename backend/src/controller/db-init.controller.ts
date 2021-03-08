@@ -1,11 +1,12 @@
 import {DbConnectionController} from './db-connection.controller';
-import {Db, InsertOneWriteOpResult} from 'mongodb';
-import {comments, dataProps, orders, products, users} from '../../data/_data';
+import {Db, InsertOneWriteOpResult, ObjectId} from 'mongodb';
+import {comments, orders, users} from '../../data/_data';
 import {cloneDeep, random, range} from 'lodash';
 import {Collection} from '../enum/collection.enum';
 import {ResizeImageController} from './resize-image.controller';
 import {insertImage} from '../util/insert-image.util';
 import * as fs from 'fs';
+import {PRODUCT_DATA} from '../../data/product.data';
 
 enum ImgSize {
   MIN = 'img min',
@@ -14,7 +15,7 @@ enum ImgSize {
 
 export class DbInitController {
 
-  imgResize = new ResizeImageController(200);
+  imgResize = new ResizeImageController(160);
 
   constructor(
     private db: DbConnectionController,
@@ -27,41 +28,27 @@ export class DbInitController {
       .then(() => this.initWithData(db));
   }
 
-  test(): Promise<any> {
-    const db = this.db.getDb();
-    return this.initAssets(db);
-  }
-
   private initWithData(db: Db) {
     return db.collection(Collection.USER).insertMany(users)
-      .then(() => this.initAssets(db))
       .then(() => this.initProducts(db))
       .then(() => this.initOrders(db));
   }
 
   private async initProducts(db: Db): Promise<any> {
-    const commentList = [];
-    const propertiesList = [];
-    const insertProductPromise = [];
-    const imgFull = await db.collection(Collection.ASSET).findOne({description: ImgSize.FULL});
-    const imgMin = await db.collection(Collection.ASSET).findOne({description: ImgSize.MIN});
-    products.forEach(product => {
-      product.fullImgId = imgFull._id;
-      product.minImgId = imgMin._id;
-      insertProductPromise.push(
-        db.collection(Collection.PRODUCT).insertOne(product)
-          .then(inserted => {
-            this.groupProductDependentData(commentList, comments, inserted);
-            this.groupProductDependentData(propertiesList, dataProps, inserted);
-          }),
-      );
+    const data: Record<string, any[]> = {
+      commentList: comments,
+      propertiesList: [],
+      insertProductPromise: [],
+    };
+    PRODUCT_DATA.forEach(product => {
+      data.insertProductPromise.push(this.insertProduct(db, product, data));
     });
-    return Promise.all(insertProductPromise)
-      .then(() => db.collection(Collection.COMMENT).insertMany(commentList))
-      .then(() => db.collection(Collection.PRODUCT_PROPERTY).insertMany(propertiesList));
+    return Promise.all(data.insertProductPromise)
+      .then(() => db.collection(Collection.COMMENT).insertMany(data.commentList))
+      .then(() => db.collection(Collection.PRODUCT_PROPERTY).insertMany(data.propertiesList));
   }
 
-  private groupProductDependentData(list: any[], dataSet: any[], inserted: InsertOneWriteOpResult<any>) {
+  private groupProductDependentData(list: any[] = [], dataSet: any[] = [], inserted: InsertOneWriteOpResult<any>) {
     const dataCpy = cloneDeep(dataSet);
     dataCpy.forEach(el => el.productId = inserted.insertedId);
     list.push(...dataCpy);
@@ -86,10 +73,28 @@ export class DbInitController {
       .then(() => db.collection(Collection.ORDER_ITEM).insertMany(orderItemList));
   }
 
-  private async initAssets(db: Db) {
-    const file = fs.readFileSync('./data/img/example.jpg');
+  private async insertProduct(db: Db, product: any, data: Record<string, any[]>): Promise<any> {
+    const {img, comments, properties} = product;
+    this.deletePropertiesFromObject(product, ['comments', 'properties', 'img']);
+    const ids = await this.initAssets(db, img);
+    product.minImgId = ids[0];
+    product.fullImgId = ids[1];
+    return db.collection(Collection.PRODUCT).insertOne(product)
+      .then(inserted => {
+        this.groupProductDependentData(data.commentList, comments, inserted);
+        this.groupProductDependentData(data.propertiesList, properties, inserted);
+      });
+  }
+
+  private async initAssets(db: Db, path: string): Promise<ObjectId[]> {
+    const file = fs.readFileSync(path);
     const fileMin = await this.imgResize.transformImageToMiniature(file);
-    await insertImage(db, fileMin, ImgSize.MIN);
-    await insertImage(db, file, ImgSize.FULL);
+    const objMin = await insertImage(db, fileMin, ImgSize.MIN);
+    const objFull = await insertImage(db, file, ImgSize.FULL);
+    return [objMin.insertedId, objFull.insertedId];
+  }
+
+  private deletePropertiesFromObject(obj: object, props: string[]) {
+    props.forEach(prop => delete obj[prop]);
   }
 }
