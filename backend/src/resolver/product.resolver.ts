@@ -43,13 +43,14 @@ const deleteProductDependentDocuments = async (productId: string, ctx: ResolverC
 };
 
 const saveProductImage = async (args, ctx: ResolverContext) => {
-  const imgResize = new ResizeImageController(160);
+  const imgResize = new ResizeImageController(160, 800);
   const file = await args.file.then().catch(() => null);
   if (!file) {
     return;
   }
-  const buffFull: any = await readStream(file.createReadStream());
-  const buffMin = await imgResize.transformImageToMiniature(buffFull);
+  const buff: any = await readStream(file.createReadStream());
+  const buffFull = await imgResize.transformImageToTargetSize(buff);
+  const buffMin = await imgResize.transformImageToMiniature(buff);
   const fullImg = await insertImage(ctx.dbConnectionController.getDb(), buffFull);
   const minImg = await insertImage(ctx.dbConnectionController.getDb(), buffMin);
   args.product.fullImgId = fullImg.insertedId;

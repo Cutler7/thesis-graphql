@@ -1,21 +1,25 @@
 import {DbConnectionController} from './db-connection.controller';
 import {Db, InsertOneWriteOpResult, ObjectId} from 'mongodb';
-import {comments, orders, users} from '../../data/_data';
+import {comments, orders} from '../../data/order.data';
 import {cloneDeep, random, range} from 'lodash';
 import {Collection} from '../enum/collection.enum';
 import {ResizeImageController} from './resize-image.controller';
 import {insertImage} from '../util/insert-image.util';
 import * as fs from 'fs';
 import {PRODUCT_DATA} from '../../data/product.data';
+import {users} from '../../data/user.data';
 
 enum ImgSize {
   MIN = 'img min',
   FULL = 'img full',
 }
 
+const addCreatedAtField = (...collection: any[][]) => collection
+  .forEach(col => col.forEach(el => el.createdAt = new Date()));
+
 export class DbInitController {
 
-  imgResize = new ResizeImageController(160);
+  imgResize = new ResizeImageController(160, 800);
 
   constructor(
     private db: DbConnectionController,
@@ -23,6 +27,7 @@ export class DbInitController {
   }
 
   initDatabase(): Promise<any> {
+    this.prepareTestDataSet();
     const db = this.db.getDb();
     return db.dropDatabase()
       .then(() => this.initWithData(db));
@@ -89,12 +94,19 @@ export class DbInitController {
   private async initAssets(db: Db, path: string): Promise<ObjectId[]> {
     const file = fs.readFileSync(path);
     const fileMin = await this.imgResize.transformImageToMiniature(file);
+    const fileFull = await this.imgResize.transformImageToTargetSize(file);
     const objMin = await insertImage(db, fileMin, ImgSize.MIN);
-    const objFull = await insertImage(db, file, ImgSize.FULL);
+    const objFull = await insertImage(db, fileFull, ImgSize.FULL);
     return [objMin.insertedId, objFull.insertedId];
   }
 
   private deletePropertiesFromObject(obj: object, props: string[]) {
     props.forEach(prop => delete obj[prop]);
+  }
+
+  private prepareTestDataSet() {
+    const properties = [];
+    PRODUCT_DATA.forEach(product => properties.push(...product.properties));
+    addCreatedAtField(PRODUCT_DATA, properties, comments, users, orders);
   }
 }

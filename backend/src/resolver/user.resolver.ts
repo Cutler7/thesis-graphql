@@ -30,7 +30,12 @@ export const userResolvers: ResolverMap = {
       if (!passwordCorrect) {
         throw Error(errorMsg);
       }
-      const token = jwt.sign({role: 'admin'}, user.password, {expiresIn: 60 * 20});
+      const token = jwt.sign(
+        {role: 'admin', username: user.username},
+        user.password,
+        {expiresIn: 10},
+        // {expiresIn: 60 * 20},
+      );
       delete user.password;
       return {user, token};
     },

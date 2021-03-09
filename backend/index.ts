@@ -12,6 +12,7 @@ import {productResolvers} from './src/resolver/product.resolver';
 import {graphqlUploadExpress} from 'graphql-upload';
 import {IncomingHttpHeaders} from 'http';
 import jwt from 'jsonwebtoken';
+import {Collection} from './src/enum/collection.enum';
 
 const app: Express = express();
 const dbConnectionController = new DbConnectionController();
@@ -23,11 +24,19 @@ const resolvers = mergeResolvers([
   userResolvers,
 ]);
 
-const getResolverContext = (headers: IncomingHttpHeaders): ResolverContext => {
-  console.log(headers);
+const getResolverContext = async (headers: IncomingHttpHeaders): Promise<ResolverContext> => {
+  let isAuthorized = false;
+  try {
+    const decoded: any = jwt.decode(headers.authorization);
+    const secret = await dbConnectionController.getDb().collection(Collection.USER)
+      .findOne({username: decoded.username});
+    isAuthorized = !!jwt.verify(headers.authorization, secret.password);
+  } catch (e) {
+    console.log(e);
+  }
   return {
     dbConnectionController,
-    isAuthorized: true,
+    isAuthorized,
   };
 };
 
@@ -37,20 +46,15 @@ app.get('/init', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  const token = jwt.sign(
-    {role: 'admin'},
-    'secret',
-    {expiresIn: 60 * 20},
-  );
-  res.send({result: token});
+  res.send({result: 'ok'});
 });
 
 app.use(
   '/graphql',
   graphqlUploadExpress({maxFileSize: 10000000, maxFiles: 10}),
-  graphqlHTTP((req) => ({
+  graphqlHTTP(async (req) => ({
     schema: makeExecutableSchema({typeDefs, resolvers}),
-    context: getResolverContext(req.headers),
+    context: await getResolverContext(req.headers),
     graphiql: true,
   })),
 );
