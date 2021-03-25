@@ -30,6 +30,7 @@ const initializeOrderFields = (order, lastId: number): any[] => {
 export const orderResolvers: ResolverMap = {
   Query: {
     async orderList(obj, args, context) {
+      if (!context.isAuthorized) return null;
       let orders = await getCollection(context, Collection.ORDER)
         .find({})
         .toArray();
@@ -38,6 +39,7 @@ export const orderResolvers: ResolverMap = {
       return getPageOfData(orders, args.queryArgs.page, args.queryArgs.pageSize);
     },
     async getOrder(obj, args, context) {
+      if (!context.isAuthorized) return null;
       return await getOrderById(context, args.id);
     },
   },
@@ -52,6 +54,7 @@ export const orderResolvers: ResolverMap = {
       return result;
     },
     async changeOrderStatus(obj, args, context) {
+      if (!context.isAuthorized) return null;
       const result = await getCollection(context, Collection.ORDER).findOneAndUpdate(
         {_id: new ObjectId(args.id)},
         {$set: {status: args.status}},

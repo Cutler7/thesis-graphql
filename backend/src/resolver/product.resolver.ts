@@ -18,8 +18,12 @@ const getProductById = (ctx: ResolverContext, id: string) => getCollection(ctx, 
 const isProductExist = async (ctx: ResolverContext, id: string): Promise<boolean> =>
   !id ? false : !!(await getProductById(ctx, id));
 
-const withAuthentication = () => {
-  
+const withAuthentication = async (obj, args, context: ResolverContext, action) => {
+  if (context.isAuthorized) {
+    return await action(obj, args, context);
+  } else {
+    return null;
+  }
 };
 
 const updateProduct = async (product: any, ctx: ResolverContext) => {
@@ -83,6 +87,7 @@ export const productResolvers: ResolverMap = {
   },
   Mutation: {
     async deleteProduct(obj, args, context) {
+      if (!context.isAuthorized) return null;
       const product = await getProductById(context, args.id);
       await getCollection(context, Collection.PRODUCT)
         .deleteOne({_id: new ObjectId(args.id)});
@@ -90,6 +95,7 @@ export const productResolvers: ResolverMap = {
       return product;
     },
     async createOrUpdateProduct(obj, args, context) {
+      if (!context.isAuthorized) return null;
       let result;
       await saveProductImage(args, context);
       const properties = args.product.properties;
@@ -111,6 +117,7 @@ export const productResolvers: ResolverMap = {
       return await insertDocument(args.comment, Collection.COMMENT, context);
     },
     async updateAmount(obj, args, context) {
+      if (!context.isAuthorized) return null;
       const result = await getCollection(context, Collection.PRODUCT).findOneAndUpdate(
         {_id: new ObjectId(args.id)},
         {$set: {quantity: args.amount}},

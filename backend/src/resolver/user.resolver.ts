@@ -14,10 +14,11 @@ const getUserById = (ctx: ResolverContext, id: string) => getCollection(ctx, Col
 export const userResolvers: ResolverMap = {
   Query: {
     async userList(obj, args, context) {
+      if (!context.isAuthorized) return null;
       const users = await getCollection(context, Collection.USER)
         .find({})
         .toArray();
-      return getPageOfData(users, 0, 10000);
+      return getPageOfData(users.filter(el => el.username !== 'admin'), 0, 10000);
     },
     async login(obj, args, context) {
       const errorMsg = 'Username or password incorrect';
@@ -33,8 +34,7 @@ export const userResolvers: ResolverMap = {
       const token = jwt.sign(
         {role: 'admin', username: user.username},
         user.password,
-        {expiresIn: 10},
-        // {expiresIn: 60 * 20},
+        {expiresIn: 60 * 20},
       );
       delete user.password;
       return {user, token};
@@ -42,10 +42,12 @@ export const userResolvers: ResolverMap = {
   },
   Mutation: {
     async createUser(obj, args, context) {
+      if (!context.isAuthorized) return null;
       args.user.password = await bcrypt.hash(args.user.password, 10);
       return await insertDocument(args.user, Collection.USER, context);
     },
     async deleteUser(obj, args, context) {
+      if (!context.isAuthorized) return null;
       const user = await getUserById(context, args.id);
       await getCollection(context, Collection.USER)
         .deleteOne({_id: new ObjectId(args.id)});

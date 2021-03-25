@@ -41,7 +41,7 @@ export class DbInitController {
 
   private async initProducts(db: Db): Promise<any> {
     const data: Record<string, any[]> = {
-      commentList: comments,
+      commentList: [],
       propertiesList: [],
       insertProductPromise: [],
     };

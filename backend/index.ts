@@ -29,8 +29,8 @@ const getResolverContext = async (headers: IncomingHttpHeaders): Promise<Resolve
   try {
     const decoded: any = jwt.decode(headers.authorization);
     const secret = await dbConnectionController.getDb().collection(Collection.USER)
-      .findOne({username: decoded.username});
-    isAuthorized = !!jwt.verify(headers.authorization, secret.password);
+      .findOne({username: decoded?.username});
+    isAuthorized = !!jwt.verify(headers.authorization, secret?.password);
   } catch (e) {
     console.log(e);
   }

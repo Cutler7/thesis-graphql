@@ -12,6 +12,10 @@ export const PRODUCT_DATA = [
       {name: 'podlewanie', value: '2 razy w tygodniu'},
       {name: 'podłoże', value: 'torfowe'},
     ],
+    comments: [
+      {rate: 4, author: 'Mateusz', content: 'jestem zadowolony z zakupu'},
+      {rate: 1, author: 'Halina', content: 'roślina ma połamane łodygi - reklamacja'},
+    ],
   },
   {
     name: 'Trzykrotka',
