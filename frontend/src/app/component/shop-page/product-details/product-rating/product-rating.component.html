@@ -1,6 +1,6 @@
-<div *ngIf="comments?.length"
-     class="rating-top-panel">
-  <div class="rating-container">
+<div class="rating-top-panel">
+  <div *ngIf="comments?.length"
+       class="rating-container">
     <h3>
       <span class="bold">{{comments.length}}</span> użytkowników oceniło ten produkt.
       Średnia ocena użytkowników: <span class="bold">{{avgRate | number:'1.0-2'}}</span>

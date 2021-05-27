@@ -1,10 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SelectItem} from '../../../../../shared/interface/select-item.interface';
-import {PRODUCT_CATEGORY} from '../../../../../shared/const/product-category.const';
 import {FilterArg} from '../../../../../shared/interface/query-list-args.interface';
 import {FilterOperator} from '../../../../../shared/enum/filter-operator.enum';
 import {InputType} from 'src/app/shared/enum/input.type';
+import {ORDER_STATUS} from '../../../../../shared/const/order-status.const';
 
 @Component({
   selector: 'app-search-panel',
@@ -14,11 +14,11 @@ import {InputType} from 'src/app/shared/enum/input.type';
 export class SearchPanelComponent implements OnInit {
 
   InputType = InputType;
-  PRODUCT_CATEGORY = PRODUCT_CATEGORY;
+  ORDER_STATUS = ORDER_STATUS;
 
   form: FormGroup;
 
-  readonly categories: SelectItem[] = PRODUCT_CATEGORY;
+  readonly categories: SelectItem[] = ORDER_STATUS;
 
   @Output()
   search = new EventEmitter<FilterArg[]>();
